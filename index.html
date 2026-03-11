@@ -3,42 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>OneHome</title>
 
 <style>
+
 body{
 margin:0;
 font-family: Arial, Helvetica, sans-serif;
-background:#f5f5f5;
+color:#222;
+}
+
+/* HERO */
+
+.hero{
+height:80vh;
+background-image:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511");
+background-size:cover;
+background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
-height:100vh;
-}
-
-.container{
+color:white;
 text-align:center;
 }
 
-h1{
-font-size:48px;
-margin-bottom:10px;
+.hero h1{
+font-size:60px;
+margin-bottom:20px;
 }
 
-p{
-font-size:18px;
-color:#666;
+.hero button{
+padding:15px 30px;
+border:none;
+background:black;
+color:white;
+font-size:16px;
+cursor:pointer;
 }
+
+/* SECTION */
+
+.section{
+padding:80px 10%;
+}
+
+.properties{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px;
+}
+
+.card img{
+width:100%;
+height:250px;
+object-fit:cover;
+}
+
+.card h3{
+margin:10px 0 5px;
+}
+
 </style>
 
 </head>
 
 <body>
 
-<div class="container">
+<section class="hero">
+<div>
 <h1>OneHome</h1>
-<p>Website em construção</p>
+<p>Casas únicas em Cascais</p>
+<button>Ver Imóveis</button>
 </div>
+</section>
+
+<section class="section">
+<h2>Imóveis em Destaque</h2>
+
+<div class="properties">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<h3>Moradia T5</h3>
+<p>Cascais</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6">
+<h3>Apartamento T3</h3>
+<p>Monte Estoril</p>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4">
+<h3>Duplex T4</h3>
+<p>Costa da Guia</p>
+</div>
+
+</div>
+</section>
 
 </body>
 </html>
