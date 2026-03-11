@@ -195,9 +195,21 @@ color:#666;
         padding:18px 5%;
       }
 
-      .logo img{
-        height:70px;
-      }
+    .logo img{
+height:90px;
+}
+
+.logo-blue{
+display:none;
+}
+
+.header.scrolled .logo-white{
+display:none;
+}
+
+.header.scrolled .logo-blue{
+display:block;
+}
 
       .menu{
         display:none;
@@ -231,9 +243,13 @@ color:#666;
 <body>
 
   <div class="header">
-    <div class="logo">
-      <img src="logo-onehome.png" alt="One Home Real Estate">
-    </div>
+  <div class="logo">
+
+<img class="logo-white" src="logo-onehome.png" alt="One Home Real Estate">
+
+<img class="logo-blue" src="logo-onehome-blue.png" alt="One Home Real Estate">
+
+</div>
 
     <div class="menu">
       <a href="#">Home</a>
