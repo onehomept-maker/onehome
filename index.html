@@ -4,48 +4,83 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>OneHome</title>
+<title>One Home</title>
 
 <style>
 
 body{
 margin:0;
-font-family: Arial, Helvetica, sans-serif;
+font-family: Helvetica, Arial, sans-serif;
 color:#222;
+}
+
+/* MENU */
+
+.header{
+position:absolute;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:30px 8%;
+box-sizing:border-box;
+color:white;
+}
+
+.logo{
+font-size:22px;
+letter-spacing:3px;
+}
+
+.menu a{
+margin-left:30px;
+text-decoration:none;
+color:white;
+font-size:14px;
+letter-spacing:1px;
 }
 
 /* HERO */
 
 .hero{
-height:80vh;
+height:85vh;
 background-image:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511");
 background-size:cover;
 background-position:center;
 display:flex;
 align-items:center;
 justify-content:center;
-color:white;
 text-align:center;
+color:white;
 }
 
 .hero h1{
-font-size:60px;
-margin-bottom:20px;
+font-size:64px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:30px;
 }
 
 .hero button{
-padding:15px 30px;
+padding:14px 28px;
 border:none;
-background:black;
-color:white;
-font-size:16px;
+background:white;
+color:black;
 cursor:pointer;
 }
 
 /* SECTION */
 
 .section{
-padding:80px 10%;
+padding:90px 10%;
+}
+
+.section h2{
+margin-bottom:40px;
 }
 
 .properties{
@@ -56,12 +91,20 @@ gap:30px;
 
 .card img{
 width:100%;
-height:250px;
+height:260px;
 object-fit:cover;
 }
 
 .card h3{
-margin:10px 0 5px;
+margin:12px 0 5px;
+}
+
+/* SOBRE */
+
+.about{
+background:#f5f2ee;
+text-align:center;
+padding:90px 20%;
 }
 
 </style>
@@ -70,9 +113,20 @@ margin:10px 0 5px;
 
 <body>
 
+<div class="header">
+<div class="logo">ONE HOME</div>
+
+<div class="menu">
+<a href="#">Home</a>
+<a href="#">Imóveis</a>
+<a href="#">Sobre</a>
+<a href="#">Contactos</a>
+</div>
+</div>
+
 <section class="hero">
 <div>
-<h1>OneHome</h1>
+<h1>One Home</h1>
 <p>Casas únicas em Cascais</p>
 <button>Ver Imóveis</button>
 </div>
@@ -84,7 +138,7 @@ margin:10px 0 5px;
 <div class="properties">
 
 <div class="card">
-<img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c">
+<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80">
 <h3>Moradia T5</h3>
 <p>Cascais</p>
 </div>
@@ -102,6 +156,15 @@ margin:10px 0 5px;
 </div>
 
 </div>
+</section>
+
+<section class="about">
+<h2>Sobre a One Home</h2>
+<p>
+A One Home é uma imobiliária focada em propriedades únicas na linha de Cascais.
+Trabalhamos com um número reduzido de imóveis para garantir um serviço
+personalizado e uma apresentação cuidada de cada casa.
+</p>
 </section>
 
 </body>
