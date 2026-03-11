@@ -20,7 +20,30 @@ h1,h2,h3{
 font-family:'Cormorant Garamond', serif;
 letter-spacing:1px;
 }
-  
+
+    .lifestyle{
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+padding:100px 10%;
+gap:60px;
+}
+
+.lifestyle-text h2{
+margin-bottom:20px;
+}
+
+.lifestyle-text p{
+font-size:16px;
+line-height:1.7;
+}
+
+.lifestyle-image img{
+width:100%;
+height:420px;
+object-fit:cover;
+}  
+    
 /* MENU */
 
 .header{
@@ -131,8 +154,26 @@ object-fit:cover;
 .card h3{
 margin:12px 0 5px;
 }
+<section class="lifestyle">
 
-/* SOBRE */
+<div class="lifestyle-text">
+<h2>Viver em Cascais</h2>
+
+<p>
+Cascais combina mar, natureza e qualidade de vida como poucos lugares em Portugal.
+A One Home está sediada em Cascais e acompanha de perto o mercado imobiliário da região,
+representando também propriedades selecionadas noutras zonas do país.
+</p>
+
+</div>
+
+<div class="lifestyle-image">
+<img src="https://images.unsplash.com/photo-1580655653885-65763b2597d0?auto=format&fit=crop&w=1600&q=80">
+</div>
+
+</section>
+    
+    /* SOBRE */
 
 .about{
 background:#f5f2ee;
