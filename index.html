@@ -298,13 +298,16 @@ color:#666;
       e uma apresentação cuidada de cada casa.
     </p>
   </section>
-  <script>
+<script>
 
 window.addEventListener("scroll", function() {
 
 const header = document.querySelector(".header");
+const hero = document.querySelector(".hero");
 
-if(window.scrollY > 80){
+const heroHeight = hero.offsetHeight;
+
+if(window.scrollY > heroHeight - 100){
 header.classList.add("scrolled");
 } else {
 header.classList.remove("scrolled");
