@@ -47,7 +47,14 @@
       letter-spacing:2px;
       font-family:'Inter', sans-serif;
     }
+    .header.scrolled{
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
 
+.header.scrolled .menu a{
+color:#222;
+}
     /* HERO */
 
     .hero{
@@ -291,6 +298,21 @@ color:#666;
       e uma apresentação cuidada de cada casa.
     </p>
   </section>
+  <script>
 
+window.addEventListener("scroll", function() {
+
+const header = document.querySelector(".header");
+
+if(window.scrollY > 80){
+header.classList.add("scrolled");
+} else {
+header.classList.remove("scrolled");
+}
+
+});
+
+</script>
+  
 </body>
 </html>
