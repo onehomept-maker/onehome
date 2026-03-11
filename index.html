@@ -1,53 +1,70 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>One Home</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Home</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <style>
-    body{
-      margin:0;
-      font-family:'Inter', sans-serif;
-      color:#222;
-    }
+<style>
 
-    h1,h2,h3{
-      font-family:'Cormorant Garamond', serif;
-      letter-spacing:1px;
-    }
+body{
+margin:0;
+font-family:'Inter', sans-serif;
+color:#222;
+}
 
-    /* MENU */
+h1,h2,h3{
+font-family:'Cormorant Garamond', serif;
+letter-spacing:1px;
+}
 
-    .header{
-      position:fixed;
-      top:0;
-      width:100%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:25px 8%;
-      box-sizing:border-box;
-      color:white;
-      z-index:10;
-    }
+/* MENU */
 
-    .logo img{
-      height:90px;
-      display:block;
-    }
+.header{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+box-sizing:border-box;
+z-index:10;
+}
 
-    .menu a{
-      margin-left:35px;
-      text-decoration:none;
-      color:white;
-      font-size:13px;
-      letter-spacing:2px;
-      font-family:'Inter', sans-serif;
-    }
-    .header.scrolled{
+.logo img{
+height:90px;
+display:block;
+}
+
+/* LOGO SWITCH */
+
+.logo-blue{
+display:none;
+}
+
+.header.scrolled .logo-white{
+display:none;
+}
+
+.header.scrolled .logo-blue{
+display:block;
+}
+
+/* MENU LINKS */
+
+.menu a{
+margin-left:35px;
+text-decoration:none;
+color:white;
+font-size:13px;
+letter-spacing:2px;
+font-family:'Inter', sans-serif;
+}
+
+.header.scrolled{
 background:white;
 box-shadow:0 2px 10px rgba(0,0,0,0.08);
 }
@@ -55,78 +72,82 @@ box-shadow:0 2px 10px rgba(0,0,0,0.08);
 .header.scrolled .menu a{
 color:#222;
 }
-    /* HERO */
 
-    .hero{
-      height:100vh;
-      background-image:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80");
-      background-size:cover;
-      background-position:center;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      color:white;
-      position:relative;
-    }
+/* HERO */
 
-    .hero::before{
-      content:"";
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      height:100%;
-      background:rgba(0,0,0,0.40);
-    }
+.hero{
+height:100vh;
+background-image:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+position:relative;
+}
 
-    .hero-content{
-      position:relative;
-      z-index:2;
-    }
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.40);
+}
 
-    .hero h1{
-      font-size:64px;
-      margin-bottom:10px;
-    }
+.hero-content{
+position:relative;
+z-index:2;
+}
 
-    .hero p{
-      font-size:20px;
-      margin-bottom:30px;
-    }
+.hero h1{
+font-size:64px;
+margin-bottom:10px;
+}
 
-    .hero button{
-      padding:12px 28px;
-      border:1px solid white;
-      background:transparent;
-      color:white;
-      font-family:'Inter', sans-serif;
-      letter-spacing:1px;
-      cursor:pointer;
-    }
+.hero p{
+font-size:20px;
+margin-bottom:30px;
+}
 
-    /* SECTION */
+.hero button{
+padding:12px 28px;
+border:1px solid white;
+background:transparent;
+color:white;
+font-family:'Inter', sans-serif;
+letter-spacing:1px;
+cursor:pointer;
+}
 
-    .section{
-      padding:90px 10%;
-    }
+/* SECTION */
 
-    .section h2{
-      margin-bottom:40px;
-    }
+.section{
+padding:90px 10%;
+}
 
-  .properties{
+.section h2{
+margin-bottom:40px;
+}
+
+/* PROPERTIES */
+
+.properties{
 display:grid;
 grid-template-columns:repeat(3,1fr);
 gap:45px;
 }
 
-   .card img{
+.card img{
 width:100%;
 height:320px;
 object-fit:cover;
 }
-    .card h3{
+
+.card h3{
 margin-top:14px;
 font-size:22px;
 }
@@ -136,121 +157,96 @@ font-size:14px;
 letter-spacing:1px;
 color:#666;
 }
-    .card h3{
-      margin:12px 0 5px;
-    }
 
-    /* LIFESTYLE */
+/* LIFESTYLE */
 
-    .lifestyle{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      align-items:center;
-      padding:100px 15%;
-      gap:80px;
-    }
-
-    .lifestyle-text{
-      max-width:480px;
-    }
-
-    .lifestyle-text h2{
-      margin-bottom:20px;
-    }
-
-    .lifestyle-text p{
-      font-size:16px;
-      line-height:1.8;
-      margin:0;
-    }
-
-    .lifestyle-image img{
-      width:100%;
-      height:500px;
-      object-fit:cover;
-      display:block;
-    }
-
-    /* SOBRE */
-
-    .about{
-      background:#f5f2ee;
-      text-align:center;
-      padding:100px 25%;
-    }
-
-    .about h2{
-      margin-bottom:20px;
-    }
-
-    .about p{
-      line-height:1.8;
-      margin:0;
-    }
-
-    /* MOBILE */
-
-    @media (max-width: 900px){
-      .header{
-        padding:18px 5%;
-      }
-
- .logo img{
-height:90px;
-position:absolute;
-left:0;
-top:0;
+.lifestyle{
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+padding:100px 15%;
+gap:80px;
 }
 
-.logo{
-position:relative;
-height:90px;
+.lifestyle-text{
+max-width:480px;
 }
 
-.logo-blue{
-opacity:0;
+.lifestyle-text h2{
+margin-bottom:20px;
 }
 
-.header.scrolled .logo-white{
-opacity:0;
+.lifestyle-text p{
+font-size:16px;
+line-height:1.8;
 }
 
-.header.scrolled .logo-blue{
-opacity:1;
+.lifestyle-image img{
+width:100%;
+height:500px;
+object-fit:cover;
 }
-      .menu{
-        display:none;
-      }
 
-      .hero h1{
-        font-size:46px;
-      }
+/* ABOUT */
 
-      .hero p{
-        font-size:18px;
-      }
+.about{
+background:#f5f2ee;
+text-align:center;
+padding:100px 25%;
+}
 
-      .properties{
-        grid-template-columns:1fr;
-      }
+.about p{
+line-height:1.8;
+}
 
-      .lifestyle{
-        grid-template-columns:1fr;
-        padding:70px 10%;
-        gap:40px;
-      }
+/* MOBILE */
 
-      .about{
-        padding:70px 10%;
-      }
-    }
-  </style>
+@media (max-width: 900px){
+
+.header{
+padding:18px 5%;
+}
+
+.logo img{
+height:70px;
+}
+
+.menu{
+display:none;
+}
+
+.hero h1{
+font-size:46px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.properties{
+grid-template-columns:1fr;
+}
+
+.lifestyle{
+grid-template-columns:1fr;
+padding:70px 10%;
+gap:40px;
+}
+
+.about{
+padding:70px 10%;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <div class="header">
-  <div class="logo">
+<div class="header">
+
+<div class="logo">
 
 <img class="logo-white" src="logo-onehome.png" alt="One Home Real Estate">
 
@@ -258,69 +254,85 @@ opacity:1;
 
 </div>
 
-    <div class="menu">
-      <a href="#">Home</a>
-      <a href="#">Imóveis</a>
-      <a href="#">Sobre</a>
-      <a href="#">Contactos</a>
-    </div>
-  </div>
+<div class="menu">
+<a href="#">Home</a>
+<a href="#">Imóveis</a>
+<a href="#">Sobre</a>
+<a href="#">Contactos</a>
+</div>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>One Home</h1>
-      <p>Casas únicas em Cascais</p>
-      <button>Ver Imóveis</button>
-    </div>
-  </section>
+</div>
 
-  <section class="section">
-    <h2>Imóveis em Destaque</h2>
+<section class="hero">
+<div class="hero-content">
+<h1>One Home</h1>
+<p>Casas únicas em Cascais</p>
+<button>Ver Imóveis</button>
+</div>
+</section>
 
-    <div class="properties">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80" alt="Moradia T5 em Cascais">
-        <h3>Moradia T5</h3>
-        <p>Cascais</p>
-      </div>
+<section class="section">
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80" alt="Apartamento T3 em Monte Estoril">
-        <h3>Apartamento T3</h3>
-        <p>Monte Estoril</p>
-      </div>
+<h2>Imóveis em Destaque</h2>
 
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1200&q=80" alt="Duplex T4 na Costa da Guia">
-        <h3>Duplex T4</h3>
-        <p>Costa da Guia</p>
-      </div>
-    </div>
-  </section>
+<div class="properties">
 
-  <section class="lifestyle">
-    <div class="lifestyle-text">
-      <h2>Viver em Cascais</h2>
-      <p>
-        Cascais combina mar, natureza e qualidade de vida como poucos lugares em Portugal.
-        A One Home está sediada em Cascais e acompanha de perto o mercado imobiliário da região,
-        representando também propriedades selecionadas noutras zonas do país.
-      </p>
-    </div>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80">
+<h3>Moradia T5</h3>
+<p>Cascais</p>
+</div>
 
-    <div class="lifestyle-image">
-     <img src="cascais-santa-marta.jpg" alt="Cascais Farol de Santa Marta">
-    </div>
-  </section>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80">
+<h3>Apartamento T3</h3>
+<p>Monte Estoril</p>
+</div>
 
-  <section class="about">
-    <h2>Sobre a One Home</h2>
-    <p>
-      A One Home é uma imobiliária focada em propriedades únicas na linha de Cascais.
-      Trabalhamos com um número reduzido de imóveis para garantir um serviço personalizado
-      e uma apresentação cuidada de cada casa.
-    </p>
-  </section>
+<div class="card">
+<img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=1200&q=80">
+<h3>Duplex T4</h3>
+<p>Costa da Guia</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="lifestyle">
+
+<div class="lifestyle-text">
+
+<h2>Viver em Cascais</h2>
+
+<p>
+Cascais combina mar, natureza e qualidade de vida como poucos lugares em Portugal.
+A One Home está sediada em Cascais e acompanha de perto o mercado imobiliário da região,
+representando também propriedades selecionadas noutras zonas do país.
+</p>
+
+</div>
+
+<div class="lifestyle-image">
+
+<img src="cascais-santa-marta.jpg" alt="Cascais Farol de Santa Marta">
+
+</div>
+
+</section>
+
+<section class="about">
+
+<h2>Sobre a One Home</h2>
+
+<p>
+A One Home é uma imobiliária focada em propriedades únicas na linha de Cascais.
+Trabalhamos com um número reduzido de imóveis para garantir um serviço personalizado
+e uma apresentação cuidada de cada casa.
+</p>
+
+</section>
+
 <script>
 
 window.addEventListener("scroll", function() {
@@ -339,6 +351,6 @@ header.classList.remove("scrolled");
 });
 
 </script>
-  
+
 </body>
 </html>
