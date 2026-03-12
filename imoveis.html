@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Imóveis | One Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter', sans-serif;
+color:#222;
+}
+
+h1,h2,h3{
+font-family:'Cormorant Garamond', serif;
+letter-spacing:1px;
+}
+
+/* HEADER */
+
+.header{
+position:fixed;
+top:0;
+width:100%;
+background:white;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+box-sizing:border-box;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+z-index:10;
+}
+
+.logo img{
+height:70px;
+}
+
+.menu a{
+margin-left:35px;
+text-decoration:none;
+color:#222;
+font-size:13px;
+letter-spacing:2px;
+}
+
+/* HERO */
+
+.hero{
+height:45vh;
+background-image:url("https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.35);
+}
+
+.hero h1{
+position:relative;
+z-index:2;
+font-size:54px;
+}
+
+/* SECTION */
+
+.section{
+padding:120px 10%;
+}
+
+.properties{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:50px;
+}
+
+/* CARD */
+
+.card img{
+width:100%;
+height:340px;
+object-fit:cover;
+}
+
+.card h3{
+margin-top:16px;
+font-size:22px;
+}
+
+.card p{
+font-size:14px;
+letter-spacing:1px;
+color:#666;
+margin-bottom:12px;
+}
+
+.card a{
+text-decoration:none;
+font-size:13px;
+letter-spacing:1px;
+border-bottom:1px solid #222;
+color:#222;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.properties{
+grid-template-columns:1fr;
+}
+
+.section{
+padding:100px 8%;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="logo">
+<img src="logo-onehome-blue.png">
+</div>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="imoveis.html">Imóveis</a>
+<a href="#">Sobre</a>
+<a href="#">Contactos</a>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+<h1>Imóveis</h1>
+</section>
+
+<!-- PROPERTIES -->
+
+<section class="section">
+
+<div class="properties">
+
+<div class="card">
+
+<img src="costa-guia.jpg">
+
+<h3>Duplex T5+1</h3>
+
+<p>Costa da Guia · Cascais</p>
+
+<a href="#" target="_blank">Ver Imóvel</a>
+
+</div>
+
+<div class="card">
+
+<img src="quinta-peru.jpg">
+
+<h3>Moradia T5</h3>
+
+<p>Quinta do Peru</p>
+
+<a href="#" target="_blank">Ver Imóvel</a>
+
+</div>
+
+<div class="card">
+
+<img src="estoril.jpg">
+
+<h3>Apartamento T3</h3>
+
+<p>Monte Estoril</p>
+
+<a href="#" target="_blank">Ver Imóvel</a>
+
+</div>
+
+</div>
+
+</section>
+
+</body>
+</html>
