@@ -174,7 +174,7 @@ cursor:pointer;
 </div>
 
 </div>
-<button onclick="gerarJSON()">Gerar imóvel</button>
+<button onclick="gerarJSON()">Guardar imóvel</button>
 
 <div id="resultado"></div>
   
@@ -297,7 +297,9 @@ document.getElementById("descricao").value = imovel.descricao
 
 window.imovelEditando = id
 
-}  
+document.querySelector("button").innerText = "Atualizar imóvel"
+
+}
 </script>
 
 </div>
