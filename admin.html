@@ -101,6 +101,26 @@ padding:20px;
 border-radius:6px;
 border:1px solid #eee;
 }
+#lista-imoveis-admin{
+margin-top:20px;
+}
+
+.item-admin{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+border-bottom:1px solid #ddd;
+}
+
+.item-admin button{
+background:#1f3f8c;
+color:white;
+border:none;
+padding:6px 12px;
+cursor:pointer;
+}  
+  
 </style>
 
 </head>
@@ -157,7 +177,11 @@ border:1px solid #eee;
 <button onclick="gerarJSON()">Gerar imóvel</button>
 
 <div id="resultado"></div>
+  
+  <h2 style="margin-top:60px">Imóveis existentes</h2>
 
+<div id="lista-imoveis-admin"></div>
+  
 <script>
 
 const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
@@ -203,8 +227,21 @@ async function gerarJSON() {
   };
 
   const { error: insertError } = await supabaseClient
-    .from("imoveis")
-    .insert([novoImovel]);
+  
+   if(window.imovelEditando){
+
+await supabaseClient
+.from("imoveis")
+.update(novoImovel)
+.eq("id", window.imovelEditando)
+
+}else{
+
+await supabaseClient
+.from("imoveis")
+.insert([novoImovel])
+
+}
 
   if (insertError) {
     alert("Erro ao guardar imóvel: " + insertError.message);
@@ -215,6 +252,52 @@ async function gerarJSON() {
   document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!";
   alert("Imóvel guardado com sucesso!");
 }
+  async function carregarListaAdmin(){
+
+const { data: imoveis, error } = await supabaseClient
+.from("imoveis")
+.select("*")
+.order("id", { ascending:false })
+
+const container = document.getElementById("lista-imoveis-admin")
+
+container.innerHTML = ""
+
+imoveis.forEach(imovel => {
+
+const item = document.createElement("div")
+item.className = "item-admin"
+
+item.innerHTML = `
+<span>${imovel.titulo}</span>
+<button onclick="editarImovel('${imovel.id}')">Editar</button>
+`
+
+container.appendChild(item)
+
+})
+
+}
+
+carregarListaAdmin()
+async function editarImovel(id){
+
+const { data: imovel } = await supabaseClient
+.from("imoveis")
+.select("*")
+.eq("id", id)
+.single()
+
+document.getElementById("titulo").value = imovel.titulo
+document.getElementById("slug").value = imovel.slug
+document.getElementById("local").value = imovel.local
+document.getElementById("preco").value = imovel.preco
+document.getElementById("estado").value = imovel.estado
+document.getElementById("descricao").value = imovel.descricao
+
+window.imovelEditando = id
+
+}  
 </script>
 
 </div>
