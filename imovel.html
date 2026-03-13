@@ -92,20 +92,33 @@ margin-bottom:20px;
 
 </section>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  
 
-const params = new URLSearchParams(window.location.search);
-const slug = params.get("slug");
+const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
 
-fetch("imoveis.json")
-.then(response => response.json())
-.then(imoveis => {
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
 
-const imovel = imoveis.find(i => i.slug === slug);
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
-const container = document.getElementById("imovel-container");
+const params = new URLSearchParams(window.location.search)
+const slug = params.get("slug")
 
-if(imovel){
+async function carregarImovel(){
+
+const { data: imovel, error } = await supabaseClient
+.from("imoveis")
+.select("*")
+.eq("slug", slug)
+.single()
+
+const container = document.getElementById("imovel-container")
+
+if(error || !imovel){
+container.innerHTML = "<p>Imóvel não encontrado.</p>"
+return
+}
 
 container.innerHTML = `
 ${imovel.imagens.map(img => `<img src="${img}">`).join("")}
@@ -113,16 +126,11 @@ ${imovel.imagens.map(img => `<img src="${img}">`).join("")}
 <p><strong>${imovel.local}</strong></p>
 <p>${imovel.descricao}</p>
 <p><strong>${imovel.preco}</strong></p>
-`;
-
-}else{
-
-container.innerHTML = "<p>Imóvel não encontrado.</p>";
+`
 
 }
 
-});
-
+carregarImovel()
 </script>
 
 </body>
