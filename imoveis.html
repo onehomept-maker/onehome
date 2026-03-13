@@ -9,6 +9,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 body{
@@ -217,9 +219,23 @@ font-size:36px;
   
 <script>
 
-fetch("imoveis.json")
-.then(response => response.json())
-.then(imoveis => {
+const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
+
+const supabaseKey = "A_TUA_ANON_KEY"
+
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
+
+async function carregarImoveis(){
+
+const { data: imoveis, error } = await supabaseClient
+.from("imoveis")
+.select("*")
+.order("id", { ascending: false })
+
+if(error){
+console.log(error)
+return
+}
 
 const container = document.getElementById("lista-imoveis");
 
@@ -288,7 +304,9 @@ criarSecao("Imóveis Disponíveis", disponiveis);
 criarSecao("Reservados", reservados);
 criarSecao("Vendidos e Arrendados", vendidos);
 
-});
+}
+
+carregarImoveis()
 
 </script>
 </body>
