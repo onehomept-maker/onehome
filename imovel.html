@@ -67,6 +67,37 @@ line-height:1.7;
 margin-bottom:20px;
 }
 
+.slider{
+position:relative;
+margin-bottom:40px;
+}
+
+.slider img{
+width:100%;
+height:520px;
+object-fit:cover;
+display:block;
+}
+
+.seta{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+background:rgba(0,0,0,0.4);
+color:white;
+border:none;
+font-size:28px;
+padding:10px 16px;
+cursor:pointer;
+}
+
+.seta.esquerda{
+left:15px;
+}
+
+.seta.direita{
+right:15px;
+}
 </style>
 
 </head>
@@ -113,6 +144,9 @@ const { data: imovel, error } = await supabaseClient
 .eq("slug", slug)
 .single()
 
+window.listaImagens = imovel.imagens || []
+window.indiceImagem = 0
+  
 console.log(imovel)
 console.log(error)
   
@@ -125,10 +159,17 @@ return
 
 let imagensHTML = ""
 
-if(imovel.imagens && Array.isArray(imovel.imagens)){
-imagensHTML = imovel.imagens.map(img => `<img src="${img}">`).join("")
-}
+let imagensHTML = `
+<div class="slider">
 
+<button class="seta esquerda" onclick="anterior()">‹</button>
+
+<img id="imagem-slide" src="${imovel.imagens[0]}">
+
+<button class="seta direita" onclick="proxima()">›</button>
+
+</div>
+`
 container.innerHTML =
 imagensHTML +
 "<h1>" + (imovel.titulo || "") + "</h1>" +
@@ -140,6 +181,34 @@ imagensHTML +
 }
 
 carregarImovel()
+
+  function mostrarImagem(){
+document.getElementById("imagem-slide").src = window.listaImagens[window.indiceImagem]
+}
+
+function proxima(){
+
+if(window.indiceImagem < window.listaImagens.length - 1){
+window.indiceImagem++
+}else{
+window.indiceImagem = 0
+}
+
+mostrarImagem()
+
+}
+
+function anterior(){
+
+if(window.indiceImagem > 0){
+window.indiceImagem--
+}else{
+window.indiceImagem = window.listaImagens.length - 1
+}
+
+mostrarImagem()
+
+}
 </script>
 
 </body>
