@@ -185,7 +185,7 @@ font-size:36px;
 
 </section>
   
-  <script>
+ <script>
 
 fetch("imoveis.json")
 .then(response => response.json())
@@ -195,14 +195,38 @@ const container = document.getElementById("lista-imoveis");
 
 imoveis.forEach(imovel => {
 
+let estadoLabel = "";
+
+if(imovel.estado === "vendido"){
+estadoLabel = "<div class='estado vendido'>VENDIDO</div>";
+}
+
+if(imovel.estado === "reservado"){
+estadoLabel = "<div class='estado reservado'>RESERVADO</div>";
+}
+
+if(imovel.estado === "arrendado"){
+estadoLabel = "<div class='estado arrendado'>ARRENDADO</div>";
+}
+
 const card = document.createElement("div");
 card.className = "card";
 
 card.innerHTML = `
+<div class="imagem-container">
+${estadoLabel}
 <img src="${imovel.imagem}">
+</div>
+
 <h3>${imovel.titulo}</h3>
+
 <p>${imovel.local}</p>
-<a href="imovel.html?slug=${imovel.slug}">Ver Imóvel</a>
+
+<p class="preco">${imovel.preco}</p>
+
+<a href="imovel.html?slug=${imovel.slug}">
+Ver Imóvel
+</a>
 `;
 
 container.appendChild(card);
@@ -212,6 +236,5 @@ container.appendChild(card);
 });
 
 </script>
-  
 </body>
 </html>
