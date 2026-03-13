@@ -294,7 +294,7 @@ estadoLabel = "<div class='estado arrendado'>ARRENDADO</div>";
 const card = document.createElement("div");
 card.className = "card";
 
-card.innerHTML = 
+card.innerHTML = `
 ${estadoLabel}
 
 <img src="${imovel.imagens[0]}">
@@ -310,10 +310,6 @@ Ver imóvel
 </a>
 `;
 
-<a href="imovel.html?slug=${imovel.slug}">
-Ver Imóvel
-</a>
-`;
 
 grid.appendChild(card);
 
