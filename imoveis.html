@@ -181,47 +181,37 @@ font-size:36px;
 
 <section class="section">
 
-<div class="properties">
-
-<div class="card">
-
-<img src="costa-guia.jpg">
-
-<h3>Duplex T5+1</h3>
-
-<p>Costa da Guia · Cascais</p>
-
-<a href="#" target="_blank">Ver Imóvel</a>
-
-</div>
-
-<div class="card">
-
-<img src="quinta-peru.jpg">
-
-<h3>Moradia T4</h3>
-
-<p>Quinta do Peru</p>
-
-<a href="#" target="_blank">Ver Imóvel</a>
-
-</div>
-
-<div class="card">
-
-<img src="verdizela.jpg">
-
-<h3>Moradia T4</h3>
-
-<p>Verdizela</p>
-
-<a href="#" target="_blank">Ver Imóvel</a>
-
-</div>
-
-</div>
+<div class="properties" id="lista-imoveis"></div>
 
 </section>
+  
+  <script>
 
+fetch("imoveis.json")
+.then(response => response.json())
+.then(imoveis => {
+
+const container = document.getElementById("lista-imoveis");
+
+imoveis.forEach(imovel => {
+
+const card = document.createElement("div");
+card.className = "card";
+
+card.innerHTML = `
+<img src="${imovel.imagem}">
+<h3>${imovel.titulo}</h3>
+<p>${imovel.local}</p>
+<a href="imovel.html?slug=${imovel.slug}">Ver Imóvel</a>
+`;
+
+container.appendChild(card);
+
+});
+
+});
+
+</script>
+  
 </body>
 </html>
