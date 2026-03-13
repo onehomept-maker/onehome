@@ -215,7 +215,7 @@ font-size:36px;
 
 </section>
   
- <script>
+<script>
 
 fetch("imoveis.json")
 .then(response => response.json())
@@ -223,7 +223,24 @@ fetch("imoveis.json")
 
 const container = document.getElementById("lista-imoveis");
 
-imoveis.forEach(imovel => {
+const disponiveis = imoveis.filter(i => i.estado === "disponivel");
+const reservados = imoveis.filter(i => i.estado === "reservado");
+const vendidos = imoveis.filter(i => i.estado === "vendido" || i.estado === "arrendado");
+
+function criarSecao(titulo, lista){
+
+if(lista.length === 0) return;
+
+const sectionTitle = document.createElement("h2");
+sectionTitle.innerText = titulo;
+sectionTitle.style.marginTop = "60px";
+
+container.appendChild(sectionTitle);
+
+const grid = document.createElement("div");
+grid.className = "properties";
+
+lista.forEach(imovel => {
 
 let estadoLabel = "";
 
@@ -259,9 +276,17 @@ Ver Imóvel
 </a>
 `;
 
-container.appendChild(card);
+grid.appendChild(card);
 
 });
+
+container.appendChild(grid);
+
+}
+
+criarSecao("Imóveis Disponíveis", disponiveis);
+criarSecao("Reservados", reservados);
+criarSecao("Vendidos e Arrendados", vendidos);
 
 });
 
