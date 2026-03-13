@@ -99,61 +99,55 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
-async function gerarJSON(){
+async function gerarJSON() {
+  const files = document.getElementById("imagens").files;
+  let imagens = [];
 
-const files = document.getElementById("imagens").files;
+  for (let file of files) {
+    const fileName = `${Date.now()}-${file.name}`;
 
-let imagens = [];
+    const { error: uploadError } = await supabaseClient
+      .storage
+      .from("imoveis")
+      .upload(fileName, file);
 
-for (let file of files) {
+    if (uploadError) {
+      alert("Erro no upload: " + uploadError.message);
+      console.log(uploadError);
+      return;
+    }
 
-const fileName = Date.now() + "-" + file.name;
+    const { data } = supabaseClient
+      .storage
+      .from("imoveis")
+      .getPublicUrl(fileName);
 
-const { error } = await supabaseClient
-.storage
-.from("imoveis")
-.upload(fileName, file);
+    imagens.push(data.publicUrl);
+  }
 
-if(error){
-alert("Erro no upload: " + error.message);
-return;
+  const novoImovel = {
+    titulo: document.getElementById("titulo").value,
+    slug: document.getElementById("slug").value,
+    local: document.getElementById("local").value,
+    preco: document.getElementById("preco").value,
+    estado: document.getElementById("estado").value,
+    descricao: document.getElementById("descricao").value,
+    imagens: imagens
+  };
+
+  const { error: insertError } = await supabaseClient
+    .from("imoveis")
+    .insert([novoImovel]);
+
+  if (insertError) {
+    alert("Erro ao guardar imóvel: " + insertError.message);
+    console.log(insertError);
+    return;
+  }
+
+  document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!";
+  alert("Imóvel guardado com sucesso!");
 }
-
-const { data } = supabaseClient
-.storage
-.from("imoveis")
-.getPublicUrl(fileName);
-
-imagens.push(data.publicUrl);
-
-}
-
-const imovel = {
-
-id: Date.now(),
-
-slug: document.getElementById("slug").value,
-
-titulo: document.getElementById("titulo").value,
-
-local: document.getElementById("local").value,
-
-preco: document.getElementById("preco").value,
-
-estado: document.getElementById("estado").value,
-
-imagens: imagens,
-
-descricao: document.getElementById("descricao").value
-
-};
-
-document.getElementById("resultado").innerText =
-JSON.stringify(imovel, null, 2) + ",";
-
-}
-
 </script>
-
 </body>
 </html>
