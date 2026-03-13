@@ -170,7 +170,7 @@ container.innerHTML =
 imagensHTML +
 "<h1>" + (imovel.titulo || "") + "</h1>" +
 "<p><strong>" + (imovel.local || "") + "</strong></p>" +
-"<p>" + (imovel.descricao || "") + "</p>" +
+"<p>" + (imovel.descricao || "").replace(/\n/g, "<br>") + "</p>"
 "<p><strong>" + (imovel.preco || "") + "</strong></p>"
 
 }
