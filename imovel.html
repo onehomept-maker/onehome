@@ -113,6 +113,9 @@ const { data: imovel, error } = await supabaseClient
 .eq("slug", slug)
 .single()
 
+console.log(imovel)
+console.log(error)
+  
 const container = document.getElementById("imovel-container")
 
 if(error || !imovel){
@@ -120,14 +123,19 @@ container.innerHTML = "<p>Imóvel não encontrado.</p>"
 return
 }
 
+let imagensHTML = ""
+
+if(imovel.imagens && Array.isArray(imovel.imagens)){
+imagensHTML = imovel.imagens.map(img => `<img src="${img}">`).join("")
+}
+
 container.innerHTML = `
-${(imovel.imagens || []).map(img => `<img src="${img}">`).join("")}
-<h1>${imovel.titulo}</h1>
-<p><strong>${imovel.local}</strong></p>
-<p>${imovel.descricao}</p>
-<p><strong>${imovel.preco}</strong></p>
-`
-`
+${imagensHTML}
+<h1>${imovel.titulo || ""}</h1>
+<p><strong>${imovel.local || ""}</strong></p>
+<p>${imovel.descricao || ""}</p>
+<p><strong>${imovel.preco || ""}</strong></p>
+
 
 }
 
