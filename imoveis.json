@@ -6,7 +6,11 @@
     "local": "Costa da Guia · Cascais",
     "preco": "Sob consulta",
     "estado": "disponivel",
-    "imagem": "costa-guia.jpg",
+    "imagens": [
+      "costa-guia-1.jpg",
+      "costa-guia-2.jpg",
+      "costa-guia-3.jpg"
+    ],
     "descricao": "Duplex T5+1 localizado na Costa da Guia, em Cascais.",
     "destaque": true
   },
@@ -17,7 +21,9 @@
     "local": "Quinta do Peru",
     "preco": "Sob consulta",
     "estado": "disponivel",
-    "imagem": "quinta-peru.jpg",
+    "imagens": [
+      "quinta-peru.jpg"
+    ],
     "descricao": "Moradia T4 situada na Quinta do Peru.",
     "destaque": true
   },
@@ -28,7 +34,9 @@
     "local": "Verdizela",
     "preco": "Sob consulta",
     "estado": "disponivel",
-    "imagem": "verdizela.jpg",
+    "imagens": [
+      "verdizela.jpg"
+    ],
     "descricao": "Moradia T4 localizada na Verdizela.",
     "destaque": true
   }
