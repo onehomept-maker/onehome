@@ -49,13 +49,6 @@ max-width:1100px;
 margin:auto;
 }
 
-.imovel img{
-width:100%;
-height:500px;
-object-fit:cover;
-margin-bottom:30px;
-}
-
 .imovel h1{
 font-size:42px;
 margin-bottom:10px;
@@ -66,6 +59,8 @@ font-size:16px;
 line-height:1.7;
 margin-bottom:20px;
 }
+
+/* SLIDER */
 
 .slider{
 position:relative;
@@ -98,6 +93,7 @@ left:15px;
 .seta.direita{
 right:15px;
 }
+
 </style>
 
 </head>
@@ -123,13 +119,13 @@ right:15px;
 
 </section>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
-  
 
 const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
 
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8"
+const supabaseKey = "AQUI_DEVE_FICAR_A_TUA_KEY_COMPLETA"
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
@@ -144,12 +140,6 @@ const { data: imovel, error } = await supabaseClient
 .eq("slug", slug)
 .single()
 
-window.listaImagens = imovel.imagens || []
-window.indiceImagem = 0
-  
-console.log(imovel)
-console.log(error)
-  
 const container = document.getElementById("imovel-container")
 
 if(error || !imovel){
@@ -157,19 +147,25 @@ container.innerHTML = "<p>Imóvel não encontrado.</p>"
 return
 }
 
-let imagensHTML = ""
+/* guardar imagens */
+
+window.listaImagens = imovel.imagens || []
+window.indiceImagem = 0
+
+let primeiraImagem = window.listaImagens.length > 0 ? window.listaImagens[0] : ""
 
 let imagensHTML = `
 <div class="slider">
 
 <button class="seta esquerda" onclick="anterior()">‹</button>
 
-<img id="imagem-slide" src="${imovel.imagens[0]}">
+<img id="imagem-slide" src="${primeiraImagem}">
 
 <button class="seta direita" onclick="proxima()">›</button>
 
 </div>
 `
+
 container.innerHTML =
 imagensHTML +
 "<h1>" + (imovel.titulo || "") + "</h1>" +
@@ -177,12 +173,11 @@ imagensHTML +
 "<p>" + (imovel.descricao || "") + "</p>" +
 "<p><strong>" + (imovel.preco || "") + "</strong></p>"
 
-
 }
 
 carregarImovel()
 
-  function mostrarImagem(){
+function mostrarImagem(){
 document.getElementById("imagem-slide").src = window.listaImagens[window.indiceImagem]
 }
 
@@ -209,6 +204,7 @@ window.indiceImagem = window.listaImagens.length - 1
 mostrarImagem()
 
 }
+
 </script>
 
 </body>
