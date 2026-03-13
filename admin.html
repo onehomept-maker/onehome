@@ -9,8 +9,8 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 
 body{
@@ -97,8 +97,8 @@ const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
 
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8"
 
-const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
-  
+const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
+
 async function gerarJSON(){
 
 const files = document.getElementById("imagens").files;
@@ -109,7 +109,7 @@ for (let file of files) {
 
 const fileName = Date.now() + "-" + file.name;
 
-const { data, error } = await supabase
+const { error } = await supabaseClient
 .storage
 .from("imoveis")
 .upload(fileName, file);
@@ -119,12 +119,12 @@ alert("Erro no upload: " + error.message);
 return;
 }
 
-const { data: publicUrl } = supabase
+const { data } = supabaseClient
 .storage
 .from("imoveis")
 .getPublicUrl(fileName);
 
-imagens.push(publicUrl.publicUrl);
+imagens.push(data.publicUrl);
 
 }
 
