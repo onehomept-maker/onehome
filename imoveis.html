@@ -294,11 +294,10 @@ estadoLabel = "<div class='estado arrendado'>ARRENDADO</div>";
 const card = document.createElement("div");
 card.className = "card";
 
-card.innerHTML = 
-<div class="imagem-container">
+card.innerHTML = `
 ${estadoLabel}
+
 <img src="${imovel.imagens[0]}">
-</div>
 
 <h3>${imovel.titulo}</h3>
 
@@ -307,7 +306,7 @@ ${estadoLabel}
 <p class="preco">${imovel.preco}</p>
 
 <a href="imovel.html?slug=${imovel.slug}">
-Ver Imóvel
+Ver imóvel
 </a>
 `;
 
