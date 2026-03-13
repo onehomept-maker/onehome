@@ -129,12 +129,12 @@ if(imovel.imagens && Array.isArray(imovel.imagens)){
 imagensHTML = imovel.imagens.map(img => `<img src="${img}">`).join("")
 }
 
-container.innerHTML = `
-${imagensHTML}
-<h1>${imovel.titulo || ""}</h1>
-<p><strong>${imovel.local || ""}</strong></p>
-<p>${imovel.descricao || ""}</p>
-<p><strong>${imovel.preco || ""}</strong></p>
+container.innerHTML =
+imagensHTML +
+"<h1>" + (imovel.titulo || "") + "</h1>" +
+"<p><strong>" + (imovel.local || "") + "</strong></p>" +
+"<p>" + (imovel.descricao || "") + "</p>" +
+"<p><strong>" + (imovel.preco || "") + "</strong></p>"
 
 
 }
