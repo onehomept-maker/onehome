@@ -15,49 +15,99 @@
 
 body{
 font-family:'Inter', sans-serif;
-max-width:800px;
-margin:auto;
-padding:60px 20px;
+margin:0;
+background:#f6f7fb;
 }
+
+/* container principal */
+
+.admin{
+max-width:1100px;
+margin:auto;
+padding:60px 40px;
+}
+
+/* título */
 
 h1{
 margin-bottom:40px;
+font-weight:500;
 }
+
+/* layout do formulário */
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+}
+
+/* campos largos */
+
+.full{
+grid-column:1 / -1;
+}
+
+/* labels */
 
 label{
 display:block;
-margin-top:20px;
-font-size:14px;
+font-size:13px;
+margin-bottom:6px;
+color:#555;
 }
+
+/* inputs */
 
 input, textarea, select{
 width:100%;
-padding:10px;
-margin-top:6px;
+padding:12px;
+border:1px solid #ddd;
+border-radius:6px;
 font-family:'Inter', sans-serif;
+font-size:14px;
 }
+
+/* textarea maior */
+
+textarea{
+min-height:120px;
+resize:vertical;
+}
+
+/* botão */
 
 button{
 margin-top:30px;
-padding:12px 20px;
+padding:14px 24px;
 background:#1f3f8c;
 color:white;
 border:none;
+border-radius:6px;
 cursor:pointer;
+font-size:14px;
 }
+
+button:hover{
+background:#162f6a;
+}
+
+/* resultado */
 
 #resultado{
 margin-top:40px;
-background:#f4f4f4;
+background:white;
 padding:20px;
-white-space:pre-wrap;
+border-radius:6px;
+border:1px solid #eee;
 }
-
 </style>
 
 </head>
 
 <body>
+
+<div class="admin">
 
 <h1>Criar Imóvel</h1>
 
@@ -149,5 +199,8 @@ async function gerarJSON() {
   alert("Imóvel guardado com sucesso!");
 }
 </script>
+
+</div>
+
 </body>
 </html>
