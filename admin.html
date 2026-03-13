@@ -111,18 +111,29 @@ border:1px solid #eee;
 
 <h1>Criar Imóvel</h1>
 
+<div class="form-grid">
+
+<div>
 <label>Título</label>
 <input id="titulo">
+</div>
 
+<div>
 <label>Slug (url)</label>
 <input id="slug">
+</div>
 
+<div>
 <label>Localização</label>
 <input id="local">
+</div>
 
+<div>
 <label>Preço</label>
 <input id="preco">
+</div>
 
+<div>
 <label>Estado</label>
 <select id="estado">
 <option value="disponivel">Disponível</option>
@@ -130,13 +141,19 @@ border:1px solid #eee;
 <option value="vendido">Vendido</option>
 <option value="arrendado">Arrendado</option>
 </select>
+</div>
 
+<div class="full">
 <label>Fotos do imóvel</label>
 <input type="file" id="imagens" multiple>
+</div>
 
+<div class="full">
 <label>Descrição</label>
 <textarea id="descricao"></textarea>
+</div>
 
+</div>
 <button onclick="gerarJSON()">Gerar imóvel</button>
 
 <div id="resultado"></div>
