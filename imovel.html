@@ -108,7 +108,7 @@ const container = document.getElementById("imovel-container");
 if(imovel){
 
 container.innerHTML = `
-<img src="${imovel.imagem}">
+${imovel.imagens.map(img => `<img src="${img}">`).join("")}
 <h1>${imovel.titulo}</h1>
 <p><strong>${imovel.local}</strong></p>
 <p>${imovel.descricao}</p>
