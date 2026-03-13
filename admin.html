@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin | One Home</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Inter', sans-serif;
+max-width:800px;
+margin:auto;
+padding:60px 20px;
+}
+
+h1{
+margin-bottom:40px;
+}
+
+label{
+display:block;
+margin-top:20px;
+font-size:14px;
+}
+
+input, textarea, select{
+width:100%;
+padding:10px;
+margin-top:6px;
+font-family:'Inter', sans-serif;
+}
+
+button{
+margin-top:30px;
+padding:12px 20px;
+background:#1f3f8c;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+#resultado{
+margin-top:40px;
+background:#f4f4f4;
+padding:20px;
+white-space:pre-wrap;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Criar Imóvel</h1>
+
+<label>Título</label>
+<input id="titulo">
+
+<label>Slug (url)</label>
+<input id="slug">
+
+<label>Localização</label>
+<input id="local">
+
+<label>Preço</label>
+<input id="preco">
+
+<label>Estado</label>
+<select id="estado">
+<option value="disponivel">Disponível</option>
+<option value="reservado">Reservado</option>
+<option value="vendido">Vendido</option>
+<option value="arrendado">Arrendado</option>
+</select>
+
+<label>Imagem</label>
+<input id="imagem">
+
+<label>Descrição</label>
+<textarea id="descricao"></textarea>
+
+<button onclick="gerarJSON()">Gerar imóvel</button>
+
+<div id="resultado"></div>
+
+<script>
+
+function gerarJSON(){
+
+const imovel = {
+
+id: Date.now(),
+
+slug: document.getElementById("slug").value,
+
+titulo: document.getElementById("titulo").value,
+
+local: document.getElementById("local").value,
+
+preco: document.getElementById("preco").value,
+
+estado: document.getElementById("estado").value,
+
+imagem: document.getElementById("imagem").value,
+
+descricao: document.getElementById("descricao").value
+
+};
+
+document.getElementById("resultado").innerText =
+JSON.stringify(imovel, null, 2) + ",";
+
+}
+
+</script>
+
+</body>
+</html>
