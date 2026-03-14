@@ -333,7 +333,8 @@ const filePath = decodeURIComponent(partes[1])
 const { error } = await supabaseClient
 .storage
 .from("imoveis")
-.remove([filePath])
+  console.log(filePath)
+    .remove([filePath])
 
 if(error){
 alert("Erro ao apagar no Supabase")
