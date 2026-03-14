@@ -531,7 +531,20 @@ container.innerHTML = imagensHTML
 
 }
 
-carregarImovel()
+  const galeria = document.getElementById("galeria-imovel")
+
+window.listaImagens.forEach(src => {
+
+const img = document.createElement("img")
+img.src = src
+
+galeria.appendChild(img)
+
+})
+  
+  }
+  
+  carregarImovel()
 
 function mostrarImagem(){
 document.getElementById("imagem-slide").src = window.listaImagens[window.indiceImagem]
