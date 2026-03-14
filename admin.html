@@ -267,6 +267,14 @@ slug: document.getElementById("slug").value,
 local: document.getElementById("local").value,
 preco: document.getElementById("preco").value,
 estado: document.getElementById("estado").value,
+
+tipologia: document.getElementById("tipologia").value,
+quartos: document.getElementById("quartos").value,
+wc: document.getElementById("wc").value,
+area_bruta: document.getElementById("area_bruta").value,
+area_util: document.getElementById("area_util").value,
+categoria_energetica: document.getElementById("categoria_energetica").value,
+
 descricao: document.getElementById("descricao").value
 
 }
@@ -371,7 +379,12 @@ document.getElementById("local").value = imovel.local
 document.getElementById("preco").value = imovel.preco
 document.getElementById("estado").value = imovel.estado
 document.getElementById("descricao").value = imovel.descricao
-
+document.getElementById("tipologia").value = imovel.tipologia || ""
+document.getElementById("quartos").value = imovel.quartos || ""
+document.getElementById("wc").value = imovel.wc || ""
+document.getElementById("area_bruta").value = imovel.area_bruta || ""
+document.getElementById("area_util").value = imovel.area_util || ""
+document.getElementById("categoria_energetica").value = imovel.categoria_energetica || ""
 window.imovelEditando = id
 
 document.querySelector("button").innerText = "Atualizar imóvel"
