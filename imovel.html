@@ -146,100 +146,197 @@ line-height:1.7;
 margin-bottom:20px;
 }
   
-  /* INFO BAR */
+/* INFO BAR */
 
-.info-bar{
-display:flex;
-justify-content:center;
-gap:60px;
-padding:30px 10%;
-background:#fafafa;
-border-bottom:1px solid #eee;
-font-size:14px;
-letter-spacing:1px;
+.infobar{
+display:grid;
+grid-template-columns:repeat(4, 1fr);
+gap:30px;
+padding:38px 10%;
+background:#f7f5f2;
+border-top:1px solid #e5e1db;
+border-bottom:1px solid #e5e1db;
+max-width:1400px;
+margin:0 auto;
+box-sizing:border-box;
 }
 
-.info-item{
+.infoitem{
 text-align:center;
 }
 
-.info-item strong{
+.infoitem strong{
 display:block;
-font-size:20px;
-margin-bottom:5px;
+font-size:22px;
+font-family:'Cormorant Garamond', serif;
+font-weight:500;
+color:#222;
+margin-bottom:6px;
 }
+
+.infoitem span{
+display:block;
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#777;
+}
+
 
 /* LAYOUT IMÓVEL */
 
-.imovel-layout{
+.layout-imovel{
 display:grid;
-grid-template-columns:2fr 1fr;
-gap:80px;
-max-width:1200px;
-margin:auto;
-padding:100px 10%;
+grid-template-columns:minmax(0, 2fr) minmax(320px, 420px);
+gap:70px;
+align-items:start;
 }
 
-.imovel-descricao h1{
-font-size:42px;
-margin-bottom:10px;
+.imovel h1{
+font-size:48px;
+line-height:1.1;
+margin:0 0 14px 0;
+font-family:'Cormorant Garamond', serif;
+font-weight:500;
 }
 
-.imovel-descricao p{
+.imovel p{
 font-size:16px;
 line-height:1.8;
-margin-bottom:20px;
+margin-bottom:22px;
+color:#333;
 }
+
+.imovel p strong{
+font-weight:500;
+}
+
 
 /* SIDEBAR CONTACTO */
 
-.sidebar{
-border:1px solid #eee;
-padding:40px;
-height:fit-content;
+.sidebar-contacto{
 position:sticky;
 top:120px;
+background:#f7f5f2;
+padding:36px 32px;
+box-sizing:border-box;
+border:1px solid #e7e1d8;
 }
 
-.sidebar h3{
-margin-top:0;
-font-size:22px;
-margin-bottom:20px;
+.sidebar-contacto h3{
+margin:0 0 18px 0;
+font-family:'Cormorant Garamond', serif;
+font-size:32px;
+font-weight:500;
+color:#222;
 }
 
-.sidebar button{
-width:100%;
-padding:14px;
-border:none;
+.sidebar-contacto p{
+margin:0 0 14px 0;
+font-size:15px;
+line-height:1.7;
+color:#444;
+}
+
+.sidebar-contacto .contacto-label{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#8a8175;
+margin-bottom:8px;
+display:block;
+}
+
+.sidebar-contacto .contacto-link{
+display:block;
+text-decoration:none;
+color:#222;
+font-size:15px;
+margin-bottom:10px;
+transition:opacity 0.3s ease;
+}
+
+.sidebar-contacto .contacto-link:hover{
+opacity:0.65;
+}
+
+.sidebar-contacto .botao-contacto{
+display:inline-block;
+margin-top:14px;
+padding:14px 30px;
 background:#222;
 color:white;
-font-size:13px;
+text-decoration:none;
+font-size:12px;
 letter-spacing:2px;
+text-transform:uppercase;
+border:none;
 cursor:pointer;
-margin-top:20px;
+transition:background 0.3s ease, opacity 0.3s ease;
 }
 
-.sidebar button:hover{
-background:#444;
+.sidebar-contacto .botao-contacto:hover{
+opacity:0.88;
 }
+
 
 /* MOBILE */
 
-@media(max-width:900px){
+@media (max-width: 980px){
 
-.imovel-layout{
+.infobar{
+grid-template-columns:repeat(2, 1fr);
+gap:22px;
+padding:28px 8%;
+}
+
+.layout-imovel{
 grid-template-columns:1fr;
 gap:40px;
 }
 
-.sidebar{
+.sidebar-contacto{
 position:relative;
 top:auto;
 }
 
-.info-bar{
-flex-wrap:wrap;
-gap:30px;
+.section{
+padding:70px 8%;
+}
+
+.imovel h1{
+font-size:38px;
+}
+
+}
+
+@media (max-width: 640px){
+
+.infobar{
+grid-template-columns:1fr 1fr;
+gap:18px;
+padding:24px 6%;
+}
+
+.infoitem strong{
+font-size:20px;
+}
+
+.infoitem span{
+font-size:10px;
+letter-spacing:1.5px;
+}
+
+.section{
+padding:55px 6%;
+}
+
+.imovel h1{
+font-size:32px;
+}
+
+.sidebar-contacto{
+padding:28px 24px;
 }
 
 }
@@ -364,17 +461,19 @@ let imagensHTML = `
 
 <div class="sidebar-contacto">
 
+<span class="contacto-label">Contacto</span>
+
 <h3>Mais informações</h3>
 
-<p>Para mais informações ou agendar visita, contacte-nos.</p>
+<p>Para mais informações ou agendar visita, fale connosco.</p>
 
 <p><strong>ONE HOME Real Estate</strong></p>
 
-<p>info@onehome.pt</p>
+<a href="mailto:info@onehome.pt" class="contacto-link">info@onehome.pt</a>
 
-<p>+351 000 000 000</p>
+<a href="tel:+351000000000" class="contacto-link">+351 000 000 000</a>
 
-<button>Contactar</button>
+<a href="contactos.html" class="botao-contacto">Pedir informações</a>
 
 </div>
 
