@@ -219,7 +219,6 @@ const { data } = supabaseClient
 imagens.push(data.publicUrl)
 
 }
-
 const novoImovel = {
 
 titulo: document.getElementById("titulo").value,
@@ -227,9 +226,12 @@ slug: document.getElementById("slug").value,
 local: document.getElementById("local").value,
 preco: document.getElementById("preco").value,
 estado: document.getElementById("estado").value,
-descricao: document.getElementById("descricao").value,
-imagens: imagens
+descricao: document.getElementById("descricao").value
 
+}
+
+if(imagens.length > 0){
+novoImovel.imagens = imagens
 }
 
 let error
