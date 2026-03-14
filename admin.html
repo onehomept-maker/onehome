@@ -190,41 +190,47 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
-async function gerarJSON() {
-  const files = document.getElementById("imagens").files;
-  let imagens = [];
 
-  for (let file of files) {
-    const fileName = `${Date.now()}-${file.name}`;
+async function gerarJSON(){
 
-    const { error: uploadError } = await supabaseClient
-      .storage
-      .from("imoveis")
-      .upload(fileName, file);
+const files = document.getElementById("imagens").files
+let imagens = []
 
-    if (uploadError) {
-      alert("Erro no upload: " + uploadError.message);
-      console.log(uploadError);
-      return;
-    }
+for (let file of files){
 
-    const { data } = supabaseClient
-      .storage
-      .from("imoveis")
-      .getPublicUrl(fileName);
+const fileName = `${Date.now()}-${file.name}`
 
-    imagens.push(data.publicUrl);
-  }
+const { error: uploadError } = await supabaseClient
+.storage
+.from("imoveis")
+.upload(fileName, file)
 
-  const novoImovel = {
-    titulo: document.getElementById("titulo").value,
-    slug: document.getElementById("slug").value,
-    local: document.getElementById("local").value,
-    preco: document.getElementById("preco").value,
-    estado: document.getElementById("estado").value,
-    descricao: document.getElementById("descricao").value,
-    imagens: imagens
-  };
+if(uploadError){
+alert("Erro no upload: " + uploadError.message)
+console.log(uploadError)
+return
+}
+
+const { data } = supabaseClient
+.storage
+.from("imoveis")
+.getPublicUrl(fileName)
+
+imagens.push(data.publicUrl)
+
+}
+
+const novoImovel = {
+
+titulo: document.getElementById("titulo").value,
+slug: document.getElementById("slug").value,
+local: document.getElementById("local").value,
+preco: document.getElementById("preco").value,
+estado: document.getElementById("estado").value,
+descricao: document.getElementById("descricao").value,
+imagens: imagens
+
+}
 
 let error
 
@@ -247,16 +253,33 @@ error = insertError
 
 }
 
-if (error) {
+if(error){
 alert("Erro ao guardar imóvel: " + error.message)
 console.log(error)
 return
 }
 
-  document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!";
-  alert("Imóvel guardado com sucesso!");
+document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!"
+alert("Imóvel guardado com sucesso!")
+
+document.getElementById("titulo").value = ""
+document.getElementById("slug").value = ""
+document.getElementById("local").value = ""
+document.getElementById("preco").value = ""
+document.getElementById("descricao").value = ""
+document.getElementById("imagens").value = ""
+
+window.imovelEditando = null
+
+document.querySelector("button").innerText = "Guardar imóvel"
+
+carregarListaAdmin()
+
 }
-  async function carregarListaAdmin(){
+
+
+
+async function carregarListaAdmin(){
 
 const { data: imoveis, error } = await supabaseClient
 .from("imoveis")
@@ -274,7 +297,11 @@ item.className = "item-admin"
 
 item.innerHTML = `
 <span>${imovel.titulo}</span>
+
+<div>
 <button onclick="editarImovel('${imovel.id}')">Editar</button>
+<button onclick="apagarImovel('${imovel.id}')">Apagar</button>
+</div>
 `
 
 container.appendChild(item)
@@ -284,6 +311,9 @@ container.appendChild(item)
 }
 
 carregarListaAdmin()
+
+
+
 async function editarImovel(id){
 
 const { data: imovel } = await supabaseClient
@@ -304,8 +334,47 @@ window.imovelEditando = id
 document.querySelector("button").innerText = "Atualizar imóvel"
 
 }
-</script>
 
+
+
+async function apagarImovel(id){
+
+if(!confirm("Apagar este imóvel?")) return
+
+const { error } = await supabaseClient
+.from("imoveis")
+.delete()
+.eq("id", id)
+
+if(error){
+alert("Erro ao apagar")
+console.log(error)
+return
+}
+
+carregarListaAdmin()
+
+}
+
+
+
+document.getElementById("titulo").addEventListener("input", function(){
+
+const titulo = this.value
+
+const slug = titulo
+.toLowerCase()
+.normalize("NFD")
+.replace(/[\u0300-\u036f]/g, "")
+.replace(/[^a-z0-9\s-]/g, "")
+.trim()
+.replace(/\s+/g, "-")
+
+document.getElementById("slug").value = slug
+
+})
+
+</script>
 </div>
 
 </body>
