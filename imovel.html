@@ -51,6 +51,10 @@ left:0;
 display:none;
 }
 
+  .logo-white{
+display:block;
+}
+  
 .header.scrolled .logo-white{
 display:none;
 }
@@ -162,11 +166,7 @@ right:15px;
 
 </div>
 
-<section class="section">
-
-<div class="imovel" id="imovel-container"></div>
-
-</section>
+<div id="imovel-container"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -260,5 +260,17 @@ mostrarImagem()
 
 </script>
 
+  window.addEventListener("scroll", function(){
+
+const header = document.querySelector(".header")
+
+if(window.scrollY > 20){
+header.classList.add("scrolled")
+}else{
+header.classList.remove("scrolled")
+}
+
+})
+  
 </body>
 </html>
