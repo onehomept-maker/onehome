@@ -36,24 +36,23 @@ transition:background-color 0.6s ease, box-shadow 0.6s ease;
 }
 
 .logo{
+position:relative;
 height:120px;
-display:flex;
-align-items:center;
 }
 
 .logo img{
 height:120px;
-display:block;
+position:absolute;
+top:0;
+left:0;
 }
+
+/* LOGO SWITCH */
 
 .logo-blue{
 display:none;
 }
 
-  .logo-white{
-display:block;
-}
-  
 .header.scrolled .logo-white{
 display:none;
 }
@@ -61,7 +60,7 @@ display:none;
 .header.scrolled .logo-blue{
 display:block;
 }
-
+  
 .menu a{
 margin-left:35px;
 text-decoration:none;
