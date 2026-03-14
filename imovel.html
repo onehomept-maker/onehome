@@ -316,6 +316,45 @@ transition:background 0.3s ease, opacity 0.3s ease;
 opacity:0.88;
 }
 
+  /* GALERIA IMÓVEL */
+
+.galeria-imovel{
+padding:120px 10%;
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:30px;
+}
+
+.galeria-imovel img{
+width:100%;
+height:320px;
+object-fit:cover;
+display:block;
+transition:transform 0.4s ease;
+}
+
+.galeria-imovel img:hover{
+transform:scale(1.03);
+}
+
+/* layout editorial */
+
+.galeria-imovel img:nth-child(1){
+grid-column:span 2;
+height:520px;
+}
+
+.galeria-imovel img:nth-child(4){
+grid-column:span 3;
+height:520px;
+}
+
+.galeria-imovel img:nth-child(7){
+grid-column:span 2;
+height:520px;
+}
 
 /* MOBILE */
 
