@@ -431,6 +431,29 @@ if(e.target.tagName === "IMG"){
 e.preventDefault();
 }
 });
+
+  const heroImages = [
+"https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80",
+"quarto.jpg",
+"cozinha.jpg"
+];
+
+let heroIndex = 0;
+
+function trocarHero(){
+
+heroIndex++;
+
+if(heroIndex >= heroImages.length){
+heroIndex = 0;
+}
+
+document.querySelector(".hero").style.backgroundImage =
+`url(${heroImages[heroIndex]})`;
+
+}
+
+setInterval(trocarHero, 5000);  
   
 </script>
 
