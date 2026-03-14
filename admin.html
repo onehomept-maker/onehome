@@ -316,31 +316,32 @@ if(!confirm("Apagar esta fotografia?")) return
 
 const url = imagensExistentes[index]
 
-/* extrair o caminho dentro do bucket */
+/* extrair caminho correto do ficheiro */
 
-const partes = url.split("/imoveis/")
+const partes = url.split("/object/public/imoveis/")
 
 if(partes.length < 2){
 alert("Não foi possível encontrar o ficheiro no storage")
+console.log(url)
 return
 }
 
 const filePath = decodeURIComponent(partes[1])
 
-/* apagar do Supabase Storage */
+/* apagar do storage */
 
-const { error: storageError } = await supabaseClient
+const { error } = await supabaseClient
 .storage
 .from("imoveis")
 .remove([filePath])
 
-if(storageError){
-alert("Erro ao apagar no storage")
-console.log(storageError)
+if(error){
+alert("Erro ao apagar no Supabase")
+console.log(error)
 return
 }
 
-/* remover da lista do imóvel */
+/* remover da lista */
 
 imagensExistentes.splice(index,1)
 
