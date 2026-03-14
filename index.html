@@ -95,15 +95,14 @@ color:#222;
 
 .hero{
 height:100vh;
-background-image:url("https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80");
-background-size:cover;
-background-position:center;
+position:relative;
+overflow:hidden;
 display:flex;
 align-items:center;
 justify-content:center;
 text-align:center;
 color:white;
-position:relative;
+}
 
   transition:opacity 1.5s ease;
 }
@@ -145,7 +144,23 @@ font-family:'Inter', sans-serif;
 letter-spacing:1px;
 cursor:pointer;
 }
+  
+  .hero-slide{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+opacity:0;
+transition:opacity 2.5s ease;
+}
 
+.hero-slide.active{
+opacity:1;
+}
+  
 /* SECTION */
 
 .section{
@@ -340,7 +355,13 @@ padding:70px 10%;
 </div>
 
 <section class="hero">
+
+<div class="hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80')"></div>
+<div class="hero-slide" style="background-image:url('quarto.jpg')"></div>
+<div class="hero-slide" style="background-image:url('cozinha.jpg')"></div>
+
 <div class="hero-content">
+  
 <h1>ONE HOME</h1>
 <p>Casas únicas em Cascais</p>
 <button onclick="window.location.href='imoveis.html'">
@@ -434,47 +455,24 @@ e.preventDefault();
 }
 });
 
-const heroImages = [
-"https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1600&q=80",
-"quarto.jpg",
-"cozinha.jpg"
-];
-
-let heroIndex = 0;
-const hero = document.querySelector(".hero");
-
-/* PRELOAD DAS IMAGENS */
-
-heroImages.forEach(src => {
-const img = new Image();
-img.src = src;
-});
-
-/* PRIMEIRA IMAGEM */
-
-hero.style.backgroundImage = `url(${heroImages[0]})`;
+const slides = document.querySelectorAll(".hero-slide");
+let slideIndex = 0;
 
 function trocarHero(){
 
-hero.style.opacity = 0;
+slides[slideIndex].classList.remove("active");
 
-setTimeout(() => {
+slideIndex++;
 
-heroIndex++;
-
-if(heroIndex >= heroImages.length){
-heroIndex = 0;
+if(slideIndex >= slides.length){
+slideIndex = 0;
 }
 
-hero.style.backgroundImage = `url(${heroImages[heroIndex]})`;
-hero.style.opacity = 1;
-
-}, 700);
+slides[slideIndex].classList.add("active");
 
 }
 
-setInterval(trocarHero, 5000);
-  
+setInterval(trocarHero, 6000);
 </script>
 
 </body>
