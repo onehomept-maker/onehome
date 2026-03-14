@@ -226,28 +226,32 @@ async function gerarJSON() {
     imagens: imagens
   };
 
-  const { error: insertError } = await supabaseClient
-  
-   if(window.imovelEditando){
+let error
 
-await supabaseClient
+if(window.imovelEditando){
+
+const { error: updateError } = await supabaseClient
 .from("imoveis")
 .update(novoImovel)
 .eq("id", window.imovelEditando)
 
+error = updateError
+
 }else{
 
-await supabaseClient
+const { error: insertError } = await supabaseClient
 .from("imoveis")
 .insert([novoImovel])
 
+error = insertError
+
 }
 
-  if (insertError) {
-    alert("Erro ao guardar imóvel: " + insertError.message);
-    console.log(insertError);
-    return;
-  }
+if (error) {
+alert("Erro ao guardar imóvel: " + error.message)
+console.log(error)
+return
+}
 
   document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!";
   alert("Imóvel guardado com sucesso!");
