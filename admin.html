@@ -19,22 +19,16 @@ margin:0;
 background:#f6f7fb;
 }
 
-/* container principal */
-
 .admin{
 max-width:1100px;
 margin:auto;
 padding:60px 40px;
 }
 
-/* título */
-
 h1{
 margin-bottom:40px;
 font-weight:500;
 }
-
-/* layout do formulário */
 
 .form-grid{
 display:grid;
@@ -42,13 +36,9 @@ grid-template-columns:1fr 1fr;
 gap:24px;
 }
 
-/* campos largos */
-
 .full{
 grid-column:1 / -1;
 }
-
-/* labels */
 
 label{
 display:block;
@@ -56,8 +46,6 @@ font-size:13px;
 margin-bottom:6px;
 color:#555;
 }
-
-/* inputs */
 
 input, textarea, select{
 width:100%;
@@ -68,14 +56,10 @@ font-family:'Inter', sans-serif;
 font-size:14px;
 }
 
-/* textarea maior */
-
 textarea{
 min-height:120px;
 resize:vertical;
 }
-
-/* botão */
 
 button{
 margin-top:30px;
@@ -92,8 +76,6 @@ button:hover{
 background:#162f6a;
 }
 
-/* resultado */
-
 #resultado{
 margin-top:40px;
 background:white;
@@ -101,6 +83,9 @@ padding:20px;
 border-radius:6px;
 border:1px solid #eee;
 }
+
+/* lista imóveis */
+
 #lista-imoveis-admin{
 margin-top:20px;
 }
@@ -114,15 +99,17 @@ border-bottom:1px solid #ddd;
 }
 
 .item-admin button{
+margin-top:0;
 background:#1f3f8c;
-color:white;
-border:none;
 padding:6px 12px;
-cursor:pointer;
-}  
-  .lista-imagens-admin{
+font-size:13px;
+}
+
+/* GALERIA ADMIN */
+
+.lista-imagens-admin{
 display:grid;
-grid-template-columns:repeat(4, 1fr);
+grid-template-columns:repeat(4,1fr);
 gap:16px;
 margin-top:12px;
 }
@@ -132,27 +119,20 @@ background:white;
 border:1px solid #ddd;
 border-radius:10px;
 overflow:hidden;
-box-shadow:0 2px 8px rgba(0,0,0,0.04);
 cursor:grab;
-}
-
-.foto-admin.dragging{
-opacity:0.5;
 }
 
 .foto-admin img{
 width:100%;
 height:150px;
 object-fit:cover;
-display:block;
 }
 
 .foto-admin-info{
-padding:10px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-gap:10px;
+padding:10px;
 }
 
 .foto-admin-numero{
@@ -162,20 +142,20 @@ color:#555;
 
 .foto-admin-apagar{
 margin-top:0;
-padding:8px 10px;
-font-size:13px;
+padding:6px 10px;
 background:#b42318;
 border:none;
 border-radius:6px;
 color:white;
+font-size:12px;
 cursor:pointer;
 }
 
 .foto-admin-apagar:hover{
 background:#8f1c13;
-}  
-</style>
+}
 
+</style>
 </head>
 
 <body>
@@ -192,7 +172,7 @@ background:#8f1c13;
 </div>
 
 <div>
-<label>Slug (url)</label>
+<label>Slug</label>
 <input id="slug">
 </div>
 
@@ -216,7 +196,7 @@ background:#8f1c13;
 </select>
 </div>
 
-  <div>
+<div>
 <label>Tipologia</label>
 <input id="tipologia">
 </div>
@@ -232,12 +212,12 @@ background:#8f1c13;
 </div>
 
 <div>
-<label>Área Bruta (m²)</label>
+<label>Área Bruta</label>
 <input id="area_bruta">
 </div>
 
 <div>
-<label>Área Útil (m²)</label>
+<label>Área Útil</label>
 <input id="area_util">
 </div>
 
@@ -256,18 +236,15 @@ background:#8f1c13;
 <option>G</option>
 </select>
 </div>
-  
+
 <div class="full">
-<label>Fotos do imóvel</label>
+<label>Adicionar novas fotos</label>
 <input type="file" id="imagens" multiple>
 </div>
 
 <div class="full">
 <label>Fotografias atuais</label>
 <div id="lista-imagens-admin" class="lista-imagens-admin"></div>
-<p id="info-imagens" style="font-size:13px;color:#666;margin-top:10px;">
-Arrasta as imagens para mudar a ordem. Clica em “Apagar” para remover.
-</p>
 </div>
 
 <div class="full">
@@ -276,306 +253,240 @@ Arrasta as imagens para mudar a ordem. Clica em “Apagar” para remover.
 </div>
 
 </div>
-<button onclick="gerarJSON()">Guardar imóvel</button>
+
+<button id="botaoGuardar" onclick="gerarJSON()">Guardar imóvel</button>
 
 <div id="resultado"></div>
-  
-  <h2 style="margin-top:60px">Imóveis existentes</h2>
+
+<h2 style="margin-top:60px">Imóveis existentes</h2>
 
 <div id="lista-imoveis-admin"></div>
-  
+
 <script>
 
 const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
-
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8"
+const supabaseKey = "YOUR_KEY"
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
-  
+
 let imagensExistentes = []
 let dragIndex = null
-  
-async function gerarJSON(){
+let imovelEditando = null
 
-const files = document.getElementById("imagens").files
-let imagens = []
+function renderizarImagensAdmin(){
 
-for (let file of files){
+const container = document.getElementById("lista-imagens-admin")
+container.innerHTML = ""
 
-const fileName = `${Date.now()}-${file.name}`
+imagensExistentes.forEach((url,index)=>{
 
-const { error: uploadError } = await supabaseClient
-.storage
-.from("imoveis")
-.upload(fileName, file)
+const div = document.createElement("div")
+div.className="foto-admin"
+div.draggable=true
 
-if(uploadError){
-alert("Erro no upload: " + uploadError.message)
-console.log(uploadError)
-return
+div.innerHTML=`
+<img src="${url}">
+<div class="foto-admin-info">
+<span class="foto-admin-numero">${index+1}</span>
+<button class="foto-admin-apagar" onclick="apagarImagem(${index})">Apagar</button>
+</div>
+`
+
+div.addEventListener("dragstart",()=>{dragIndex=index})
+div.addEventListener("dragover",(e)=>{e.preventDefault()})
+div.addEventListener("drop",()=>{
+
+const item=imagensExistentes[dragIndex]
+imagensExistentes.splice(dragIndex,1)
+imagensExistentes.splice(index,0,item)
+
+renderizarImagensAdmin()
+
+})
+
+container.appendChild(div)
+
+})
+
 }
 
-const { data } = supabaseClient
-.storage
+async function apagarImagem(index){
+
+if(!confirm("Apagar fotografia?")) return
+
+const url=imagensExistentes[index]
+
+const path=url.split("/imoveis/")[1]
+
+await supabaseClient.storage
+.from("imoveis")
+.remove([path])
+
+imagensExistentes.splice(index,1)
+
+renderizarImagensAdmin()
+
+}
+
+async function gerarJSON(){
+
+const files=document.getElementById("imagens").files
+let novas=[]
+
+for(let file of files){
+
+const fileName=`${Date.now()}-${file.name}`
+
+await supabaseClient.storage
+.from("imoveis")
+.upload(fileName,file)
+
+const {data}=supabaseClient.storage
 .from("imoveis")
 .getPublicUrl(fileName)
 
-imagens.push(data.publicUrl)
+novas.push(data.publicUrl)
 
 }
-const novoImovel = {
 
-titulo: document.getElementById("titulo").value,
-slug: document.getElementById("slug").value,
-local: document.getElementById("local").value,
-preco: document.getElementById("preco").value,
-estado: document.getElementById("estado").value,
+const imagensFinais=[...imagensExistentes,...novas]
 
-tipologia: document.getElementById("tipologia").value,
-quartos: document.getElementById("quartos").value,
-wc: document.getElementById("wc").value,
-area_bruta: document.getElementById("area_bruta").value,
-area_util: document.getElementById("area_util").value,
-categoria_energetica: document.getElementById("categoria_energetica").value,
-
-descricao: document.getElementById("descricao").value
-
-}
-const imagensFinais = [...imagensExistentes, ...imagens]
-
-if(imagensFinais.length > 0){
-novoImovel.imagens = imagensFinais
+const novoImovel={
+titulo:titulo.value,
+slug:slug.value,
+local:local.value,
+preco:preco.value,
+estado:estado.value,
+tipologia:tipologia.value,
+quartos:quartos.value,
+wc:wc.value,
+area_bruta:area_bruta.value,
+area_util:area_util.value,
+categoria_energetica:categoria_energetica.value,
+descricao:descricao.value,
+imagens:imagensFinais
 }
 
-let error
+if(imovelEditando){
 
-if(window.imovelEditando){
-
-const { error: updateError } = await supabaseClient
+await supabaseClient
 .from("imoveis")
 .update(novoImovel)
-.eq("id", window.imovelEditando)
-
-error = updateError
+.eq("id",imovelEditando)
 
 }else{
 
-const { error: insertError } = await supabaseClient
+await supabaseClient
 .from("imoveis")
 .insert([novoImovel])
 
-error = insertError
-
 }
 
-if(error){
-alert("Erro ao guardar imóvel: " + error.message)
-console.log(error)
-return
-}
+alert("Imóvel guardado")
 
-document.getElementById("resultado").innerText = "Imóvel guardado com sucesso!"
-alert("Imóvel guardado com sucesso!")
-
-document.getElementById("titulo").value = ""
-document.getElementById("slug").value = ""
-document.getElementById("local").value = ""
-document.getElementById("preco").value = ""
-document.getElementById("estado").value = "disponivel"
-document.getElementById("descricao").value = ""
-document.getElementById("tipologia").value = ""
-document.getElementById("quartos").value = ""
-document.getElementById("wc").value = ""
-document.getElementById("area_bruta").value = ""
-document.getElementById("area_util").value = ""
-document.getElementById("categoria_energetica").value = ""
-document.getElementById("imagens").value = ""
-
-imagensExistentes = []
+imovelEditando=null
+imagensExistentes=[]
 renderizarImagensAdmin()
 
-window.imovelEditando = null
-
-document.querySelector("button").innerText = "Guardar imóvel"
+document.querySelectorAll("input,textarea").forEach(el=>el.value="")
 
 carregarListaAdmin()
-  renderizarImagensAdmin()
+
 }
-
-
 
 async function carregarListaAdmin(){
 
-const { data: imoveis, error } = await supabaseClient
+const {data}=await supabaseClient
 .from("imoveis")
 .select("*")
-.order("id", { ascending:false })
+.order("id",{ascending:false})
 
-const container = document.getElementById("lista-imoveis-admin")
+const container=document.getElementById("lista-imoveis-admin")
 
-container.innerHTML = ""
+container.innerHTML=""
 
-imoveis.forEach(imovel => {
+data.forEach(imovel=>{
 
-const item = document.createElement("div")
-item.className = "item-admin"
+const div=document.createElement("div")
+div.className="item-admin"
 
-item.innerHTML = `
+div.innerHTML=`
 <span>${imovel.titulo}</span>
-
 <div>
 <button onclick="editarImovel('${imovel.id}')">Editar</button>
 <button onclick="apagarImovel('${imovel.id}')">Apagar</button>
 </div>
 `
 
-container.appendChild(item)
+container.appendChild(div)
 
 })
 
 }
-
-carregarListaAdmin()
-
-
 
 async function editarImovel(id){
 
-const { data: imovel } = await supabaseClient
+const {data}=await supabaseClient
 .from("imoveis")
 .select("*")
-.eq("id", id)
+.eq("id",id)
 .single()
 
-document.getElementById("titulo").value = imovel.titulo
-document.getElementById("slug").value = imovel.slug
-document.getElementById("local").value = imovel.local
-document.getElementById("preco").value = imovel.preco
-document.getElementById("estado").value = imovel.estado
-document.getElementById("descricao").value = imovel.descricao
-document.getElementById("tipologia").value = imovel.tipologia || ""
-document.getElementById("quartos").value = imovel.quartos || ""
-document.getElementById("wc").value = imovel.wc || ""
-document.getElementById("area_bruta").value = imovel.area_bruta || ""
-document.getElementById("area_util").value = imovel.area_util || ""
-document.getElementById("categoria_energetica").value = imovel.categoria_energetica || ""
+titulo.value=data.titulo
+slug.value=data.slug
+local.value=data.local
+preco.value=data.preco
+estado.value=data.estado
+descricao.value=data.descricao
 
-imagensExistentes = imovel.imagens ? [...imovel.imagens] : []
+tipologia.value=data.tipologia||""
+quartos.value=data.quartos||""
+wc.value=data.wc||""
+area_bruta.value=data.area_bruta||""
+area_util.value=data.area_util||""
+categoria_energetica.value=data.categoria_energetica||""
+
+imagensExistentes=data.imagens||[]
+
 renderizarImagensAdmin()
 
-window.imovelEditando = id
+imovelEditando=id
 
-document.querySelector("button").innerText = "Atualizar imóvel"
+document.getElementById("botaoGuardar").innerText="Atualizar imóvel"
 
 }
-
-
 
 async function apagarImovel(id){
 
-if(!confirm("Apagar este imóvel?")) return
+if(!confirm("Apagar imóvel?")) return
 
-const { error } = await supabaseClient
+await supabaseClient
 .from("imoveis")
 .delete()
-.eq("id", id)
-
-if(error){
-alert("Erro ao apagar")
-console.log(error)
-return
-}
+.eq("id",id)
 
 carregarListaAdmin()
 
 }
 
-  function renderizarImagensAdmin(){
+titulo.addEventListener("input",function(){
 
-const container = document.getElementById("lista-imagens-admin")
-container.innerHTML = ""
-
-if(!imagensExistentes || imagensExistentes.length === 0){
-container.innerHTML = "<p style='color:#777;margin:0;'>Ainda não há fotografias para este imóvel.</p>"
-return
-}
-
-imagensExistentes.forEach((url, index) => {
-
-const item = document.createElement("div")
-item.className = "foto-admin"
-item.draggable = true
-item.dataset.index = index
-
-item.innerHTML = `
-<img src="${url}">
-<div class="foto-admin-info">
-<span class="foto-admin-numero">Posição ${index + 1}</span>
-<button type="button" class="foto-admin-apagar" onclick="apagarImagemExistente(${index})">Apagar</button>
-</div>
-`
-
-item.addEventListener("dragstart", () => {
-dragIndex = index
-item.classList.add("dragging")
-})
-
-item.addEventListener("dragend", () => {
-item.classList.remove("dragging")
-})
-
-item.addEventListener("dragover", (e) => {
-e.preventDefault()
-})
-
-item.addEventListener("drop", (e) => {
-e.preventDefault()
-
-const dropIndex = Number(item.dataset.index)
-
-if(dragIndex === null || dragIndex === dropIndex) return
-
-const imagemArrastada = imagensExistentes[dragIndex]
-imagensExistentes.splice(dragIndex, 1)
-imagensExistentes.splice(dropIndex, 0, imagemArrastada)
-
-dragIndex = null
-renderizarImagensAdmin()
-})
-
-container.appendChild(item)
-
-})
-
-}
-  
-  function apagarImagemExistente(index){
-
-if(!confirm("Apagar esta fotografia da galeria?")) return
-
-imagensExistentes.splice(index, 1)
-renderizarImagensAdmin()
-
-}
-
-document.getElementById("titulo").addEventListener("input", function(){
-
-const titulo = this.value
-
-const slug = titulo
+const s=this.value
 .toLowerCase()
 .normalize("NFD")
-.replace(/[\u0300-\u036f]/g, "")
-.replace(/[^a-z0-9\s-]/g, "")
+.replace(/[\u0300-\u036f]/g,"")
+.replace(/[^a-z0-9\s-]/g,"")
 .trim()
-.replace(/\s+/g, "-")
+.replace(/\s+/g,"-")
 
-document.getElementById("slug").value = slug
+slug.value=s
 
 })
 
-</script>
-</div>
+carregarListaAdmin()
 
+</script>
+
+</div>
 </body>
 </html>
