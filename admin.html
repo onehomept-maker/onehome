@@ -310,17 +310,37 @@ container.appendChild(div)
 
 }
 
-async function apagarImagem(index){
+async function apagarImagemExistente(index){
 
-if(!confirm("Apagar fotografia?")) return
+if(!confirm("Apagar esta fotografia?")) return
 
-const url=imagensExistentes[index]
+const url = imagensExistentes[index]
 
-const path=url.split("/imoveis/")[1]
+/* extrair o caminho dentro do bucket */
 
-await supabaseClient.storage
+const partes = url.split("/imoveis/")
+
+if(partes.length < 2){
+alert("Não foi possível encontrar o ficheiro no storage")
+return
+}
+
+const filePath = decodeURIComponent(partes[1])
+
+/* apagar do Supabase Storage */
+
+const { error: storageError } = await supabaseClient
+.storage
 .from("imoveis")
-.remove([path])
+.remove([filePath])
+
+if(storageError){
+alert("Erro ao apagar no storage")
+console.log(storageError)
+return
+}
+
+/* remover da lista do imóvel */
 
 imagensExistentes.splice(index,1)
 
