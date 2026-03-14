@@ -442,7 +442,7 @@ let imagensHTML = `
 
 <button class="seta direita" onclick="proxima()">›</button>
 
-<button class="ver-mais">Ver mais</button>
+<button class="ver-mais" onclick="irGaleria()">Ver mais</button>
 
 </div>
 
@@ -520,6 +520,10 @@ let imagensHTML = `
 
 </section>
 
+<!-- GALERIA FOTOGRAFIAS -->
+
+<div id="galeria-imovel" class="galeria-imovel"></div>
+
 `
 
 
@@ -550,6 +554,15 @@ window.indiceImagem = window.listaImagens.length - 1
 }
 mostrarImagem()
 }
+  
+function irGaleria(){
+
+document.getElementById("galeria-imovel")
+.scrollIntoView({
+behavior:"smooth"
+})
+
+}  
 
 /* HEADER SCROLL */
 
