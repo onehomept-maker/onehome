@@ -323,48 +323,48 @@ opacity:0.88;
 padding:120px 10%;
 max-width:1400px;
 margin:auto;
-display:grid;
-grid-template-columns:repeat(3, 1fr);
-gap:40px;
+column-count:3;
+column-gap:24px;
 }
 
 .galeria-imovel img{
 width:100%;
-height:320px;
-object-fit:cover;
 display:block;
+margin-bottom:24px;
+break-inside:avoid;
+object-fit:cover;
 transition:transform 0.4s ease;
 }
 
-.galeria-imovel img:hover{
-transform:scale(1.03);
-}
-
-/* layout editorial */
+/* alturas editoriais variadas */
 
 .galeria-imovel img:nth-child(6n+1){
-grid-column:span 2;
 height:520px;
 }
 
-.galeria-imovel img:nth-child(6n+4){
-grid-column:span 3;
-height:520px;
+.galeria-imovel img:nth-child(6n+2){
+height:300px;
 }
 
-.galeria-imovel img:nth-child(6n+5){
+.galeria-imovel img:nth-child(6n+3){
 height:420px;
 }
 
-.galeria-imovel img:nth-child(6n+2),
-.galeria-imovel img:nth-child(6n+3),
-.galeria-imovel img:nth-child(6n+6){
-height:260px;
-}
-  .galeria-imovel img:nth-child(2){
-height:260px;
+.galeria-imovel img:nth-child(6n+4){
+height:620px;
 }
 
+.galeria-imovel img:nth-child(6n+5){
+height:340px;
+}
+
+.galeria-imovel img:nth-child(6n+6){
+height:460px;
+}
+
+.galeria-imovel img:hover{
+transform:scale(1.015);
+}
 .galeria-imovel img:nth-child(3){
 height:260px;
 }
@@ -404,7 +404,15 @@ padding:70px 8%;
 .imovel h1{
 font-size:38px;
 }
+  .galeria-imovel{
+column-count:2;
+column-gap:18px;
+padding:80px 8%;
+}
 
+.galeria-imovel img{
+margin-bottom:18px;
+}
 }
 
 @media (max-width: 640px){
@@ -435,7 +443,11 @@ font-size:32px;
 .sidebar-contacto{
 padding:28px 24px;
 }
-
+  .galeria-imovel{
+column-count:1;
+padding:60px 6%;
+}
+  
 }
 </style>
 
