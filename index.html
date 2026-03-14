@@ -104,6 +104,8 @@ justify-content:center;
 text-align:center;
 color:white;
 position:relative;
+
+  transition:opacity 1.5s ease;
 }
 
 .hero::before{
@@ -442,18 +444,24 @@ let heroIndex = 0;
 
 function trocarHero(){
 
+const hero = document.querySelector(".hero");
+
+hero.style.opacity = 0;
+
+setTimeout(() => {
+
 heroIndex++;
 
 if(heroIndex >= heroImages.length){
 heroIndex = 0;
 }
 
-document.querySelector(".hero").style.backgroundImage =
-`url(${heroImages[heroIndex]})`;
+hero.style.backgroundImage = `url(${heroImages[heroIndex]})`;
+hero.style.opacity = 1;
+
+}, 700);
 
 }
-
-setInterval(trocarHero, 5000);  
   
 </script>
 
