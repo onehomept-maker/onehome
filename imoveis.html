@@ -140,6 +140,8 @@ padding:120px 10%;
 margin-bottom:40px;
 }
 
+/* BARRA PRINCIPAL */
+
 .pesquisa-imoveis{
 display:grid;
 grid-template-columns:repeat(4, minmax(0, 1fr));
@@ -149,8 +151,12 @@ box-shadow:0 10px 30px rgba(0,0,0,0.08);
 overflow:hidden;
 }
 
+/* CAMPOS DAS DUAS BARRAS */
+
 .pesquisa-imoveis select,
-.pesquisa-imoveis button{
+.pesquisa-imoveis button,
+.pesquisa-avancada select,
+.pesquisa-avancada input{
 height:54px;
 border:none;
 border-right:1px solid #eee;
@@ -159,10 +165,13 @@ font-family:'Inter', sans-serif;
 font-size:14px;
 background:white;
 box-sizing:border-box;
+width:100%;
 }
 
-.pesquisa-imoveis select{
-width:100%;
+/* SETA DOS SELECTS */
+
+.pesquisa-imoveis select,
+.pesquisa-avancada select{
 appearance:none;
 -webkit-appearance:none;
 background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -178,6 +187,8 @@ padding-right:34px;
 outline:none;
 }
 
+/* BOTÃO PESQUISAR */
+
 #btn-pesquisar{
 background:#222;
 color:white;
@@ -190,6 +201,8 @@ transition:background 0.25s ease;
 background:#444;
 }
 
+/* BOTÃO FILTROS */
+
 #btn-filtros{
 margin-top:12px;
 background:none;
@@ -197,9 +210,12 @@ border:none;
 cursor:pointer;
 padding:4px;
 }
-  #btn-filtros:hover{
+
+#btn-filtros:hover{
 opacity:0.6;
-}  
+}
+
+/* FILTROS AVANÇADOS */
 
 .pesquisa-avancada{
 display:none;
@@ -215,47 +231,11 @@ margin-top:16px;
 display:grid;
 }
 
-.pesquisa-avancada select{
-appearance:none;
--webkit-appearance:none;
-background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-background-repeat:no-repeat;
-background-position:right 14px center;
-background-size:12px;
-padding-right:34px;
-}
+/* REMOVER BORDA DIREITA DO ÚLTIMO */
 
 .pesquisa-imoveis > *:last-child,
 .pesquisa-avancada > *:last-child{
 border-right:none;
-}
-
-.properties{
-display:grid;
-grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-gap:60px;
-}
-
-@media (max-width:900px){
-
-.pesquisa-imoveis,
-.pesquisa-avancada{
-grid-template-columns:1fr;
-}
-
-.pesquisa-imoveis select,
-.pesquisa-imoveis button,
-.pesquisa-avancada select,
-.pesquisa-avancada input{
-border-right:none;
-border-bottom:1px solid #eee;
-}
-
-.pesquisa-imoveis > *:last-child,
-.pesquisa-avancada > *:last-child{
-border-bottom:none;
-}
-
 }
 /* CARD LINK */
 
