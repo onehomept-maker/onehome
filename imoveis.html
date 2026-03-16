@@ -514,8 +514,8 @@ if(precoNumero > Number(precoMax)) return false;
 }
 
 if(quartos && Number(imovel.quartos) < Number(quartos)) return false;
-if(wc && Number(imovel.WC) < Number(wc)) return false;
-if(area && Number(imovel["área útil"]) < Number(area)) return false;
+if(wc && Number(imovel.wc) < Number(wc)) return false;
+if(area && Number(imovel["area_util"]) < Number(area)) return false;
 
 return true;
 
