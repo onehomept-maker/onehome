@@ -136,6 +136,69 @@ color:white;
 padding:120px 10%;
 }
 
+  .pesquisa-imoveis{
+display:flex;
+gap:14px;
+flex-wrap:wrap;
+align-items:center;
+margin-bottom:18px;
+}
+
+.pesquisa-imoveis select,
+.pesquisa-imoveis button,
+.pesquisa-avancada select,
+.pesquisa-avancada input{
+height:46px;
+padding:0 14px;
+border:1px solid #d8d8d8;
+background:white;
+font-family:'Inter', sans-serif;
+font-size:14px;
+color:#222;
+box-sizing:border-box;
+}
+
+.pesquisa-imoveis select,
+.pesquisa-avancada select,
+.pesquisa-avancada input{
+min-width:190px;
+}
+
+.pesquisa-imoveis button{
+cursor:pointer;
+transition:all 0.25s ease;
+}
+
+#btn-pesquisar{
+background:#222;
+color:white;
+border:1px solid #222;
+}
+
+#btn-pesquisar:hover{
+background:#444;
+border-color:#444;
+}
+
+#btn-filtros{
+background:white;
+color:#222;
+}
+
+#btn-filtros:hover{
+background:#f5f5f5;
+}
+
+.pesquisa-avancada{
+display:none;
+gap:14px;
+flex-wrap:wrap;
+margin-bottom:50px;
+}
+
+.pesquisa-avancada.active{
+display:flex;
+}
 .properties{
 display:grid;
 grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -261,7 +324,64 @@ font-size:36px;
 
 <section class="section">
 
-<div class="properties" id="lista-imoveis"></div>
+<div class="pesquisa-imoveis">
+
+<select id="filtro-local">
+<option value="">Localização</option>
+</select>
+
+<select id="filtro-tipologia">
+<option value="">Tipologia</option>
+</select>
+
+<select id="filtro-preco">
+<option value="">Preço máximo</option>
+<option value="500000">Até 500.000€</option>
+<option value="1000000">Até 1.000.000€</option>
+<option value="1500000">Até 1.500.000€</option>
+<option value="2000000">Até 2.000.000€</option>
+<option value="3000000">Até 3.000.000€</option>
+</select>
+
+<button id="btn-pesquisar">Pesquisar</button>
+
+<button id="btn-filtros" type="button">Mais filtros</button>
+
+</div>
+
+<div class="pesquisa-avancada" id="pesquisa-avancada">
+
+<select id="filtro-quartos">
+<option value="">Quartos</option>
+<option value="1">1+</option>
+<option value="2">2+</option>
+<option value="3">3+</option>
+<option value="4">4+</option>
+<option value="5">5+</option>
+</select>
+
+<select id="filtro-wc">
+<option value="">WC</option>
+<option value="1">1+</option>
+<option value="2">2+</option>
+<option value="3">3+</option>
+<option value="4">4+</option>
+<option value="5">5+</option>
+</select>
+
+<input type="number" id="filtro-area" placeholder="area util mínima">
+
+<select id="filtro-estado">
+<option value="">Estado</option>
+<option value="disponivel">Disponível</option>
+<option value="reservado">Reservado</option>
+<option value="vendido">Vendido</option>
+<option value="arrendado">Arrendado</option>
+</select>
+
+</div>
+
+<div id="lista-imoveis"></div>
 
 </section>
   
@@ -273,25 +393,36 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
-async function carregarImoveis(){
+let todosImoveis = [];
 
-const { data: imoveis, error } = await supabaseClient
-.from("imoveis")
-.select("*")
-.order("id", { ascending: false })
+function preencherFiltros(imoveis){
 
-if(error){
-console.log(error)
-return
+const selectLocal = document.getElementById("filtro-local");
+const selectTipologia = document.getElementById("filtro-tipologia");
+
+const locaisUnicos = [...new Set(imoveis.map(i => i.local).filter(Boolean))];
+const tipologiasUnicas = [...new Set(imoveis.map(i => i.tipologia).filter(Boolean))];
+
+locaisUnicos.sort((a, b) => a.localeCompare(b, "pt"));
+tipologiasUnicas.sort((a, b) => a.localeCompare(b, "pt"));
+
+locaisUnicos.forEach(local => {
+const option = document.createElement("option");
+option.value = local;
+option.textContent = local;
+selectLocal.appendChild(option);
+});
+
+tipologiasUnicas.forEach(tipologia => {
+const option = document.createElement("option");
+option.value = tipologia;
+option.textContent = tipologia;
+selectTipologia.appendChild(option);
+});
+
 }
 
-const container = document.getElementById("lista-imoveis");
-
-const disponiveis = imoveis.filter(i => i.estado === "disponivel");
-const reservados = imoveis.filter(i => i.estado === "reservado");
-const vendidos = imoveis.filter(i => i.estado === "vendido" || i.estado === "arrendado");
-
-function criarSecao(titulo, lista){
+function criarSecao(titulo, lista, container){
 
 if(lista.length === 0) return;
 
@@ -327,17 +458,12 @@ cardLink.href = `imovel.html?slug=${imovel.slug}`;
 cardLink.innerHTML = `
 <div class="card">
 ${estadoLabel}
-
-<img src="${imovel.imagens[0]}">
-
-<h3>${imovel.titulo}</h3>
-
-<p>${imovel.local}</p>
-
-<p class="preco">${imovel.preco}</p>
+<img src="${imovel.imagens?.[0] || ''}">
+<h3>${imovel.titulo || ""}</h3>
+<p>${imovel.local || ""}</p>
+<p class="preco">${imovel.preco || ""}</p>
 </div>
 `;
-
 
 grid.appendChild(cardLink);
 
@@ -347,14 +473,85 @@ container.appendChild(grid);
 
 }
 
-criarSecao("Imóveis Disponíveis", disponiveis);
-criarSecao("Reservados", reservados);
-criarSecao("Vendidos e Arrendados", vendidos);
+function renderImoveis(lista){
+
+const container = document.getElementById("lista-imoveis");
+container.innerHTML = "";
+
+const disponiveis = lista.filter(i => i.estado === "disponivel");
+const reservados = lista.filter(i => i.estado === "reservado");
+const vendidos = lista.filter(i => i.estado === "vendido" || i.estado === "arrendado");
+
+criarSecao("Imóveis Disponíveis", disponiveis, container);
+criarSecao("Reservados", reservados, container);
+criarSecao("Vendidos e Arrendados", vendidos, container);
+
+if(lista.length === 0){
+container.innerHTML = "<p>Não foram encontrados imóveis com esses critérios.</p>";
+}
+
+}
+
+function aplicarFiltros(){
+
+const local = document.getElementById("filtro-local").value;
+const tipologia = document.getElementById("filtro-tipologia").value;
+const precoMax = document.getElementById("filtro-preco").value;
+const quartos = document.getElementById("filtro-quartos").value;
+const wc = document.getElementById("filtro-wc").value;
+const area = document.getElementById("filtro-area").value;
+const estado = document.getElementById("filtro-estado").value;
+
+const filtrados = todosImoveis.filter(imovel => {
+
+if(local && imovel.local !== local) return false;
+if(tipologia && imovel.tipologia !== tipologia) return false;
+if(estado && imovel.estado !== estado) return false;
+
+if(precoMax){
+const precoNumero = Number(String(imovel.preco).replace(/[^\d]/g, ""));
+if(precoNumero > Number(precoMax)) return false;
+}
+
+if(quartos && Number(imovel.quartos) < Number(quartos)) return false;
+if(wc && Number(imovel.WC) < Number(wc)) return false;
+if(area && Number(imovel["área útil"]) < Number(area)) return false;
+
+return true;
+
+});
+
+renderImoveis(filtrados);
+
+}
+
+async function carregarImoveis(){
+
+const { data: imoveis, error } = await supabaseClient
+.from("imoveis")
+.select("*")
+.order("id", { ascending: false });
+
+if(error){
+console.log(error);
+return;
+}
+
+todosImoveis = imoveis || [];
+
+preencherFiltros(todosImoveis);
+renderImoveis(todosImoveis);
 
 }
 
 carregarImoveis()
 
+  document.getElementById("btn-pesquisar").addEventListener("click", aplicarFiltros);
+
+document.getElementById("btn-filtros").addEventListener("click", function(){
+document.getElementById("pesquisa-avancada").classList.toggle("active");
+});
+  
   window.addEventListener("scroll", function() {
 
 const header = document.querySelector(".header");
