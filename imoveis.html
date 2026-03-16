@@ -142,6 +142,14 @@ grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
 gap:60px;
 }
 
+/* CARD LINK */
+
+.card-link{
+text-decoration:none;
+color:inherit;
+display:block;
+}
+
 /* CARD */
 
 .card{
@@ -149,7 +157,9 @@ background:transparent;
 border:1.5px solid transparent;
 transition:all 0.35s ease;
 overflow:hidden;
+cursor:pointer;
 }
+
 .card:hover{
 background:white;
 box-shadow:
@@ -195,18 +205,7 @@ padding:12px 22px 0 22px;
 color:#111;
 }
 
-/* LINK */
 
-.card a{
-margin-left:22px;
-margin-top:10px;
-display:inline-block;
-font-size:12px;
-letter-spacing:1px;
-text-decoration:none;
-color:#222;
-border-bottom:1px solid #222;
-}
 
 /* MOBILE */
 
@@ -321,10 +320,12 @@ if(imovel.estado === "arrendado"){
 estadoLabel = "<div class='estado arrendado'>ARRENDADO</div>";
 }
 
-const card = document.createElement("div");
-card.className = "card";
+const cardLink = document.createElement("a");
+cardLink.className = "card-link";
+cardLink.href = `imovel.html?slug=${imovel.slug}`;
 
-card.innerHTML = `
+cardLink.innerHTML = `
+<div class="card">
 ${estadoLabel}
 
 <img src="${imovel.imagens[0]}">
@@ -334,14 +335,11 @@ ${estadoLabel}
 <p>${imovel.local}</p>
 
 <p class="preco">${imovel.preco}</p>
-
-<a href="imovel.html?slug=${imovel.slug}">
-Ver imóvel
-</a>
+</div>
 `;
 
 
-grid.appendChild(card);
+grid.appendChild(cardLink);
 
 });
 
