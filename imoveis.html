@@ -135,73 +135,50 @@ color:white;
 .section{
 padding:120px 10%;
 }
-  
+
+.pesquisa-topo{
+margin-bottom:40px;
+}
+
 .pesquisa-imoveis{
-display:flex;
-gap:0;
-flex-wrap:wrap;
-align-items:center;
-margin-bottom:25px;
+display:grid;
+grid-template-columns:repeat(4, minmax(0, 1fr));
 background:white;
 border-radius:6px;
 box-shadow:0 10px 30px rgba(0,0,0,0.08);
 overflow:hidden;
+}
+
+.pesquisa-imoveis select,
+.pesquisa-imoveis button{
+height:54px;
+border:none;
+border-right:1px solid #eee;
+padding:0 18px;
+font-family:'Inter', sans-serif;
+font-size:14px;
+background:white;
+box-sizing:border-box;
 }
 
 .pesquisa-imoveis select{
-border:none;
-border-right:1px solid #eee;
-padding:0 18px;
-height:52px;
-font-family:'Inter', sans-serif;
-font-size:14px;
-background:white;
-min-width:190px;
+width:100%;
+appearance:none;
+-webkit-appearance:none;
 }
 
-  .pesquisa-avancada{
-display:none;
-gap:0;
-flex-wrap:wrap;
-background:white;
-border-radius:6px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-overflow:hidden;
-margin-bottom:40px;
-}
-  
-  .pesquisa-avancada{
-margin-top:-10px;
-}
-  
-.pesquisa-avancada select,
-.pesquisa-avancada input{
-border:none;
-border-right:1px solid #eee;
-padding:0 18px;
-height:52px;
-font-family:'Inter', sans-serif;
-font-size:14px;
-background:white;
-min-width:190px;
-}
-
-.pesquisa-avancada input:focus,
-.pesquisa-avancada select:focus{
-outline:none;
-}  
-.pesquisa-imoveis select:focus{
+.pesquisa-imoveis select:focus,
+.pesquisa-avancada select:focus,
+.pesquisa-avancada input:focus{
 outline:none;
 }
 
 #btn-pesquisar{
-height:52px;
-padding:0 26px;
-border:none;
 background:#222;
 color:white;
 cursor:pointer;
-font-size:14px;
+border-right:none;
+transition:background 0.25s ease;
 }
 
 #btn-pesquisar:hover{
@@ -209,23 +186,75 @@ background:#444;
 }
 
 #btn-filtros{
-flex-basis:100%;
 margin-top:12px;
+padding:0;
 background:none;
 border:none;
 font-size:13px;
 color:#777;
 cursor:pointer;
-text-align:left;
-padding-left:4px;
+font-family:'Inter', sans-serif;
 }
-  
+
+.pesquisa-avancada{
+display:none;
+grid-template-columns:repeat(4, minmax(0, 1fr));
+background:white;
+border-radius:6px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+overflow:hidden;
+margin-top:16px;
+}
+
+.pesquisa-avancada.active{
+display:grid;
+}
+
+.pesquisa-avancada select,
+.pesquisa-avancada input{
+height:54px;
+border:none;
+border-right:1px solid #eee;
+padding:0 18px;
+font-family:'Inter', sans-serif;
+font-size:14px;
+background:white;
+box-sizing:border-box;
+width:100%;
+}
+
+.pesquisa-imoveis > *:last-child,
+.pesquisa-avancada > *:last-child{
+border-right:none;
+}
+
 .properties{
 display:grid;
 grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
 gap:60px;
 }
 
+@media (max-width:900px){
+
+.pesquisa-imoveis,
+.pesquisa-avancada{
+grid-template-columns:1fr;
+}
+
+.pesquisa-imoveis select,
+.pesquisa-imoveis button,
+.pesquisa-avancada select,
+.pesquisa-avancada input{
+border-right:none;
+border-bottom:1px solid #eee;
+}
+
+.pesquisa-imoveis > *:last-child,
+.pesquisa-avancada > *:last-child{
+border-bottom:none;
+}
+
+}
 /* CARD LINK */
 
 .card-link{
@@ -345,6 +374,8 @@ font-size:36px;
 
 <section class="section">
 
+<div class="pesquisa-topo">
+
 <div class="pesquisa-imoveis">
 
 <select id="filtro-local">
@@ -366,9 +397,9 @@ font-size:36px;
 
 <button id="btn-pesquisar">Pesquisar</button>
 
-<button id="btn-filtros" type="button">Mais filtros</button>
-
 </div>
+
+<button id="btn-filtros" type="button">Mais filtros</button>
 
 <div class="pesquisa-avancada" id="pesquisa-avancada">
 
@@ -390,7 +421,7 @@ font-size:36px;
 <option value="5">5+</option>
 </select>
 
-<input type="number" id="filtro-area" placeholder="area util mínima">
+<input type="number" id="filtro-area" placeholder="Área útil mínima">
 
 <select id="filtro-estado">
 <option value="">Estado</option>
@@ -402,10 +433,11 @@ font-size:36px;
 
 </div>
 
+</div>
+
 <div id="lista-imoveis"></div>
 
 </section>
-  
 <script>
 
 const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
