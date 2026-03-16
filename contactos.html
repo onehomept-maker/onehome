@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contactos | One Home</title>
+
+<meta name="description" content="Contacte a ONE HOME Real Estate, imobiliária sediada em Cascais. Estamos disponíveis para ajudar na compra, venda ou avaliação do seu imóvel.">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Inter', sans-serif;
+color:#222;
+}
+
+/* HEADER */
+
+.header{
+position:fixed;
+top:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:25px 8%;
+box-sizing:border-box;
+z-index:10;
+background:rgba(255,255,255,0.08);
+transition:background-color 0.6s ease, box-shadow 0.6s ease;
+}
+
+.logo{
+position:relative;
+height:150px;
+}
+
+.logo img{
+height:150px;
+position:absolute;
+top:0;
+left:0;
+}
+
+.logo-blue{
+display:none;
+}
+
+.header.scrolled .logo-white{
+display:none;
+}
+
+.header.scrolled .logo-blue{
+display:block;
+}
+
+.menu a{
+margin-left:35px;
+text-decoration:none;
+color:white;
+font-size:13px;
+letter-spacing:2px;
+}
+
+.header.scrolled{
+background:white;
+box-shadow:0 2px 10px rgba(0,0,0,0.08);
+padding:20px 8%;
+}
+
+.header.scrolled .menu a{
+color:#222;
+}
+
+/* HERO */
+
+.hero{
+height:70vh;
+background-image:url("contactos.jpg");
+background-size:cover;
+background-position:center;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+color:white;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.45);
+}
+
+.hero h1{
+font-family:'Generica', sans-serif;
+font-size:70px;
+font-weight:400;
+letter-spacing:6px;
+position:relative;
+z-index:2;
+}
+
+/* SECÇÃO CONTACTOS */
+
+.contactos{
+padding:120px 10%;
+background:white;
+}
+
+.contacto-caixa{
+background:#f7f5f2;
+padding:70px 80px;
+max-width:900px;
+margin:auto;
+border:1px solid #e7e1d8;
+text-align:center;
+}
+
+.contacto-label{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#8a8175;
+margin-bottom:8px;
+display:block;
+}
+
+.contacto-caixa h2{
+margin:0 0 18px 0;
+font-family:'Cormorant Garamond', serif;
+font-size:32px;
+font-weight:500;
+}
+
+.contacto-caixa p{
+font-size:15px;
+line-height:1.7;
+color:#444;
+margin-bottom:14px;
+}
+
+.contacto-link{
+display:block;
+text-decoration:none;
+color:#222;
+font-size:16px;
+margin-bottom:10px;
+}
+
+.contacto-link:hover{
+opacity:0.7;
+}
+
+.botao-contacto{
+display:inline-block;
+margin-top:20px;
+padding:14px 30px;
+background:#222;
+color:white;
+text-decoration:none;
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+/* MAPA */
+
+.mapa{
+padding:0 10% 120px 10%;
+}
+
+.mapa iframe{
+width:100%;
+height:420px;
+border:0;
+}
+
+/* MOBILE */
+
+@media (max-width:900px){
+
+.hero h1{
+font-size:36px;
+}
+
+.contactos{
+padding:90px 8%;
+}
+
+.contacto-caixa{
+padding:50px 40px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="logo">
+<img class="logo-white" src="logo-onehome.png">
+<img class="logo-blue" src="logo-onehome-blue.png">
+</div>
+
+<div class="menu">
+<a href="index.html">Home</a>
+<a href="imoveis.html">Imóveis</a>
+<a href="sobre.html">Quem Somos</a>
+<a href="contactos.html">Contactos</a>
+</div>
+
+</div>
+
+<!-- HERO -->
+
+<section class="hero">
+<h1>CONTACTOS</h1>
+</section>
+
+<!-- CONTACTOS -->
+
+<section class="contactos">
+
+<div class="contacto-caixa">
+
+<span class="contacto-label">Contacto</span>
+
+<h2>Fale Connosco</h2>
+
+<p>
+Se pretende vender, comprar ou obter mais informações sobre um imóvel,
+teremos todo o gosto em ajudar.
+</p>
+
+<p><strong>ONE HOME REAL ESTATE</strong></p>
+
+<a href="mailto:info@onehome-realestate.com" class="contacto-link">
+info@onehome-realestate.com
+</a>
+
+<a href="tel:+351914012634" class="contacto-link">
++351 914 012 634
+</a>
+
+<p>Cascais, Portugal</p>
+
+<a href="mailto:info@onehome-realestate.com" class="botao-contacto">
+Enviar Email
+</a>
+
+</div>
+
+</section>
+
+<!-- MAPA -->
+
+<section class="mapa">
+
+<iframe
+src="https://www.google.com/maps?q=Cascais,Portugal&output=embed">
+</iframe>
+
+</section>
+
+<script>
+
+window.addEventListener("scroll", function(){
+
+const header = document.querySelector(".header");
+
+if(window.scrollY > 20){
+header.classList.add("scrolled");
+}else{
+header.classList.remove("scrolled");
+}
+
+})
+
+</script>
+
+</body>
+</html>
