@@ -165,6 +165,11 @@ box-sizing:border-box;
 width:100%;
 appearance:none;
 -webkit-appearance:none;
+background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+background-repeat:no-repeat;
+background-position:right 14px center;
+background-size:12px;
+padding-right:34px;
 }
 
 .pesquisa-imoveis select:focus,
@@ -187,14 +192,14 @@ background:#444;
 
 #btn-filtros{
 margin-top:12px;
-padding:0;
 background:none;
 border:none;
-font-size:13px;
-color:#777;
 cursor:pointer;
-font-family:'Inter', sans-serif;
+padding:4px;
 }
+  #btn-filtros:hover{
+opacity:0.6;
+}  
 
 .pesquisa-avancada{
 display:none;
@@ -210,17 +215,14 @@ margin-top:16px;
 display:grid;
 }
 
-.pesquisa-avancada select,
-.pesquisa-avancada input{
-height:54px;
-border:none;
-border-right:1px solid #eee;
-padding:0 18px;
-font-family:'Inter', sans-serif;
-font-size:14px;
-background:white;
-box-sizing:border-box;
-width:100%;
+.pesquisa-avancada select{
+appearance:none;
+-webkit-appearance:none;
+background-image:url("data:image/svg+xml;utf8,<svg fill='black' height='10' viewBox='0 0 24 24' width='10' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+background-repeat:no-repeat;
+background-position:right 14px center;
+background-size:12px;
+padding-right:34px;
 }
 
 .pesquisa-imoveis > *:last-child,
@@ -399,7 +401,22 @@ font-size:36px;
 
 </div>
 
-<button id="btn-filtros" type="button">Mais filtros</button>
+<button id="btn-filtros" type="button">
+
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2">
+
+<line x1="4" y1="6" x2="20" y2="6"/>
+<circle cx="9" cy="6" r="2"/>
+
+<line x1="4" y1="12" x2="20" y2="12"/>
+<circle cx="15" cy="12" r="2"/>
+
+<line x1="4" y1="18" x2="20" y2="18"/>
+<circle cx="11" cy="18" r="2"/>
+
+</svg>
+
+</button>
 
 <div class="pesquisa-avancada" id="pesquisa-avancada">
 
