@@ -159,6 +159,33 @@ background:white;
 min-width:190px;
 }
 
+  .pesquisa-avancada{
+display:none;
+gap:0;
+flex-wrap:wrap;
+background:white;
+border-radius:6px;
+box-shadow:0 10px 30px rgba(0,0,0,0.08);
+overflow:hidden;
+margin-bottom:40px;
+}
+
+.pesquisa-avancada select,
+.pesquisa-avancada input{
+border:none;
+border-right:1px solid #eee;
+padding:0 18px;
+height:52px;
+font-family:'Inter', sans-serif;
+font-size:14px;
+background:white;
+min-width:190px;
+}
+
+.pesquisa-avancada input:focus,
+.pesquisa-avancada select:focus{
+outline:none;
+}  
 .pesquisa-imoveis select:focus{
 outline:none;
 }
@@ -178,13 +205,15 @@ background:#444;
 }
 
 #btn-filtros{
-margin-top:10px;
+margin-top:12px;
 background:none;
 border:none;
 font-size:13px;
-color:#666;
+color:#777;
 cursor:pointer;
+display:block;
 }
+  
 .properties{
 display:grid;
 grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
