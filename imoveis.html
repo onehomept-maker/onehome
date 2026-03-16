@@ -523,8 +523,10 @@ return true;
 
 renderImoveis(filtrados);
 
-}
-
+  document.getElementById("lista-imoveis").scrollIntoView({
+behavior: "smooth"
+});
+  
 async function carregarImoveis(){
 
 const { data: imoveis, error } = await supabaseClient
