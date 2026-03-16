@@ -148,49 +148,77 @@ color:#444;
 margin-bottom:20px;
 }
 
+/* SECÇÃO CONTACTO FINAL */
+
 .contacto-final{
+padding:120px 10%;
+background:white;
+}
+
+.contacto-caixa{
 background:#f7f5f2;
-padding:100px 10%;
+padding:60px 70px;
+max-width:900px;
+margin:auto;
+border:1px solid #e7e1d8;
 text-align:center;
-margin-top:80px;
+box-sizing:border-box;
 }
 
-.contacto-final h2{
-font-family:'Inter', sans-serif;
-font-size:28px;
-margin-bottom:20px;
-letter-spacing:1px;
+.contacto-caixa h3{
+margin:0 0 18px 0;
+font-family:'Cormorant Garamond', serif;
+font-size:32px;
+font-weight:500;
+color:#222;
 }
 
-.contacto-final p{
-max-width:600px;
-margin:0 auto 18px auto;
+.contacto-caixa p{
+margin:0 0 14px 0;
+font-size:15px;
 line-height:1.7;
 color:#444;
 }
 
-.contacto-final a{
-color:#222;
+.contacto-caixa .contacto-label{
+font-size:11px;
+letter-spacing:2px;
+text-transform:uppercase;
+color:#8a8175;
+margin-bottom:8px;
+display:block;
+}
+
+.contacto-caixa .contacto-link{
+display:block;
 text-decoration:none;
+color:#222;
+font-size:15px;
+margin-bottom:10px;
+transition:opacity 0.3s ease;
 }
 
-.contacto-final .botao-contacto{
-color:#fff;
-background:#222;
+.contacto-caixa .contacto-link:hover{
+opacity:0.65;
 }
 
-.botao-contacto{
+.contacto-caixa .botao-contacto{
 display:inline-block;
-margin-top:20px;
+margin-top:18px;
 padding:14px 30px;
 background:#222;
-color:#fff;
+color:white;
 text-decoration:none;
 font-size:12px;
 letter-spacing:2px;
 text-transform:uppercase;
 border:none;
 cursor:pointer;
+transition:background 0.3s ease, opacity 0.3s ease;
+}
+
+.contacto-caixa .botao-contacto:hover{
+opacity:0.88;
 }
   
 /* MOBILE */
@@ -279,7 +307,11 @@ Na ONE HOME procuramos oferecer um serviço imobiliário sério, transparente e 
 
 <section class="contacto-final">
 
-<h2>Fale Connosco</h2>
+<div class="contacto-caixa">
+
+<span class="contacto-label">Contacto</span>
+
+<h3>Fale Connosco</h3>
 
 <p>
 Se pretende vender, comprar ou obter mais informações sobre um imóvel,
@@ -288,12 +320,19 @@ teremos todo o gosto em ajudar.
 
 <p><strong>ONE HOME REAL ESTATE</strong></p>
 
-<p>
-<a href="mailto:info@onehome-realestate.com">info@onehome-realestate.com</a><br>
-<a href="tel:+351914012634">+351 914 012 634</a>
-</p>
+<a href="mailto:info@onehome-realestate.com" class="contacto-link">
+info@onehome-realestate.com
+</a>
 
-<a href="contactos.html" class="botao-contacto">Entrar em contacto</a>
+<a href="tel:+351914012634" class="contacto-link">
++351 914 012 634
+</a>
+
+<a href="contactos.html" class="botao-contacto">
+Pedir Informações
+</a>
+
+</div>
 
 </section>
 
