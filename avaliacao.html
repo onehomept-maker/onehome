@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Descubra quanto poderá valer o seu imóvel | One Home</title>
+  <meta name="description" content="Faça uma simulação simples e gratuita e descubra o valor indicativo do seu imóvel com a One Home." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f1ea;
+      --white: #ffffff;
+      --text: #18202a;
+      --muted: #667085;
+      --line: rgba(24, 32, 42, 0.12);
+      --brand: #1f3b5b;
+      --brand-2: #b79d7a;
+      --shadow: 0 12px 40px rgba(19, 31, 46, 0.08);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --container: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f8f5f0 0%, #f5efe8 100%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--container));
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 120px 0 70px;
+      background:
+        linear-gradient(135deg, rgba(20, 33, 47, 0.9), rgba(31, 59, 91, 0.75)),
+        url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?auto=format&fit=crop&w=1800&q=80') center/cover;
+      color: #fff;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 35%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0 0 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 0.96;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 650px;
+      font-size: 18px;
+      line-height: 1.72;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .hero-actions {
+      margin-top: 34px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      padding: 16px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: #fff;
+      color: var(--brand);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 26px;
+      margin-top: -46px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.7);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .intro-card,
+    .trust-card {
+      padding: 34px;
+    }
+
+    .intro-card h2,
+    .trust-card h3,
+    .simulator-header h2,
+    .lead-box h3 {
+      margin: 0 0 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 42px);
+      line-height: 1.05;
+      font-weight: 600;
+      color: var(--brand);
+    }
+
+    .intro-card p,
+    .trust-card p,
+    .simulator-header p,
+    .disclaimer,
+    .result-note,
+    .lead-box p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.72;
+      font-size: 15px;
+    }
+
+    .mini-points {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mini-point {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .mini-point strong {
+      display: block;
+      font-size: 15px;
+      color: var(--brand);
+      margin-bottom: 6px;
+    }
+
+    .mini-point span {
+      display: block;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .trust-list {
+      margin: 20px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .trust-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .trust-list li::before {
+      content: '•';
+      color: var(--brand-2);
+      font-size: 20px;
+      line-height: 1;
+      margin-top: -1px;
+    }
+
+    .simulator-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 26px;
+      align-items: start;
+    }
+
+    .simulator-card,
+    .result-card,
+    .lead-box {
+      padding: 34px;
+    }
+
+    .simulator-header { margin-bottom: 26px; }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 54px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 0 16px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: rgba(31,59,91,0.45);
+      box-shadow: 0 0 0 4px rgba(31,59,91,0.08);
+    }
+
+    .checkbox-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .check-item input {
+      width: 18px;
+      min-height: auto;
+      height: 18px;
+      margin: 0;
+      box-shadow: none;
+    }
+
+    .check-item label {
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .form-actions {
+      margin-top: 26px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn-calc {
+      background: var(--brand);
+      color: #fff;
+    }
+
+    .btn-clear {
+      background: #fff;
+      color: var(--text);
+      border: 1px solid var(--line);
+    }
+
+    .result-card {
+      position: sticky;
+      top: 32px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(252,250,247,0.96) 100%);
+    }
+
+    .result-topline {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand-2);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .result-card h3 {
+      margin: 0 0 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      line-height: 1.05;
+      color: var(--brand);
+    }
+
+    .price-range {
+      margin: 18px 0;
+      padding: 20px 22px;
+      border-radius: 20px;
+      background: #fff;
+      border: 1px solid rgba(31,59,91,0.12);
+    }
+
+    .price-label {
+      display: block;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .price-value {
+      display: block;
+      font-size: clamp(28px, 3.5vw, 42px);
+      line-height: 1.08;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: -0.03em;
+    }
+
+    .summary-list {
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .summary-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(24,32,42,0.08);
+      padding-bottom: 12px;
+      font-size: 14px;
+    }
+
+    .summary-list span:last-child {
+      text-align: right;
+      color: var(--muted);
+    }
+
+    .disclaimer {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .lead-box {
+      margin-top: 26px;
+      background: linear-gradient(180deg, #f6efe5 0%, #f3eadf 100%);
+      border: 1px solid rgba(183,157,122,0.2);
+    }
+
+    .lead-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .lead-grid .field:last-child { grid-column: 1 / -1; }
+
+    .lead-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .hidden { display: none !important; }
+
+    .message {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .message.success {
+      background: rgba(30, 140, 89, 0.1);
+      color: #16603e;
+      border: 1px solid rgba(30, 140, 89, 0.16);
+    }
+
+    .message.error {
+      background: rgba(179, 61, 43, 0.08);
+      color: #8a2f23;
+      border: 1px solid rgba(179, 61, 43, 0.14);
+    }
+
+    .footer-space {
+      height: 30px;
+    }
+
+    @media (max-width: 980px) {
+      .intro-grid,
+      .simulator-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .result-card {
+        position: static;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding: 104px 0 60px;
+      }
+
+      .section {
+        padding: 54px 0;
+      }
+
+      .intro-card,
+      .trust-card,
+      .simulator-card,
+      .result-card,
+      .lead-box {
+        padding: 24px;
+        border-radius: 22px;
+      }
+
+      .mini-points,
+      .form-grid,
+      .lead-grid,
+      .checkbox-group {
+        grid-template-columns: 1fr;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="eyebrow">Estimativa Indicativa • One Home</div>
+        <h1>Descubra quanto poderá valer o seu imóvel</h1>
+        <p>
+          Faça uma simulação simples e gratuita. Em poucos passos, obtenha uma estimativa indicativa do valor do seu apartamento, moradia ou terreno.
+        </p>
+        <div class="hero-actions">
+          <a href="#simulador" class="btn btn-primary">Começar simulação</a>
+          <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="card intro-card">
+          <h2>Uma primeira estimativa, simples e credível</h2>
+          <p>
+            Esta ferramenta foi pensada para lhe dar uma indicação inicial do valor do seu imóvel, com base em critérios como localização, área, estado de conservação e características relevantes. Não substitui uma avaliação presencial, mas ajuda-o a perceber uma ordem de grandeza realista.
+          </p>
+          <div class="mini-points">
+            <div class="mini-point">
+              <strong>Rápido</strong>
+              <span>Preencha os dados em menos de 2 minutos.</span>
+            </div>
+            <div class="mini-point">
+              <strong>Gratuito</strong>
+              <span>Sem compromisso e sem custos.</span>
+            </div>
+            <div class="mini-point">
+              <strong>Útil</strong>
+              <span>Ideal para quem está a ponderar vender.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card trust-card">
+          <h3>Importante saber</h3>
+          <p>
+            O valor apresentado é meramente indicativo. O valor real de mercado poderá variar em função de fatores como localização exata, exposição solar, vista, qualidade da construção, remodelações, envolvente e procura na zona.
+          </p>
+          <ul class="trust-list">
+            <li>Mostramos um intervalo de preço, e não um número rígido.</li>
+            <li>Quanto mais completo for o preenchimento, mais útil será a estimativa.</li>
+            <li>No final, poderá pedir uma análise mais detalhada da One Home.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="simulador">
+    <div class="container">
+      <div class="simulator-wrap">
+        <div class="card simulator-card">
+          <div class="simulator-header">
+            <h2>Simulador de valor do imóvel</h2>
+            <p>Preencha os campos abaixo para obter uma estimativa indicativa.</p>
+          </div>
+
+          <form id="simulatorForm">
+            <div class="form-grid">
+              <div class="field">
+                <label for="propertyType">Tipo de imóvel</label>
+                <select id="propertyType" name="propertyType" required>
+                  <option value="">Selecionar</option>
+                  <option value="apartamento">Apartamento</option>
+                  <option value="moradia">Moradia</option>
+                  <option value="terreno">Terreno</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="location">Zona</label>
+                <select id="location" name="location" required>
+                  <option value="">Selecionar</option>
+                  <option value="cascais">Cascais</option>
+                  <option value="estoril">Estoril</option>
+                  <option value="carcavelos-parede">Carcavelos / Parede</option>
+                  <option value="oeiras">Oeiras</option>
+                  <option value="sintra">Sintra</option>
+                  <option value="lisboa-prime">Lisboa Prime</option>
+                  <option value="lisboa-restante">Lisboa Outras Zonas</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="area">Área (m²)</label>
+                <input type="number" id="area" name="area" min="20" step="1" placeholder="Ex.: 120" required />
+              </div>
+
+              <div class="field" id="typologyField">
+                <label for="typology">Tipologia</label>
+                <select id="typology" name="typology">
+                  <option value="">Selecionar</option>
+                  <option value="t0">T0</option>
+                  <option value="t1">T1</option>
+                  <option value="t2">T2</option>
+                  <option value="t3">T3</option>
+                  <option value="t4">T4+</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="condition">Estado do imóvel</label>
+                <select id="condition" name="condition" required>
+                  <option value="">Selecionar</option>
+                  <option value="obras">A precisar de obras</option>
+                  <option value="usado">Usado</option>
+                  <option value="bom">Bom estado</option>
+                  <option value="renovado">Renovado / como novo</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="yearBuilt">Ano de construção</label>
+                <input type="number" id="yearBuilt" name="yearBuilt" min="1900" max="2099" step="1" placeholder="Opcional" />
+              </div>
+
+              <div class="field field-full" id="extrasField">
+                <label>Características</label>
+                <div class="checkbox-group">
+                  <div class="check-item">
+                    <input type="checkbox" id="garage" name="extras" value="garage" />
+                    <label for="garage">Garagem</label>
+                  </div>
+                  <div class="check-item">
+                    <input type="checkbox" id="elevator" name="extras" value="elevator" />
+                    <label for="elevator">Elevador</label>
+                  </div>
+                  <div class="check-item">
+                    <input type="checkbox" id="garden" name="extras" value="garden" />
+                    <label for="garden">Jardim</label>
+                  </div>
+                  <div class="check-item">
+                    <input type="checkbox" id="pool" name="extras" value="pool" />
+                    <label for="pool">Piscina</label>
+                  </div>
+                  <div class="check-item">
+                    <input type="checkbox" id="seaView" name="extras" value="seaView" />
+                    <label for="seaView">Vista mar</label>
+                  </div>
+                  <div class="check-item">
+                    <input type="checkbox" id="outdoor" name="extras" value="outdoor" />
+                    <label for="outdoor">Terraço / varanda</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-calc">Ver estimativa</button>
+              <button type="button" class="btn btn-clear" id="clearBtn">Limpar</button>
+            </div>
+          </form>
+        </div>
+
+        <div>
+          <div class="card result-card" id="resultCard">
+            <div class="result-topline">Resultado</div>
+            <h3>A sua estimativa aparecerá aqui</h3>
+            <p class="result-note">
+              Preencha o formulário e clique em <strong>Ver estimativa</strong> para obter um intervalo indicativo de valor.
+            </p>
+
+            <div class="price-range hidden" id="priceRangeBox">
+              <span class="price-label">Estimativa indicativa</span>
+              <span class="price-value" id="priceRange">—</span>
+            </div>
+
+            <ul class="summary-list hidden" id="summaryList"></ul>
+
+            <p class="disclaimer" id="disclaimerText">
+              Esta simulação é meramente indicativa e não constitui uma avaliação oficial ou vinculativa. O valor real do imóvel pode variar em função de diversos fatores, incluindo localização exata, estado de conservação, características específicas e condições de mercado.
+            </p>
+          </div>
+
+          <div class="card lead-box hidden" id="leadBox">
+            <h3>Quer uma análise mais precisa?</h3>
+            <p>
+              Deixe os seus dados e a One Home poderá contactá-lo para uma avaliação mais detalhada e ajustada ao seu imóvel.
+            </p>
+
+            <form id="leadForm">
+              <div class="lead-grid">
+                <div class="field">
+                  <label for="leadName">Nome</label>
+                  <input type="text" id="leadName" name="leadName" placeholder="O seu nome" required />
+                </div>
+
+                <div class="field">
+                  <label for="leadPhone">Telefone</label>
+                  <input type="tel" id="leadPhone" name="leadPhone" placeholder="O seu telefone" required />
+                </div>
+
+                <div class="field">
+                  <label for="leadEmail">Email</label>
+                  <input type="email" id="leadEmail" name="leadEmail" placeholder="O seu email" required />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-calc">Pedir contacto</button>
+              </div>
+
+              <p class="lead-note">
+                Ao enviar este formulário, está a autorizar o contacto da One Home relativamente ao seu pedido. Pode ajustar este texto mais tarde à vossa política de privacidade.
+              </p>
+
+              <div id="leadMessage"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-space"></div>
+
+  <script>
+    const PRICES_PER_M2 = {
+      'cascais': { apartamento: 5500, moradia: 6200, terreno: 1750 },
+      'estoril': { apartamento: 6000, moradia: 6800, terreno: 1900 },
+      'carcavelos-parede': { apartamento: 4800, moradia: 5600, terreno: 1500 },
+      'oeiras': { apartamento: 4500, moradia: 5300, terreno: 1450 },
+      'sintra': { apartamento: 3000, moradia: 3800, terreno: 950 },
+      'lisboa-prime': { apartamento: 7000, moradia: 7800, terreno: 2100 },
+      'lisboa-restante': { apartamento: 5000, moradia: 5900, terreno: 1650 }
+    };
+
+    const CONDITION_MULTIPLIER = {
+      obras: 0.88,
+      usado: 0.95,
+      bom: 1,
+      renovado: 1.08
+    };
+
+    const TYPOLOGY_MULTIPLIER = {
+      t0: 0.97,
+      t1: 1,
+      t2: 1.03,
+      t3: 1.06,
+      t4: 1.08
+    };
+
+    const EXTRA_MULTIPLIER = {
+      garage: 0.03,
+      elevator: 0.02,
+      garden: 0.04,
+      pool: 0.06,
+      seaView: 0.1,
+      outdoor: 0.02
+    };
+
+    const PROPERTY_LABELS = {
+      apartamento: 'Apartamento',
+      moradia: 'Moradia',
+      terreno: 'Terreno'
+    };
+
+    const LOCATION_LABELS = {
+      'cascais': 'Cascais',
+      'estoril': 'Estoril',
+      'carcavelos-parede': 'Carcavelos / Parede',
+      'oeiras': 'Oeiras',
+      'sintra': 'Sintra',
+      'lisboa-prime': 'Lisboa Prime',
+      'lisboa-restante': 'Lisboa Outras Zonas'
+    };
+
+    const CONDITION_LABELS = {
+      obras: 'A precisar de obras',
+      usado: 'Usado',
+      bom: 'Bom estado',
+      renovado: 'Renovado / como novo'
+    };
+
+    const simulatorForm = document.getElementById('simulatorForm');
+    const leadForm = document.getElementById('leadForm');
+    const clearBtn = document.getElementById('clearBtn');
+    const propertyType = document.getElementById('propertyType');
+    const typologyField = document.getElementById('typologyField');
+    const extrasField = document.getElementById('extrasField');
+    const resultCard = document.getElementById('resultCard');
+    const priceRangeBox = document.getElementById('priceRangeBox');
+    const priceRange = document.getElementById('priceRange');
+    const summaryList = document.getElementById('summaryList');
+    const leadBox = document.getElementById('leadBox');
+    const leadMessage = document.getElementById('leadMessage');
+
+    let latestSimulation = null;
+
+    function formatCurrency(value) {
+      return new Intl.NumberFormat('pt-PT', {
+        style: 'currency',
+        currency: 'EUR',
+        maximumFractionDigits: 0
+      }).format(value);
+    }
+
+    function updateConditionalFields() {
+      const type = propertyType.value;
+      const isLand = type === 'terreno';
+
+      typologyField.classList.toggle('hidden', isLand);
+      extrasField.classList.toggle('hidden', false);
+
+      const typologySelect = document.getElementById('typology');
+      if (isLand) {
+        typologySelect.value = '';
+      }
+    }
+
+    function getSelectedExtras() {
+      return Array.from(document.querySelectorAll('input[name="extras"]:checked')).map(item => item.value);
+    }
+
+    function calculateEstimate(data) {
+      const zoneData = PRICES_PER_M2[data.location];
+      if (!zoneData) return null;
+
+      const basePricePerM2 = zoneData[data.propertyType];
+      if (!basePricePerM2) return null;
+
+      let total = basePricePerM2 * data.area;
+
+      const conditionMultiplier = CONDITION_MULTIPLIER[data.condition] || 1;
+      total *= conditionMultiplier;
+
+      if (data.propertyType !== 'terreno' && data.typology) {
+        total *= (TYPOLOGY_MULTIPLIER[data.typology] || 1);
+      }
+
+      let extrasTotal = 0;
+      data.extras.forEach(extra => {
+        extrasTotal += EXTRA_MULTIPLIER[extra] || 0;
+      });
+      total *= (1 + extrasTotal);
+
+      if (data.yearBuilt) {
+        if (data.yearBuilt >= 2018) total *= 1.03;
+        else if (data.yearBuilt <= 1980) total *= 0.97;
+      }
+
+      const minEstimate = Math.round(total * 0.95);
+      const maxEstimate = Math.round(total * 1.05);
+
+      return {
+        basePricePerM2,
+        calculatedValue: Math.round(total),
+        minEstimate,
+        maxEstimate,
+        extrasTotal
+      };
+    }
+
+    function renderSummary(data, result) {
+      const items = [
+        ['Tipo de imóvel', PROPERTY_LABELS[data.propertyType] || '—'],
+        ['Zona', LOCATION_LABELS[data.location] || '—'],
+        ['Área', `${data.area} m²`],
+        ['Estado', CONDITION_LABELS[data.condition] || '—'],
+        ['Preço base por m²', formatCurrency(result.basePricePerM2)]
+      ];
+
+      if (data.propertyType !== 'terreno' && data.typology) {
+        items.splice(3, 0, ['Tipologia', data.typology.toUpperCase()]);
+      }
+
+      if (data.extras.length > 0) {
+        const extraLabels = {
+          garage: 'Garagem',
+          elevator: 'Elevador',
+          garden: 'Jardim',
+          pool: 'Piscina',
+          seaView: 'Vista mar',
+          outdoor: 'Terraço / varanda'
+        };
+
+        items.push([
+          'Características',
+          data.extras.map(extra => extraLabels[extra]).join(', ')
+        ]);
+      }
+
+      summaryList.innerHTML = items.map(([label, value]) => `
+        <li>
+          <span>${label}</span>
+          <span>${value}</span>
+        </li>
+      `).join('');
+
+      summaryList.classList.remove('hidden');
+    }
+
+    simulatorForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const formData = new FormData(simulatorForm);
+      const data = {
+        propertyType: formData.get('propertyType'),
+        location: formData.get('location'),
+        area: Number(formData.get('area')),
+        typology: formData.get('typology'),
+        condition: formData.get('condition'),
+        yearBuilt: Number(formData.get('yearBuilt')) || null,
+        extras: getSelectedExtras()
+      };
+
+      const result = calculateEstimate(data);
+      if (!result) return;
+
+      latestSimulation = { ...data, ...result };
+
+      resultCard.querySelector('h3').textContent = 'A sua estimativa indicativa';
+      resultCard.querySelector('.result-note').textContent = 'Com base nos dados preenchidos, este é o intervalo indicativo de valor do seu imóvel.';
+      priceRange.textContent = `${formatCurrency(result.minEstimate)} — ${formatCurrency(result.maxEstimate)}`;
+      priceRangeBox.classList.remove('hidden');
+      renderSummary(data, result);
+      leadBox.classList.remove('hidden');
+      leadMessage.innerHTML = '';
+
+      leadBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    clearBtn.addEventListener('click', function () {
+      simulatorForm.reset();
+      leadForm.reset();
+      latestSimulation = null;
+      updateConditionalFields();
+
+      resultCard.querySelector('h3').textContent = 'A sua estimativa aparecerá aqui';
+      resultCard.querySelector('.result-note').innerHTML = 'Preencha o formulário e clique em <strong>Ver estimativa</strong> para obter um intervalo indicativo de valor.';
+      priceRangeBox.classList.add('hidden');
+      summaryList.classList.add('hidden');
+      summaryList.innerHTML = '';
+      leadBox.classList.add('hidden');
+      leadMessage.innerHTML = '';
+    });
+
+    propertyType.addEventListener('change', updateConditionalFields);
+    updateConditionalFields();
+
+    leadForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      if (!latestSimulation) {
+        leadMessage.innerHTML = '<div class="message error">Faça primeiro a simulação antes de pedir contacto.</div>';
+        return;
+      }
+
+      const leadData = {
+        name: document.getElementById('leadName').value.trim(),
+        phone: document.getElementById('leadPhone').value.trim(),
+        email: document.getElementById('leadEmail').value.trim(),
+        simulation: latestSimulation
+      };
+
+      console.log('Lead captada:', leadData);
+
+      leadMessage.innerHTML = '<div class="message success">Pedido enviado com sucesso. A One Home entrará em contacto consigo em breve.</div>';
+      leadForm.reset();
+
+      /*
+        PASSO SEGUINTE: ligar ao Supabase.
+        Aqui vais substituir o console.log por um insert na tabela.
+        Exemplo futuro:
+
+        const { error } = await supabase
+          .from("avaliacoes_leads")
+          .insert([{ ...leadData }]);
+
+        if (error) {
+          leadMessage.innerHTML = '<div class="message error">Ocorreu um erro ao enviar. Tente novamente.</div>';
+          return;
+        }
+      */
+    });
+  </script>
+</body>
+</html>
