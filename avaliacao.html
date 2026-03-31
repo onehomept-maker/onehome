@@ -1151,7 +1151,7 @@
       leadMessage.innerHTML = '<div class="message success">Pedido enviado com sucesso. A One Home entrará em contacto consigo em breve.</div>';
       leadForm.reset();
 
-      /*
+         /*
         PASSO SEGUINTE: ligar ao Supabase.
         Aqui vais substituir o console.log por um insert na tabela.
         Exemplo futuro:
@@ -1165,15 +1165,17 @@
           return;
         }
       */
-      window.addEventListener("scroll", function () {
-  const header = document.querySelector(".header");
-  if (!header) return;
+    });
 
-  if (window.scrollY > 50) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
+    window.addEventListener("scroll", function () {
+      const header = document.querySelector(".header");
+      if (!header) return;
+
+      if (window.scrollY > 20) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
     });
   </script>
 </body>
