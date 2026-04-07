@@ -556,65 +556,109 @@ renderizarImagensAdmin()
 
 async function gerarJSON(){
 
-const files=document.getElementById("imagens").files
-let novas=[]
+const resultado = document.getElementById("resultado")
+resultado.innerHTML = "A guardar imóvel..."
 
-for(let file of files){
+const tituloEl = document.getElementById("titulo")
+const slugEl = document.getElementById("slug")
+const localEl = document.getElementById("local")
+const precoEl = document.getElementById("preco")
+const estadoEl = document.getElementById("estado")
+const tipologiaEl = document.getElementById("tipologia")
+const quartosEl = document.getElementById("quartos")
+const wcEl = document.getElementById("wc")
+const areaBrutaEl = document.getElementById("area_bruta")
+const areaUtilEl = document.getElementById("area_util")
+const categoriaEnergeticaEl = document.getElementById("categoria_energetica")
+const descricaoEl = document.getElementById("descricao")
+const imagensInput = document.getElementById("imagens")
 
-const fileName=`${Date.now()}-${file.name}`
+const files = imagensInput.files
+let novas = []
 
-await supabaseClient.storage
-.from("imoveis")
-.upload(fileName,file)
+for (let file of files) {
 
-const {data}=supabaseClient.storage
-.from("imoveis")
-.getPublicUrl(fileName)
+  const fileName = `${Date.now()}-${file.name}`
 
-novas.push(data.publicUrl)
+  const { error: uploadError } = await supabaseClient.storage
+    .from("imoveis")
+    .upload(fileName, file)
 
+  if (uploadError) {
+    console.log(uploadError)
+    resultado.innerHTML = "Erro ao carregar uma das imagens."
+    return
+  }
+
+  const { data } = supabaseClient.storage
+    .from("imoveis")
+    .getPublicUrl(fileName)
+
+  novas.push(data.publicUrl)
 }
 
-const imagensFinais=[...imagensExistentes,...novas]
+const imagensFinais = [...imagensExistentes, ...novas]
 
-const novoImovel={
-titulo:titulo.value,
-slug:slug.value,
-local:local.value,
-preco:preco.value,
-estado:estado.value,
-tipologia:tipologia.value,
-quartos:quartos.value,
-wc:wc.value,
-area_bruta:area_bruta.value,
-area_util:area_util.value,
-categoria_energetica:categoria_energetica.value,
-descricao:descricao.value,
-imagens:imagensFinais
+const novoImovel = {
+  titulo: tituloEl.value,
+  slug: slugEl.value,
+  local: localEl.value,
+  preco: precoEl.value,
+  estado: estadoEl.value,
+  tipologia: tipologiaEl.value,
+  quartos: quartosEl.value,
+  wc: wcEl.value,
+  area_bruta: areaBrutaEl.value,
+  area_util: areaUtilEl.value,
+  categoria_energetica: categoriaEnergeticaEl.value,
+  descricao: descricaoEl.value,
+  imagens: imagensFinais
 }
 
-if(imovelEditando){
+let error
 
-await supabaseClient
-.from("imoveis")
-.update(novoImovel)
-.eq("id",imovelEditando)
+if (imovelEditando) {
+  const resposta = await supabaseClient
+    .from("imoveis")
+    .update(novoImovel)
+    .eq("id", imovelEditando)
 
-}else{
+  error = resposta.error
+} else {
+  const resposta = await supabaseClient
+    .from("imoveis")
+    .insert([novoImovel])
 
-await supabaseClient
-.from("imoveis")
-.insert([novoImovel])
-
+  error = resposta.error
 }
 
-alert("Imóvel guardado")
+if (error) {
+  console.log(error)
+  resultado.innerHTML = `Erro ao guardar: ${error.message}`
+  return
+}
 
-imovelEditando=null
-imagensExistentes=[]
+resultado.innerHTML = "Imóvel guardado com sucesso."
+
+imovelEditando = null
+imagensExistentes = []
 renderizarImagensAdmin()
 
-document.querySelectorAll("input,textarea").forEach(el=>el.value="")
+tituloEl.value = ""
+slugEl.value = ""
+localEl.value = ""
+precoEl.value = ""
+estadoEl.value = "disponivel"
+tipologiaEl.value = ""
+quartosEl.value = ""
+wcEl.value = ""
+areaBrutaEl.value = ""
+areaUtilEl.value = ""
+categoriaEnergeticaEl.value = ""
+descricaoEl.value = ""
+imagensInput.value = ""
+
+document.getElementById("botaoGuardar").innerText = "Guardar imóvel"
 
 carregarListaAdmin()
 
