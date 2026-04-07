@@ -408,7 +408,7 @@ button:hover{
 
       <div>
         <label>Preço</label>
-        <input id="preco">
+        <input id="preco" inputmode="numeric" placeholder="Ex.: 450 000 €">
       </div>
 
       <div>
@@ -507,6 +507,18 @@ const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 let imagensExistentes = []
 let dragIndex = null
 let imovelEditando = null
+
+    function limparPreco(valor){
+  return String(valor || "")
+    .replace(/[^\d]/g, "")
+}
+
+function formatarPrecoInput(valor){
+  const numeros = limparPreco(valor)
+  if (!numeros) return ""
+
+  return new Intl.NumberFormat("pt-PT").format(Number(numeros)) + " €"
+}
 
 function renderizarImagensAdmin(){
 
@@ -645,7 +657,7 @@ const novoImovel = {
   titulo: tituloEl.value,
   slug: slugEl.value,
   local: localEl.value,
-  preco: precoEl.value,
+  preco: formatarPrecoInput(precoEl.value),
   estado: estadoEl.value,
   tipologia: tipologiaEl.value,
   quartos: quartosEl.value,
@@ -747,7 +759,7 @@ const {data}=await supabaseClient
 titulo.value=data.titulo
 slug.value=data.slug
 local.value=data.local
-preco.value=data.preco
+preco.value = formatarPrecoInput(data.preco)
 estado.value=data.estado
 descricao.value=data.descricao
 
@@ -793,6 +805,10 @@ const s=this.value
 
 slug.value=s
 
+})
+
+    preco.addEventListener("input", function () {
+  this.value = formatarPrecoInput(this.value)
 })
 
 carregarListaAdmin()
