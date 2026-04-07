@@ -1127,7 +1127,9 @@
       leadBox.classList.remove('hidden');
       leadMessage.innerHTML = '';
 
-      leadBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+     if (window.innerWidth <= 980) {
+  resultCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
     });
 
     clearBtn.addEventListener('click', function () {
