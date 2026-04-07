@@ -279,6 +279,24 @@ button:hover{
   overflow:hidden;
   cursor:grab;
   box-shadow:0 6px 20px rgba(19,31,46,0.04);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+}
+
+.foto-admin:active{
+  cursor:grabbing;
+}
+
+.foto-admin.dragging{
+  opacity:0.45;
+  transform:scale(0.97);
+  box-shadow:0 16px 36px rgba(19,31,46,0.12);
+  border-color:rgba(31,59,91,0.35);
+}
+
+.foto-admin.drag-over{
+  transform:translateY(-4px);
+  border-color:rgba(31,59,91,0.45);
+  box-shadow:0 18px 40px rgba(31,59,91,0.12);
 }
 
 .foto-admin img{
@@ -500,6 +518,7 @@ imagensExistentes.forEach((url,index)=>{
 const div = document.createElement("div")
 div.className="foto-admin"
 div.draggable=true
+div.setAttribute("title", "Arraste para mudar a posição")  
 
 div.innerHTML = `
 <img src="${url}">
@@ -509,18 +528,41 @@ div.innerHTML = `
 </div>
 `
 
-div.addEventListener("dragstart",()=>{dragIndex=index})
-div.addEventListener("dragover",(e)=>{e.preventDefault()})
-div.addEventListener("drop",()=>{
-
-const item=imagensExistentes[dragIndex]
-imagensExistentes.splice(dragIndex,1)
-imagensExistentes.splice(index,0,item)
-
-renderizarImagensAdmin()
-
+div.addEventListener("dragstart",(e)=>{
+  dragIndex = index
+  div.classList.add("dragging")
 })
 
+div.addEventListener("dragend",()=>{
+  div.classList.remove("dragging")
+  document.querySelectorAll(".foto-admin").forEach(item=>{
+    item.classList.remove("drag-over")
+  })
+})
+
+div.addEventListener("dragover",(e)=>{
+  e.preventDefault()
+  if (dragIndex !== index) {
+    div.classList.add("drag-over")
+  }
+})
+
+div.addEventListener("dragleave",()=>{
+  div.classList.remove("drag-over")
+})
+
+div.addEventListener("drop",()=>{
+  div.classList.remove("drag-over")
+
+  if (dragIndex === null || dragIndex === index) return
+
+  const item = imagensExistentes[dragIndex]
+  imagensExistentes.splice(dragIndex,1)
+  imagensExistentes.splice(index,0,item)
+
+  dragIndex = null
+  renderizarImagensAdmin()
+})
 container.appendChild(div)
 
 })
