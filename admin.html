@@ -357,107 +357,129 @@ button:hover{
 
 <div class="admin">
 
-<h1>Criar Imóvel</h1>
+  <div class="admin-top">
+    <div class="admin-kicker">Admin • One Home</div>
+    <h1>Gerir Imóveis</h1>
+    <p class="admin-subtitle">
+      Introduza, edite e organize os imóveis da One Home num painel mais limpo, elegante e fácil de usar.
+    </p>
+  </div>
 
-<div class="form-grid">
+  <div class="card form-card">
+    <h2 class="section-title">Criar / editar imóvel</h2>
+    <p class="section-text">
+      Preencha os dados do imóvel, adicione fotografias e guarde. A lógica continua exatamente igual — aqui estamos só a melhorar o aspeto.
+    </p>
 
-<div>
-<label>Título</label>
-<input id="titulo">
-</div>
+    <div class="form-grid">
 
-<div>
-<label>Slug</label>
-<input id="slug">
-</div>
+      <div>
+        <label>Título</label>
+        <input id="titulo">
+      </div>
 
-<div>
-<label>Localização</label>
-<input id="local">
-</div>
+      <div>
+        <label>Slug</label>
+        <input id="slug">
+      </div>
 
-<div>
-<label>Preço</label>
-<input id="preco">
-</div>
+      <div>
+        <label>Localização</label>
+        <input id="local">
+      </div>
 
-<div>
-<label>Estado</label>
-<select id="estado">
-<option value="disponivel">Disponível</option>
-<option value="reservado">Reservado</option>
-<option value="vendido">Vendido</option>
-<option value="arrendado">Arrendado</option>
-</select>
-</div>
+      <div>
+        <label>Preço</label>
+        <input id="preco">
+      </div>
 
-<div>
-<label>Tipologia</label>
-<input id="tipologia">
-</div>
+      <div>
+        <label>Estado</label>
+        <select id="estado">
+          <option value="disponivel">Disponível</option>
+          <option value="reservado">Reservado</option>
+          <option value="vendido">Vendido</option>
+          <option value="arrendado">Arrendado</option>
+        </select>
+      </div>
 
-<div>
-<label>Quartos</label>
-<input id="quartos">
-</div>
+      <div>
+        <label>Tipologia</label>
+        <input id="tipologia">
+      </div>
 
-<div>
-<label>WC</label>
-<input id="wc">
-</div>
+      <div>
+        <label>Quartos</label>
+        <input id="quartos">
+      </div>
 
-<div>
-<label>Área Bruta</label>
-<input id="area_bruta">
-</div>
+      <div>
+        <label>WC</label>
+        <input id="wc">
+      </div>
 
-<div>
-<label>Área Útil</label>
-<input id="area_util">
-</div>
+      <div>
+        <label>Área Bruta</label>
+        <input id="area_bruta">
+      </div>
 
-<div>
-<label>Classe energética</label>
-<select id="categoria_energetica">
-<option value="">Selecionar</option>
-<option>A+</option>
-<option>A</option>
-<option>B</option>
-<option>B-</option>
-<option>C</option>
-<option>D</option>
-<option>E</option>
-<option>F</option>
-<option>G</option>
-</select>
-</div>
+      <div>
+        <label>Área Útil</label>
+        <input id="area_util">
+      </div>
 
-<div class="full">
-<label>Adicionar novas fotos</label>
-<input type="file" id="imagens" multiple>
-</div>
+      <div>
+        <label>Classe energética</label>
+        <select id="categoria_energetica">
+          <option value="">Selecionar</option>
+          <option>A+</option>
+          <option>A</option>
+          <option>B</option>
+          <option>B-</option>
+          <option>C</option>
+          <option>D</option>
+          <option>E</option>
+          <option>F</option>
+          <option>G</option>
+        </select>
+      </div>
 
-<div class="full">
-<label>Fotografias atuais</label>
-<div id="lista-imagens-admin" class="lista-imagens-admin"></div>
-</div>
+      <div class="full">
+        <label>Adicionar novas fotos</label>
+        <input type="file" id="imagens" multiple>
+      </div>
 
-<div class="full">
-<label>Descrição</label>
-<textarea id="descricao"></textarea>
-</div>
+      <div class="full">
+        <label>Fotografias atuais</label>
+        <div id="lista-imagens-admin" class="lista-imagens-admin"></div>
+      </div>
 
-</div>
+      <div class="full">
+        <label>Descrição</label>
+        <textarea id="descricao"></textarea>
+      </div>
 
-<button id="botaoGuardar" onclick="gerarJSON()">Guardar imóvel</button>
+    </div>
 
-<div id="resultado"></div>
+    <div class="actions-row">
+      <button id="botaoGuardar" onclick="gerarJSON()">Guardar imóvel</button>
+    </div>
 
-<h2 style="margin-top:60px">Imóveis existentes</h2>
+    <div id="resultado"></div>
+  </div>
 
-<div id="lista-imoveis-admin"></div>
+  <div class="admin-divider"></div>
 
-<script>
+  <div class="card list-card">
+    <h2 class="section-title">Imóveis existentes</h2>
+    <p class="section-text">
+      Edite ou apague imóveis já criados.
+    </p>
+
+    <div id="lista-imoveis-admin"></div>
+  </div>
+
+  <script>
 
 const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
 const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8"
@@ -511,13 +533,9 @@ if(!confirm("Apagar esta fotografia?")) return
 
 const url = imagensExistentes[index]
 
-/* extrair nome do ficheiro */
-
 const filePath = url.split("/").pop()
 
 console.log("A apagar:", filePath)
-
-/* apagar no Supabase */
 
 const { error } = await supabaseClient
 .storage
@@ -530,13 +548,12 @@ console.log(error)
 return
 }
 
-/* remover da lista */
-
 imagensExistentes.splice(index,1)
 
 renderizarImagensAdmin()
 
 }
+
 async function gerarJSON(){
 
 const files=document.getElementById("imagens").files
@@ -694,7 +711,7 @@ slug.value=s
 
 carregarListaAdmin()
 
-</script>
+  </script>
 
 </div>
 </body>
