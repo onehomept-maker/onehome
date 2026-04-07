@@ -505,6 +505,7 @@ const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey)
 
 let imagensExistentes = []
+let novasImagens = []
 let dragIndex = null
 let imovelEditando = null
 
@@ -525,84 +526,131 @@ function renderizarImagensAdmin(){
 const container = document.getElementById("lista-imagens-admin")
 container.innerHTML = ""
 
-imagensExistentes.forEach((url,index)=>{
+const todasImagens = [
+  ...imagensExistentes.map(url => ({ tipo: "existente", url })),
+  ...novasImagens.map(item => ({ tipo: "nova", file: item.file, preview: item.preview }))
+]
 
-const div = document.createElement("div")
-div.className="foto-admin"
-div.draggable=true
-div.setAttribute("title", "Arraste para mudar a posição")  
+todasImagens.forEach((imagem, index) => {
 
-div.innerHTML = `
-<img src="${url}">
-<div class="foto-admin-info">
-<span class="foto-admin-numero">Posição ${index + 1}</span>
-<button type="button" class="foto-admin-apagar" onclick="apagarImagemExistente(${index})">Apagar</button>
-</div>
-`
+  const div = document.createElement("div")
+  div.className = "foto-admin"
+  div.draggable = true
+  div.setAttribute("title", "Arraste para mudar a posição")
 
-div.addEventListener("dragstart",(e)=>{
-  dragIndex = index
-  div.classList.add("dragging")
-})
+  const src = imagem.tipo === "existente" ? imagem.url : imagem.preview
+  const etiqueta = imagem.tipo === "existente" ? `Posição ${index + 1}` : `Nova • posição ${index + 1}`
 
-div.addEventListener("dragend",()=>{
-  div.classList.remove("dragging")
-  document.querySelectorAll(".foto-admin").forEach(item=>{
-    item.classList.remove("drag-over")
+  div.innerHTML = `
+    <img src="${src}">
+    <div class="foto-admin-info">
+      <span class="foto-admin-numero">${etiqueta}</span>
+      <button type="button" class="foto-admin-apagar" onclick="apagarImagemAdmin(${index})">Apagar</button>
+    </div>
+  `
+
+  div.addEventListener("dragstart", () => {
+    dragIndex = index
+    div.classList.add("dragging")
   })
-})
 
-div.addEventListener("dragover",(e)=>{
-  e.preventDefault()
-  if (dragIndex !== index) {
-    div.classList.add("drag-over")
-  }
-})
+  div.addEventListener("dragend", () => {
+    div.classList.remove("dragging")
+    document.querySelectorAll(".foto-admin").forEach(item => {
+      item.classList.remove("drag-over")
+    })
+  })
 
-div.addEventListener("dragleave",()=>{
-  div.classList.remove("drag-over")
-})
+  div.addEventListener("dragover", (e) => {
+    e.preventDefault()
+    if (dragIndex !== index) {
+      div.classList.add("drag-over")
+    }
+  })
 
-div.addEventListener("drop",()=>{
-  div.classList.remove("drag-over")
+  div.addEventListener("dragleave", () => {
+    div.classList.remove("drag-over")
+  })
 
-  if (dragIndex === null || dragIndex === index) return
+  div.addEventListener("drop", () => {
+    div.classList.remove("drag-over")
 
-  const item = imagensExistentes[dragIndex]
-  imagensExistentes.splice(dragIndex,1)
-  imagensExistentes.splice(index,0,item)
+    if (dragIndex === null || dragIndex === index) return
 
-  dragIndex = null
-  renderizarImagensAdmin()
-})
-container.appendChild(div)
+    const listaCompleta = [
+      ...imagensExistentes.map(url => ({ tipo: "existente", url })),
+      ...novasImagens.map(item => ({ tipo: "nova", file: item.file, preview: item.preview }))
+    ]
 
+    const itemMovido = listaCompleta[dragIndex]
+    listaCompleta.splice(dragIndex, 1)
+    listaCompleta.splice(index, 0, itemMovido)
+
+    imagensExistentes = listaCompleta
+      .filter(item => item.tipo === "existente")
+      .map(item => item.url)
+
+    novasImagens = listaCompleta
+      .filter(item => item.tipo === "nova")
+      .map(item => ({ file: item.file, preview: item.preview }))
+
+    dragIndex = null
+    renderizarImagensAdmin()
+  })
+
+  container.appendChild(div)
 })
 
 }
 
-async function apagarImagemExistente(index){
+async function apagarImagemAdmin(index){
 
-if(!confirm("Apagar esta fotografia?")) return
+const listaCompleta = [
+  ...imagensExistentes.map(url => ({ tipo: "existente", url })),
+  ...novasImagens.map(item => ({ tipo: "nova", file: item.file, preview: item.preview }))
+]
 
-const url = imagensExistentes[index]
+const imagem = listaCompleta[index]
+if (!imagem) return
 
+if (imagem.tipo === "nova") {
+  novasImagens = listaCompleta
+    .filter((_, i) => i !== index && listaCompleta[i].tipo === "nova")
+    .map(item => ({ file: item.file, preview: item.preview }))
+
+  imagensExistentes = listaCompleta
+    .filter((_, i) => i !== index && listaCompleta[i].tipo === "existente")
+    .map(item => item.url)
+
+  renderizarImagensAdmin()
+  return
+}
+
+if (!confirm("Apagar esta fotografia?")) return
+
+const url = imagem.url
 const filePath = url.split("/").pop()
 
 console.log("A apagar:", filePath)
 
 const { error } = await supabaseClient
-.storage
-.from("imoveis")
-.remove([filePath])
+  .storage
+  .from("imoveis")
+  .remove([filePath])
 
-if(error){
-alert("Erro ao apagar no Supabase")
-console.log(error)
-return
+if (error) {
+  alert("Erro ao apagar no Supabase")
+  console.log(error)
+  return
 }
 
-imagensExistentes.splice(index,1)
+imagensExistentes = listaCompleta
+  .filter((_, i) => i !== index && listaCompleta[i].tipo === "existente")
+  .map(item => item.url)
+
+novasImagens = listaCompleta
+  .filter((_, i) => i !== index && listaCompleta[i].tipo === "nova")
+  .map(item => ({ file: item.file, preview: item.preview }))
 
 renderizarImagensAdmin()
 
@@ -625,18 +673,19 @@ const areaBrutaEl = document.getElementById("area_bruta")
 const areaUtilEl = document.getElementById("area_util")
 const categoriaEnergeticaEl = document.getElementById("categoria_energetica")
 const descricaoEl = document.getElementById("descricao")
-const imagensInput = document.getElementById("imagens")
+let imagensFinais = []
 
-const files = imagensInput.files
-let novas = []
+for (const url of imagensExistentes) {
+  imagensFinais.push(url)
+}
 
-for (let file of files) {
+for (const item of novasImagens) {
 
-  const fileName = `${Date.now()}-${file.name}`
+  const fileName = `${Date.now()}-${item.file.name}`
 
   const { error: uploadError } = await supabaseClient.storage
     .from("imoveis")
-    .upload(fileName, file)
+    .upload(fileName, item.file)
 
   if (uploadError) {
     console.log(uploadError)
@@ -648,11 +697,8 @@ for (let file of files) {
     .from("imoveis")
     .getPublicUrl(fileName)
 
-  novas.push(data.publicUrl)
+  imagensFinais.push(data.publicUrl)
 }
-
-const imagensFinais = [...imagensExistentes, ...novas]
-
 const novoImovel = {
   titulo: tituloEl.value,
   slug: slugEl.value,
@@ -696,6 +742,7 @@ resultado.innerHTML = "Imóvel guardado com sucesso."
 
 imovelEditando = null
 imagensExistentes = []
+novasImagens = []
 renderizarImagensAdmin()
 
 tituloEl.value = ""
@@ -770,7 +817,8 @@ area_bruta.value=data.area_bruta||""
 area_util.value=data.area_util||""
 categoria_energetica.value=data.categoria_energetica||""
 
-imagensExistentes=data.imagens||[]
+imagensExistentes = data.imagens || []
+novasImagens = []
 
 renderizarImagensAdmin()
 
@@ -809,6 +857,22 @@ slug.value=s
 
     preco.addEventListener("input", function () {
   this.value = formatarPrecoInput(this.value)
+})
+
+    document.getElementById("imagens").addEventListener("change", function () {
+
+const ficheiros = Array.from(this.files)
+
+ficheiros.forEach(file => {
+  novasImagens.push({
+    file,
+    preview: URL.createObjectURL(file)
+  })
+})
+
+this.value = ""
+renderizarImagensAdmin()
+
 })
 
 carregarListaAdmin()
