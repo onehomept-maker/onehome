@@ -284,6 +284,78 @@ width:100%;
 height:500px;
 object-fit:cover;
 }
+  /* VALORIZAR IMÓVEL */
+
+.valorizar{
+background:#f5f2ee;
+display:grid;
+grid-template-columns:1.1fr 1fr;
+align-items:center;
+gap:80px;
+padding:100px 10%;
+}
+
+.valorizar-image img{
+width:100%;
+height:520px;
+object-fit:cover;
+display:block;
+}
+
+.valorizar-text{
+max-width:560px;
+}
+
+.valorizar-text h2{
+font-size:42px;
+font-weight:500;
+margin-bottom:22px;
+font-family:'Cormorant Garamond', serif;
+}
+
+.valorizar-text p{
+font-size:16px;
+line-height:1.9;
+color:#444;
+margin-bottom:18px;
+}
+
+.valorizar-btn{
+display:inline-block;
+margin-top:12px;
+padding:13px 26px;
+border:1px solid #1f3b5b;
+background:#1f3b5b;
+color:white;
+text-decoration:none;
+font-size:13px;
+letter-spacing:1.2px;
+text-transform:uppercase;
+transition:all 0.3s ease;
+}
+
+.valorizar-btn:hover{
+background:#16304a;
+border-color:#16304a;
+}
+
+@media (max-width: 900px){
+
+.valorizar{
+grid-template-columns:1fr;
+gap:35px;
+padding:70px 10%;
+}
+
+.valorizar-image img{
+height:340px;
+}
+
+.valorizar-text h2{
+font-size:34px;
+}
+
+}
 
 /* ABOUT */
 
@@ -465,6 +537,32 @@ Ver Imóveis
 <p>Costa da Guia</p>
 </div>
 
+</div>
+
+</section>
+  <section class="valorizar">
+
+<div class="valorizar-image">
+<img src="hero-onehome-sala-azul.jpg" alt="Imóvel valorizado e preparado para venda">
+</div>
+
+<div class="valorizar-text">
+<h2>Valorizar o seu imóvel</h2>
+
+<p>
+Nem sempre o potencial de um imóvel é imediatamente visível.
+Um espaço vazio ou desatualizado pode dificultar essa perceção.
+</p>
+
+<p>
+Na One Home, ajudamos a revelar esse potencial antes de colocar o imóvel no mercado, através de uma apresentação mais cuidada, mais apelativa e mais estratégica.
+</p>
+
+<p>
+Esta valorização faz parte da nossa abordagem e está incluída no nosso serviço.
+</p>
+
+<a href="valorizar-imovel.html" class="valorizar-btn">Descubra mais</a>
 </div>
 
 </section>
