@@ -665,9 +665,10 @@ setInterval(trocarHero, 4000);
 <!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-  const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co"
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8"
-  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+  const supabaseUrl = "https://skznafnlkretulgzklue.supabase.co";
+  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrem5hZm5sa3JldHVsZ3prbHVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzOTkyMzYsImV4cCI6MjA4ODk3NTIzNn0.2Qf6Qo9xwrtWyL15SBOGtuVDVI-EEIornO0WTVsg4I8";
+
+  const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 </script>
 
 <!-- IMÓVEIS EM DESTAQUE -->
@@ -678,43 +679,49 @@ async function carregarImoveisDestaque() {
 
   container.innerHTML = "<p>A carregar imóveis...</p>";
 
-  const { data, error } = await supabase
-    .from("imoveis")
-    .select("*")
-    .eq("em_destaque", true)
-    .order("id", { ascending: false });
+  try {
+    const { data, error } = await supabaseClient
+      .from("imoveis")
+      .select("*")
+      .eq("em_destaque", true)
+      .order("id", { ascending: false });
 
-  if (error) {
-    console.error("Erro ao carregar imóveis em destaque:", error);
-    container.innerHTML = "<p>Erro ao carregar imóveis.</p>";
-    return;
-  }
-
-  if (!data || data.length === 0) {
-    container.innerHTML = "<p>Sem imóveis em destaque.</p>";
-    return;
-  }
-
-  container.innerHTML = data.map(imovel => {
-    let imagem = "https://via.placeholder.com/1200x800";
-
-    if (Array.isArray(imovel.imagens) && imovel.imagens.length > 0) {
-      imagem = imovel.imagens[0];
+    if (error) {
+      console.error("Erro:", error);
+      container.innerHTML = "<p>Erro ao carregar imóveis.</p>";
+      return;
     }
 
-    const preco = imovel.preco
-      ? Number(imovel.preco).toLocaleString("pt-PT") + " €"
-      : "Sob consulta";
+    if (!data || data.length === 0) {
+      container.innerHTML = "<p>Sem imóveis em destaque.</p>";
+      return;
+    }
 
-    return `
-      <a href="imovel.html?slug=${imovel.slug}" class="card">
-        <img src="${imagem}" alt="${imovel.titulo}">
-        <h3>${imovel.titulo || ""}</h3>
-        <p>${imovel.localizacao || ""}</p>
-        <p>${preco}</p>
-      </a>
-    `;
-  }).join("");
+    container.innerHTML = data.map(imovel => {
+      let imagem = "https://via.placeholder.com/1200x800";
+
+      if (Array.isArray(imovel.imagens) && imovel.imagens.length > 0) {
+        imagem = imovel.imagens[0];
+      }
+
+      const preco = imovel.preco
+        ? Number(imovel.preco).toLocaleString("pt-PT") + " €"
+        : "Sob consulta";
+
+      return `
+        <a href="imovel.html?slug=${imovel.slug}" class="card">
+          <img src="${imagem}" alt="${imovel.titulo || 'Imóvel'}">
+          <h3>${imovel.titulo || ""}</h3>
+          <p>${imovel.localizacao || ""}</p>
+          <p>${preco}</p>
+        </a>
+      `;
+    }).join("");
+
+  } catch (err) {
+    console.error("Erro geral:", err);
+    container.innerHTML = "<p>Erro de ligação.</p>";
+  }
 }
 
 carregarImoveisDestaque();
