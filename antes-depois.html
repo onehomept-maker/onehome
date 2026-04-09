@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antes e Depois | One Home</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #222;
+      background: #fff;
+      line-height: 1.6;
+    }
+
+    .hero-topo {
+      padding: 120px 20px 70px;
+      text-align: center;
+      background: #f8f6f2;
+    }
+
+    .hero-topo h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      font-weight: 600;
+      color: #1f3b5b;
+      margin-bottom: 16px;
+    }
+
+    .hero-topo p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 17px;
+      color: #555;
+    }
+
+    .exemplos-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 70px 20px 90px;
+    }
+
+    .exemplo {
+      margin-bottom: 80px;
+    }
+
+    .exemplo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    .cartao-imagem img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .legenda-box {
+      padding: 22px 0 0;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #1f3b5b;
+      border: 1px solid #d9d9d9;
+      padding: 6px 10px;
+      margin-bottom: 14px;
+    }
+
+    .legenda-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #1f3b5b;
+    }
+
+    .legenda-box p {
+      font-size: 15px;
+      color: #555;
+      max-width: 520px;
+    }
+
+    .cta-final {
+      text-align: center;
+      padding-top: 10px;
+    }
+
+    .cta-final h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      color: #1f3b5b;
+      margin-bottom: 16px;
+    }
+
+    .cta-final p {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: #555;
+      font-size: 16px;
+    }
+
+    .btn-cta {
+      display: inline-block;
+      padding: 14px 32px;
+      background: #1f3b5b;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 0.6px;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-cta:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 900px) {
+      .exemplo-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .hero-topo h1 {
+        font-size: 42px;
+      }
+
+      .legenda-box h3 {
+        font-size: 28px;
+      }
+
+      .cta-final h2 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero-topo">
+    <h1>Antes e Depois</h1>
+    <p>
+      Veja exemplos de como uma melhor apresentação pode transformar a perceção de um imóvel
+      e ajudar a evidenciar o seu verdadeiro valor.
+    </p>
+  </section>
+
+  <section class="exemplos-section">
+
+    <!-- EXEMPLO 1 -->
+    <div class="exemplo">
+      <div class="exemplo-grid">
+        <div class="cartao-imagem">
+          <img src="images/exemplo-sala-antes.jpg" alt="Sala antes da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Antes</span>
+            <h3>Potencial por revelar</h3>
+            <p>
+              Uma divisão com boas dimensões, mas sem evidenciar todo o conforto e a amplitude que pode oferecer.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao-imagem">
+          <img src="images/exemplo-sala-depois.jpg" alt="Sala depois da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Depois</span>
+            <h3>Valor mais evidente</h3>
+            <p>
+              Uma apresentação mais cuidada, luminosa e harmoniosa, que mostra melhor o espaço e o seu potencial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXEMPLO 2 -->
+    <div class="exemplo">
+      <div class="exemplo-grid">
+        <div class="cartao-imagem">
+          <img src="images/exemplo-quarto-antes.jpg" alt="Quarto antes da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Antes</span>
+            <h3>Menos impacto à primeira vista</h3>
+            <p>
+              O espaço existe, mas não transmite de imediato o conforto, a leveza e a funcionalidade que poderia.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao-imagem">
+          <img src="images/exemplo-quarto-depois.jpg" alt="Quarto depois da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Depois</span>
+            <h3>Mais conforto, mais perceção de valor</h3>
+            <p>
+              Um ambiente mais equilibrado e acolhedor ajuda o comprador a imaginar-se a viver no imóvel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXEMPLO 3 -->
+    <div class="exemplo">
+      <div class="exemplo-grid">
+        <div class="cartao-imagem">
+          <img src="images/exemplo-cozinha-antes.jpg" alt="Cozinha antes da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Antes</span>
+            <h3>Funcional, mas pouco apelativa</h3>
+            <p>
+              A divisão cumpre a sua função, mas não evidencia o seu verdadeiro potencial visual.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao-imagem">
+          <img src="images/exemplo-cozinha-depois.jpg" alt="Cozinha depois da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Depois</span>
+            <h3>Mais atual e mais atrativa</h3>
+            <p>
+              Uma imagem mais leve e cuidada melhora a perceção do imóvel no seu conjunto.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXEMPLO 4 -->
+    <div class="exemplo">
+      <div class="exemplo-grid">
+        <div class="cartao-imagem">
+          <img src="images/exemplo-sala-vazia-antes.jpg" alt="Sala vazia antes da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Antes</span>
+            <h3>Difícil de imaginar</h3>
+            <p>
+              Sem contexto visual, torna-se mais difícil perceber a escala, a função e o ambiente do espaço.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao-imagem">
+          <img src="images/exemplo-sala-vazia-depois.jpg" alt="Sala decorada depois da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Depois</span>
+            <h3>Mais fácil de visualizar</h3>
+            <p>
+              Com uma apresentação pensada, o espaço torna-se mais claro, apelativo e memorável.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-final">
+      <h2>Quer saber quanto poderá valer o seu imóvel?</h2>
+      <p>
+        Uma boa apresentação pode fazer diferença na forma como o mercado percebe o seu imóvel.
+        Peça a sua avaliação e descubra o seu potencial.
+      </p>
+      <a href="avaliacao.html" class="btn-cta">Pedir avaliação</a>
+    </div>
+
+  </section>
+
+</body>
+</html>
