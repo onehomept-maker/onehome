@@ -8,6 +8,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    @font-face {
+      font-family: 'Generica';
+      src: url('Generica.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,28 +28,96 @@
       line-height: 1.6;
     }
 
-   .hero-topo {
-  padding: 120px 20px 70px;
-  text-align: center;
-  background: #f5f2ee;
-}
+    h1, h2, h3 {
+      letter-spacing: 1px;
+    }
 
-  .hero-topo h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 54px;
-  font-weight: 500;
-  color: #222;
-  margin-bottom: 22px;
-  letter-spacing: 1px;
-}
+    /* HEADER */
 
-  .hero-topo p {
-  max-width: 760px;
-  margin: 0 auto;
-  font-size: 16px;
-  line-height: 1.9;
-  color: #444;
-}
+    .header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 8%;
+      box-sizing: border-box;
+      z-index: 100;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .logo {
+      position: relative;
+      height: 150px;
+    }
+
+    .logo img {
+      height: 150px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .logo-white {
+      display: none;
+    }
+
+    .logo-blue {
+      display: block;
+    }
+
+    .menu a {
+      margin-left: 35px;
+      text-decoration: none;
+      color: #222;
+      font-size: 13px;
+      letter-spacing: 2px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-avaliar {
+      background: #1f3b5b;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 10px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-avaliar:hover {
+      background: #16304a;
+    }
+
+    /* TOPO */
+
+    .hero-topo {
+      padding: 190px 20px 70px;
+      text-align: center;
+      background: #f5f2ee;
+    }
+
+    .hero-topo h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 54px;
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 22px;
+      letter-spacing: 1px;
+    }
+
+    .hero-topo p {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.9;
+      color: #444;
+    }
+
+    /* EXEMPLOS */
 
     .exemplos-section {
       max-width: 1200px;
@@ -82,70 +157,122 @@
       margin-bottom: 14px;
     }
 
-   .legenda-box h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px;
-  font-weight: 500;
-  margin-bottom: 10px;
-  color: #222;
-  letter-spacing: 1px;
-}
+    .legenda-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 10px;
+      color: #222;
+      letter-spacing: 1px;
+    }
 
-  .legenda-box p {
-  font-size: 16px;
-  line-height: 1.9;
-  color: #444;
-  max-width: 520px;
-}
+    .legenda-box p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: #444;
+      max-width: 520px;
+    }
+
+    /* CTA FINAL */
 
     .cta-final {
       text-align: center;
       padding-top: 10px;
     }
 
-  .cta-final h2 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 42px;
-  font-weight: 500;
-  color: #222;
-  margin-bottom: 22px;
-  letter-spacing: 1px;
-}
+    .cta-final h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px;
+      font-weight: 500;
+      color: #222;
+      margin-bottom: 22px;
+      letter-spacing: 1px;
+    }
 
-   .cta-final p {
-  max-width: 700px;
-  margin: 0 auto 28px;
-  color: #444;
-  font-size: 16px;
-  line-height: 1.9;
-}
+    .cta-final p {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      color: #444;
+      font-size: 16px;
+      line-height: 1.9;
+    }
 
-  .btn-cta {
-  display: inline-block;
-  padding: 13px 26px;
-  border: 1px solid #1f3b5b;
-  background: #1f3b5b;
-  color: white;
-  text-decoration: none;
-  font-size: 13px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
+    .btn-cta {
+      display: inline-block;
+      padding: 13px 26px;
+      border: 1px solid #1f3b5b;
+      background: #1f3b5b;
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+    }
 
-.btn-cta:hover {
-  background: #16304a;
-  border-color: #16304a;
-}
+    .btn-cta:hover {
+      background: #16304a;
+      border-color: #16304a;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      background: #f7f7f7;
+      padding: 40px 8%;
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .footer-conteudo p {
+      margin: 6px 0;
+    }
+
+    .social {
+      margin-top: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .social svg {
+      width: 22px;
+      height: 22px;
+      fill: #1a3c6e;
+      transition: opacity 0.3s ease;
+    }
+
+    .social svg:hover {
+      opacity: 0.6;
+    }
+
+    /* MOBILE */
 
     @media (max-width: 900px) {
-      .exemplo-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
+      .header {
+        padding: 18px 5%;
+      }
+
+      .logo img {
+        height: 70px;
+      }
+
+      .menu {
+        display: none;
+      }
+
+      .hero-topo {
+        padding: 130px 20px 60px;
       }
 
       .hero-topo h1 {
         font-size: 42px;
+      }
+
+      .exemplo-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
       }
 
       .legenda-box h3 {
@@ -160,6 +287,21 @@
 </head>
 <body>
 
+  <div class="header">
+    <div class="logo">
+      <img class="logo-white" src="logo-onehome.png" alt="One Home Real Estate">
+      <img class="logo-blue" src="logo-onehome-blue.png" alt="One Home Real Estate">
+    </div>
+
+    <div class="menu">
+      <a href="index.html">Home</a>
+      <a href="imoveis.html">Imóveis</a>
+      <a href="sobre.html">Quem Somos</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="avaliacao.html" class="btn-avaliar">Avaliar Imóvel</a>
+    </div>
+  </div>
+
   <section class="hero-topo">
     <h1>Antes e Depois</h1>
     <p>
@@ -170,9 +312,6 @@
 
   <section class="exemplos-section">
 
-   
-
-    <!-- EXEMPLO 2 -->
     <div class="exemplo">
       <div class="exemplo-grid">
         <div class="cartao-imagem">
@@ -199,7 +338,6 @@
       </div>
     </div>
 
-    <!-- EXEMPLO 3 -->
     <div class="exemplo">
       <div class="exemplo-grid">
         <div class="cartao-imagem">
@@ -225,63 +363,59 @@
         </div>
       </div>
     </div>
-    <!-- EXEMPLO CASA DE BANHO -->
-<div class="exemplo">
-  <div class="exemplo-grid">
-    
-    <div class="cartao-imagem">
-      <img src="exemplo-casabanho-antes.jpg" alt="Casa de banho antes da valorização">
-      <div class="legenda-box">
-        <span class="etiqueta">Antes</span>
-        <h3>Desatualizada</h3>
-        <p>
-          Um espaço funcional, mas com acabamentos antigos que não valorizam o imóvel.
-        </p>
-      </div>
-    </div>
 
-    <div class="cartao-imagem">
-      <img src="exemplo-casabanho-depois.jpg" alt="Casa de banho depois da valorização">
-      <div class="legenda-box">
-        <span class="etiqueta">Depois</span>
-        <h3>Mais moderna e valorizada</h3>
-        <p>
-          Uma renovação simples pode transformar completamente a perceção e aumentar o valor do imóvel.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-    <!-- EXEMPLO 4 -->
     <div class="exemplo">
       <div class="exemplo-grid">
         <div class="cartao-imagem">
-          <img src="exemplo-sala-decorada-antes.jpg" alt="Sala vazia antes da valorização">
+          <img src="exemplo-casabanho-antes.jpg" alt="Casa de banho antes da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Antes</span>
+            <h3>Desatualizada</h3>
+            <p>
+              Um espaço funcional, mas com acabamentos antigos que não valorizam o imóvel.
+            </p>
+          </div>
+        </div>
+
+        <div class="cartao-imagem">
+          <img src="exemplo-casabanho-depois.jpg" alt="Casa de banho depois da valorização">
+          <div class="legenda-box">
+            <span class="etiqueta">Depois</span>
+            <h3>Mais moderna e valorizada</h3>
+            <p>
+              Uma renovação simples pode transformar completamente a perceção e aumentar o valor do imóvel.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="exemplo">
+      <div class="exemplo-grid">
+        <div class="cartao-imagem">
+          <img src="exemplo-sala-decorada-antes.jpg" alt="Sala com mobiliário antes da valorização">
           <div class="legenda-box">
             <span class="etiqueta">Antes</span>
             <h3>Espaço condicionado pela decoração existente</h3>
             <p>
-             A presença de mobiliário pode dificultar a identificação com o espaço e limitar a perceção do seu potencial.
+              A presença de mobiliário pode dificultar a identificação com o espaço e limitar a perceção do seu potencial.
             </p>
           </div>
         </div>
 
         <div class="cartao-imagem">
-          <img src="exemplo-sala-vazia-depois.jpg" alt="Sala decorada depois da valorização">
+          <img src="exemplo-sala-vazia-depois.jpg" alt="Sala vazia depois da valorização">
           <div class="legenda-box">
             <span class="etiqueta">Depois</span>
-            <h3>Espaço mais neutro, mais fácil de projetar.</h3>
+            <h3>Espaço mais neutro, mais fácil de projetar</h3>
             <p>
-             Sem mobiliário, torna-se mais simples visualizar o potencial e adaptar o espaço a diferentes estilos de vida.
+              Sem mobiliário, torna-se mais simples visualizar o potencial e adaptar o espaço a diferentes estilos de vida.
             </p>
           </div>
         </div>
       </div>
     </div>
 
-      <!-- EXEMPLO 1 -->
     <div class="exemplo">
       <div class="exemplo-grid">
         <div class="cartao-imagem">
@@ -317,6 +451,35 @@
     </div>
 
   </section>
+
+  <footer class="footer">
+    <div class="footer-conteudo">
+      <p>© 2026 ONE HOME Real Estate</p>
+      <p>Licença AMI 22696</p>
+
+      <div class="social">
+        <a href="https://www.instagram.com/onehomerealestate" target="_blank" aria-label="Instagram">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 
+            5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 
+            1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 
+            1.3-3 3-3h10zm-5 3.5A4.5 4.5 0 1 0 12 
+            16.5 4.5 4.5 0 0 0 12 7.5zm0 2A2.5 2.5 0 
+            1 1 9.5 12 2.5 2.5 0 0 1 12 9.5zm4.8-.9a1 
+            1 0 1 0-1 1 1 1 0 0 0 1-1z"/>
+          </svg>
+        </a>
+
+        <a href="https://www.facebook.com/onehome.realestate" target="_blank" aria-label="Facebook">
+          <svg viewBox="0 0 24 24">
+            <path d="M13.5 9H16l.5-3h-3V4.5c0-.9.3-1.5 
+            1.7-1.5H17V0h-2.5C11.5 0 10 
+            1.7 10 4.5V6H7v3h3v9h3.5V9z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 
 </body>
 </html>
