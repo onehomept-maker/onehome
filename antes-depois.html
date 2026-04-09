@@ -34,19 +34,19 @@
 
     /* HEADER */
 
-    .header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 8%;
-      box-sizing: border-box;
-      z-index: 100;
-      background: white;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    }
+ .header{
+  position:fixed;
+  top:0;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:25px 8%;
+  box-sizing:border-box;
+  z-index:100;
+  background:rgba(255,255,255,0.08);
+  transition:background-color 0.6s ease, box-shadow 0.6s ease, padding 0.6s ease;
+}
 
     .logo {
       position: relative;
@@ -60,45 +60,78 @@
       left: 0;
     }
 
-    .logo-white {
-      display: none;
-    }
+   .logo-blue{
+  display:none;
+}
 
-    .logo-blue {
-      display: block;
-    }
+.logo-white{
+  display:block;
+}
 
-    .menu a {
-      margin-left: 35px;
-      text-decoration: none;
-      color: #222;
-      font-size: 13px;
-      letter-spacing: 2px;
-      font-family: 'Inter', sans-serif;
-    }
+.header.scrolled .logo-white{
+  display:none;
+}
 
-    .btn-avaliar {
-      background: #1f3b5b;
-      color: white !important;
-      padding: 10px 18px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-left: 10px;
-      transition: all 0.2s ease;
-    }
+.header.scrolled .logo-blue{
+  display:block;
+}
 
-    .btn-avaliar:hover {
-      background: #16304a;
-    }
+  .menu a{
+  margin-left:35px;
+  text-decoration:none;
+  color:white;
+  font-size:13px;
+  letter-spacing:2px;
+  font-family:'Inter', sans-serif;
+}
+    .header.scrolled{
+  background:white;
+  box-shadow:0 2px 10px rgba(0,0,0,0.08);
+  padding:20px 8%;
+}
+
+.header.scrolled .menu a{
+  color:#222;
+}
+
+    .btn-avaliar{
+  background:transparent;
+  color:white !important;
+  padding:10px 18px;
+  border-radius:999px;
+  font-size:14px;
+  font-weight:600;
+  margin-left:10px;
+  border:1px solid white;
+  transition:all 0.3s ease;
+}
+
+.btn-avaliar:hover{
+  background:rgba(255,255,255,0.12);
+}
+
+.header.scrolled .btn-avaliar{
+  background:#1f3b5b;
+  color:white !important;
+  border:1px solid #1f3b5b;
+}
+
+.header.scrolled .btn-avaliar:hover{
+  background:#16304a;
+  border-color:#16304a;
+}
 
     /* TOPO */
 
-   .hero-topo {
-  padding: 190px 20px 70px;
+.hero-topo {
+  min-height: 78vh;
+  padding: 220px 20px 110px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background:
-    linear-gradient(rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.28)),
+    linear-gradient(rgba(0, 0, 0, 0.34), rgba(0, 0, 0, 0.34)),
     url("hero-cozinha-depois.jpg");
   background-size: cover;
   background-position: center;
@@ -255,10 +288,13 @@
     /* MOBILE */
 
     @media (max-width: 900px) {
-      .header {
-        padding: 18px 5%;
-      }
+     .header {
+  padding: 18px 5%;
+}
 
+.header.scrolled {
+  padding: 16px 5%;
+}
       .logo img {
         height: 70px;
       }
@@ -267,8 +303,9 @@
         display: none;
       }
 
-     .hero-topo {
-  padding: 140px 20px 70px;
+ .hero-topo {
+  min-height: 62vh;
+  padding: 160px 20px 70px;
 }
 
       .hero-topo h1 {
@@ -485,6 +522,18 @@
       </div>
     </div>
   </footer>
+  
+<script>
+window.addEventListener("scroll", function() {
+  const header = document.querySelector(".header");
 
+  if (window.scrollY > 20) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+</script>
+  
 </body>
 </html>
