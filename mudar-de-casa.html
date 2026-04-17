@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mudar de Casa | One Home</title>
+  <meta name="description" content="Saiba qual a melhor estratégia para comprar uma casa nova quando precisa de vender a atual. Veja os principais cenários e como a One Home o pode ajudar.">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'Generica';
+      src: url('Generica.otf') format('opentype');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body{
+      margin:0;
+      font-family:'Inter', sans-serif;
+      color:#222;
+      background:#fff;
+    }
+
+    h1,h2,h3{
+      letter-spacing:1px;
+    }
+
+    /* MENU */
+
+    .header{
+      position:fixed;
+      top:0;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:25px 8%;
+      box-sizing:border-box;
+      z-index:1000;
+      background:rgba(255,255,255,0.08);
+      transition:background-color 0.6s ease, box-shadow 0.6s ease, padding 0.6s ease;
+    }
+
+    .logo{
+      position:relative;
+      height:150px;
+      width:160px;
+    }
+
+    .logo img{
+      height:150px;
+      position:absolute;
+      top:0;
+      left:0;
+    }
+
+    .logo-blue{
+      display:none;
+    }
+
+    .header.scrolled .logo-white{
+      display:none;
+    }
+
+    .header.scrolled .logo-blue{
+      display:block;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .menu a{
+      margin-left:35px;
+      text-decoration:none;
+      color:white;
+      font-size:13px;
+      letter-spacing:2px;
+      font-family:'Inter', sans-serif;
+      text-transform:uppercase;
+    }
+
+    .header.scrolled{
+      background:white;
+      box-shadow:0 2px 10px rgba(0,0,0,0.08);
+      padding:20px 8%;
+    }
+
+    .header.scrolled .menu a{
+      color:#222;
+    }
+
+    .btn-avaliar {
+      background: #1f3b5b;
+      color: white !important;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-left: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-avaliar:hover {
+      background: #16304a;
+    }
+
+    .scrolled .btn-avaliar,
+    header.scrolled .btn-avaliar,
+    .site-header.scrolled .btn-avaliar,
+    .main-header.scrolled .btn-avaliar {
+      background: #1f3b5b !important;
+      color: #ffffff !important;
+      border: 1px solid #1f3b5b !important;
+    }
+
+    .scrolled .btn-avaliar:hover,
+    header.scrolled .btn-avaliar:hover,
+    .site-header.scrolled .btn-avaliar:hover,
+    .main-header.scrolled .btn-avaliar:hover {
+      background: #16304a !important;
+      color: #ffffff !important;
+      border: 1px solid #16304a !important;
+    }
+
+    /* HERO */
+
+    .hero{
+      height:100vh;
+      min-height:720px;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      transition:opacity 1.5s ease;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(0,0,0,0.48);
+      z-index:1;
+    }
+
+    .hero-slide{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-size:cover;
+      background-position:center;
+      opacity:0;
+      transition:opacity 2s ease;
+    }
+
+    .hero-slide.active{
+      opacity:1;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:900px;
+      padding:0 24px;
+    }
+
+    .hero h1{
+      font-family:'Generica', sans-serif;
+      font-size:clamp(42px, 7vw, 76px);
+      margin-bottom:14px;
+      font-weight:400;
+      letter-spacing:6px;
+      line-height:1.02;
+    }
+
+    .hero p{
+      font-size:20px;
+      line-height:1.7;
+      margin-bottom:30px;
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .hero-buttons{
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .hero-btn{
+      display:inline-block;
+      padding:13px 26px;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      transition:all 0.3s ease;
+    }
+
+    .hero-btn-outline{
+      border:1px solid white;
+      color:white;
+      background:transparent;
+    }
+
+    .hero-btn-outline:hover{
+      background:white;
+      color:#222;
+    }
+
+    .hero-btn-solid{
+      border:1px solid #1f3b5b;
+      background:#1f3b5b;
+      color:white;
+    }
+
+    .hero-btn-solid:hover{
+      background:#16304a;
+      border-color:#16304a;
+    }
+
+    /* GENERAL SECTIONS */
+
+    .section{
+      padding:100px 10%;
+    }
+
+    .intro{
+      background:#fff;
+    }
+
+    .intro-grid{
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:70px;
+      align-items:start;
+    }
+
+    .section h2,
+    .faq h2,
+    .cta-box h2{
+      font-family:'Cormorant Garamond', serif;
+      font-size:42px;
+      font-weight:500;
+      margin:0 0 22px;
+      line-height:1.1;
+    }
+
+    .intro p,
+    .text-block p,
+    .cta-box p,
+    .faq-item p{
+      font-size:16px;
+      line-height:1.9;
+      color:#444;
+      margin:0 0 18px;
+    }
+
+    .intro-box{
+      background:#f5f2ee;
+      padding:34px;
+      border-radius:0;
+    }
+
+    .intro-box h3{
+      margin:0 0 18px;
+      font-family:'Cormorant Garamond', serif;
+      font-size:30px;
+      font-weight:500;
+    }
+
+    .intro-list{
+      padding-left:18px;
+      margin:0;
+    }
+
+    .intro-list li{
+      margin-bottom:14px;
+      line-height:1.8;
+      color:#444;
+      font-size:16px;
+    }
+
+    /* OPTIONS */
+
+    .options{
+      background:#f5f2ee;
+    }
+
+    .options-head{
+      max-width:760px;
+      margin-bottom:50px;
+    }
+
+    .options-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:28px;
+    }
+
+    .option-card{
+      background:white;
+      padding:34px 30px;
+      box-shadow:0 12px 30px rgba(0,0,0,0.06);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .option-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.10);
+    }
+
+    .option-number{
+      display:inline-block;
+      font-size:12px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#1f3b5b;
+      margin-bottom:14px;
+      font-weight:600;
+    }
+
+    .option-card h3{
+      font-family:'Cormorant Garamond', serif;
+      font-size:32px;
+      font-weight:500;
+      margin:0 0 18px;
+    }
+
+    .option-card p{
+      font-size:15px;
+      line-height:1.85;
+      color:#444;
+      margin:0 0 16px;
+    }
+
+    .option-card ul{
+      margin:0 0 20px;
+      padding-left:18px;
+    }
+
+    .option-card li{
+      margin-bottom:10px;
+      line-height:1.75;
+      color:#444;
+      font-size:15px;
+    }
+
+    .option-highlight{
+      font-size:14px;
+      line-height:1.7;
+      color:#1f3b5b;
+      font-weight:600;
+      border-top:1px solid rgba(0,0,0,0.08);
+      padding-top:18px;
+    }
+
+    /* TIMING */
+
+    .timing{
+      background:#fff;
+    }
+
+    .timing-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:70px;
+      align-items:center;
+    }
+
+    .timing-image img{
+      width:100%;
+      height:560px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .timing-points{
+      display:grid;
+      gap:18px;
+      margin-top:28px;
+    }
+
+    .timing-point{
+      padding:20px 24px;
+      background:#f5f2ee;
+      border-left:3px solid #1f3b5b;
+    }
+
+    .timing-point h3{
+      margin:0 0 8px;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .timing-point p{
+      margin:0;
+      font-size:15px;
+      line-height:1.8;
+      color:#444;
+    }
+
+    /* HOW WE HELP */
+
+    .help{
+      background:#f5f2ee;
+    }
+
+    .help-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:60px;
+      align-items:start;
+    }
+
+    .help-text p{
+      font-size:16px;
+      line-height:1.9;
+      color:#444;
+    }
+
+    .help-list{
+      display:grid;
+      gap:18px;
+    }
+
+    .help-item{
+      background:white;
+      padding:24px 26px;
+      box-shadow:0 10px 28px rgba(0,0,0,0.05);
+    }
+
+    .help-item h3{
+      margin:0 0 10px;
+      font-size:18px;
+      font-weight:600;
+    }
+
+    .help-item p{
+      margin:0;
+      font-size:15px;
+      line-height:1.8;
+      color:#444;
+    }
+
+    /* FAQ */
+
+    .faq{
+      background:#fff;
+    }
+
+    .faq-wrap{
+      max-width:920px;
+      margin:0 auto;
+    }
+
+    .faq-item{
+      border-top:1px solid rgba(0,0,0,0.08);
+      padding:28px 0;
+    }
+
+    .faq-item:last-child{
+      border-bottom:1px solid rgba(0,0,0,0.08);
+    }
+
+    .faq-item h3{
+      margin:0 0 10px;
+      font-size:22px;
+      font-weight:500;
+      color:#222;
+    }
+
+    /* CTA */
+
+    .cta{
+      background:#f5f2ee;
+      padding:100px 10%;
+    }
+
+    .cta-box{
+      max-width:900px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .cta-links{
+      margin-top:26px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .cta-btn{
+      display:inline-block;
+      padding:14px 28px;
+      text-decoration:none;
+      font-size:13px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+      transition:all 0.3s ease;
+    }
+
+    .cta-btn-primary{
+      background:#1f3b5b;
+      border:1px solid #1f3b5b;
+      color:white;
+    }
+
+    .cta-btn-primary:hover{
+      background:#16304a;
+      border-color:#16304a;
+    }
+
+    .cta-btn-secondary{
+      background:transparent;
+      border:1px solid #222;
+      color:#222;
+    }
+
+    .cta-btn-secondary:hover{
+      background:#222;
+      color:white;
+    }
+
+    /* FOOTER */
+
+    .footer{
+      background:#f7f7f7;
+      padding:40px 8%;
+      text-align:center;
+      font-size:14px;
+      color:#555;
+    }
+
+    .footer-conteudo p{
+      margin:6px 0;
+    }
+
+    .social{
+      margin-top:12px;
+      display:flex;
+      justify-content:center;
+      gap:18px;
+    }
+
+    .social svg{
+      width:22px;
+      height:22px;
+      fill:#1a3c6e;
+      transition:opacity 0.3s ease;
+    }
+
+    .social svg:hover{
+      opacity:0.6;
+    }
+
+    /* MOBILE */
+
+    @media (max-width: 900px){
+
+      .header{
+        padding:18px 5%;
+      }
+
+      .logo{
+        height:70px;
+        width:90px;
+      }
+
+      .logo img{
+        height:70px;
+      }
+
+      .menu{
+        display:none;
+      }
+
+      .hero{
+        min-height:620px;
+      }
+
+      .hero h1{
+        letter-spacing:4px;
+      }
+
+      .hero p{
+        font-size:18px;
+      }
+
+      .section,
+      .cta{
+        padding:70px 10%;
+      }
+
+      .intro-grid,
+      .options-grid,
+      .timing-grid,
+      .help-grid{
+        grid-template-columns:1fr;
+        gap:34px;
+      }
+
+      .timing-image img{
+        height:340px;
+      }
+
+      .section h2,
+      .faq h2,
+      .cta-box h2{
+        font-size:34px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="index.html" class="logo" aria-label="One Home">
+      <img src="logo-onehome.png" alt="One Home" class="logo-white">
+      <img src="logo-onehome-blue.png" alt="One Home" class="logo-blue">
+    </a>
+
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="imoveis.html">Imóveis</a>
+      <a href="sobre.html">Quem Somos</a>
+      <a href="contactos.html">Contactos</a>
+      <a href="avaliacao.html" class="btn-avaliar">Avaliar Imóvel</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-slide active" style="background-image:url('images/mudar-casa-1.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/mudar-casa-2.jpg');"></div>
+    <div class="hero-slide" style="background-image:url('images/mudar-casa-3.jpg');"></div>
+
+    <div class="hero-content">
+      <h1>MUDAR DE CASA</h1>
+      <p>Quer comprar uma casa nova, mas precisa de vender a sua primeiro? Há várias formas de o fazer — a diferença está em escolher a estratégia certa.</p>
+
+      <div class="hero-buttons">
+        <a href="#opcoes" class="hero-btn hero-btn-outline">Ver opções</a>
+        <a href="#contacto" class="hero-btn hero-btn-solid">Falar connosco</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section intro">
+    <div class="intro-grid">
+      <div class="text-block">
+        <h2>Comprar outra casa sem vender a atual primeiro?</h2>
+        <p>Mudar de casa é um passo importante, mas também pode trazer muitas dúvidas. Em muitos casos, a compra da nova casa depende diretamente da venda da casa atual — e isso exige planeamento, timing e uma estratégia bem definida.</p>
+        <p>A questão não é apenas vender e comprar. É perceber em que ordem avançar, como reduzir risco, como alinhar os prazos e como evitar ficar sem casa ou assumir mais encargos do que seria confortável.</p>
+        <p>Na prática, existem três caminhos principais: vender primeiro, comprar primeiro ou coordenar os dois processos em simultâneo. A melhor opção depende sempre do seu perfil financeiro, do tempo disponível e do tipo de imóvel que procura.</p>
+      </div>
+
+      <div class="intro-box">
+        <h3>O que deve analisar antes de avançar</h3>
+        <ul class="intro-list">
+          <li>Quanto vale realmente a sua casa no mercado atual</li>
+          <li>Qual o prazo médio de venda na sua zona</li>
+          <li>Se precisa do valor da venda para a nova compra</li>
+          <li>Se consegue suportar temporariamente dois encargos</li>
+          <li>Que margem tem para negociar datas e condições</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section options" id="opcoes">
+    <div class="options-head">
+      <h2>As 3 estratégias mais comuns</h2>
+      <p>Não existe uma fórmula única. O importante é perceber qual destas opções faz mais sentido para si e qual o nível de risco que está disposto a assumir.</p>
+    </div>
+
+    <div class="options-grid">
+      <div class="option-card">
+        <div class="option-number">Opção 1</div>
+        <h3>Vender primeiro</h3>
+        <p>É normalmente a opção mais segura para quem precisa do dinheiro da venda para avançar para a nova compra.</p>
+        <ul>
+          <li>Permite saber exatamente qual o orçamento disponível</li>
+          <li>Reduz o risco de ter dois créditos ou duas prestações ao mesmo tempo</li>
+          <li>Dá mais controlo sobre a decisão financeira</li>
+        </ul>
+        <div class="option-highlight">Mais indicada para quem privilegia segurança e previsibilidade.</div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-number">Opção 2</div>
+        <h3>Comprar primeiro</h3>
+        <p>Pode fazer sentido quando aparece uma oportunidade rara e existe capacidade financeira para suportar o processo com mais flexibilidade.</p>
+        <ul>
+          <li>Evita perder a casa que realmente quer comprar</li>
+          <li>Pode permitir uma transição mais direta</li>
+          <li>Exige maior conforto financeiro ou solução temporária de financiamento</li>
+        </ul>
+        <div class="option-highlight">Mais indicada para quem tem margem financeira e quer agir rápido.</div>
+      </div>
+
+      <div class="option-card">
+        <div class="option-number">Opção 3</div>
+        <h3>Fazer tudo ao mesmo tempo</h3>
+        <p>É o cenário ideal em teoria, mas o mais exigente em termos de coordenação, negociação e prazos.</p>
+        <ul>
+          <li>Ajuda a evitar mudanças temporárias</li>
+          <li>Requer boa articulação entre compra, venda, banco e contratos</li>
+          <li>Pede acompanhamento próximo para reduzir imprevistos</li>
+        </ul>
+        <div class="option-highlight">Mais indicada para quem quer alinhar tudo com o mínimo de tempo entre uma casa e outra.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section timing">
+    <div class="timing-grid">
+      <div class="timing-image">
+        <img src="images/mudar-casa-timing.jpg" alt="Planeamento da mudança de casa">
+      </div>
+
+      <div class="text-block">
+        <h2>O ponto mais importante é o timing</h2>
+        <p>Em muitos casos, o sucesso de todo o processo não depende apenas do preço de venda ou do imóvel que quer comprar. Depende sobretudo da forma como os timings são planeados e negociados.</p>
+        <p>É aqui que entram decisões fundamentais, como a avaliação do imóvel atual, a análise da sua capacidade de compra, os prazos do CPCV, a data da escritura e, quando necessário, soluções de financiamento temporário.</p>
+
+        <div class="timing-points">
+          <div class="timing-point">
+            <h3>Avaliar bem a casa atual</h3>
+            <p>Antes de procurar a próxima casa, é importante perceber o valor real de mercado da sua, e o tempo médio de venda na sua zona.</p>
+          </div>
+
+          <div class="timing-point">
+            <h3>Alinhar prazos nos contratos</h3>
+            <p>Datas mal definidas podem criar pressão desnecessária, perda de oportunidades ou risco de ficar sem solução habitacional.</p>
+          </div>
+
+          <div class="timing-point">
+            <h3>Confirmar a estratégia financeira</h3>
+            <p>Se ainda existe crédito habitação, importa perceber com antecedência que margem existe e que solução faz mais sentido no seu caso.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section help">
+    <div class="help-grid">
+      <div class="help-text">
+        <h2>Como a One Home pode ajudar</h2>
+        <p>Na One Home, este processo é pensado de forma estratégica. Não se trata apenas de vender uma casa ou encontrar outra. Trata-se de ajudá-lo a mudar de casa com segurança, clareza e o menor nível possível de stress.</p>
+        <p>Cada situação é diferente. Há quem precise de vender rapidamente, há quem tenha margem para esperar, e há quem precise de alinhar tudo quase em simultâneo. O nosso papel é perceber o seu caso e construir consigo o plano certo.</p>
+      </div>
+
+      <div class="help-list">
+        <div class="help-item">
+          <h3>Definir a melhor estratégia</h3>
+          <p>Analisamos consigo se faz mais sentido vender primeiro, comprar primeiro ou coordenar ambos os processos.</p>
+        </div>
+
+        <div class="help-item">
+          <h3>Posicionar a sua casa para vender bem</h3>
+          <p>Trabalhamos a apresentação, o preço e a estratégia comercial para aumentar a probabilidade de uma venda eficiente.</p>
+        </div>
+
+        <div class="help-item">
+          <h3>Procurar oportunidades com o timing certo</h3>
+          <p>Acompanhamos a compra da nova casa tendo em conta os prazos e a realidade do seu processo de venda.</p>
+        </div>
+
+        <div class="help-item">
+          <h3>Negociar com mais segurança</h3>
+          <p>Ajudamos a estruturar prazos e condições para reduzir risco e dar-lhe mais margem de manobra.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq">
+    <div class="faq-wrap">
+      <h2>Perguntas frequentes</h2>
+
+      <div class="faq-item">
+        <h3>É melhor vender primeiro ou comprar primeiro?</h3>
+        <p>Depende do seu caso. Se precisa do valor da venda para comprar, vender primeiro tende a ser a opção mais segura. Se tem margem financeira e aparece uma oportunidade rara, comprar primeiro pode fazer sentido.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>É possível vender e comprar no mesmo período?</h3>
+        <p>Sim, é possível, mas exige coordenação de prazos, boa preparação e acompanhamento próximo. Quando bem estruturado, pode evitar uma transição temporária entre casas.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>E se ainda tiver crédito habitação?</h3>
+        <p>Nesse caso, é importante analisar antecipadamente a sua situação com o banco e perceber que margem existe para avançar para a nova compra. Em certos casos, pode ser considerada uma solução temporária de financiamento.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Quanto tempo devo contar para todo o processo?</h3>
+        <p>Não existe um prazo único. Depende da zona, do tipo de imóvel, do preço, da procura e do seu perfil de compra. Por isso, a estratégia deve começar sempre por uma avaliação realista.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto">
+    <div class="cta-box">
+      <h2>Quer planear a sua mudança de casa com mais segurança?</h2>
+      <p>Se está a pensar vender a sua casa para comprar outra, fale connosco. Ajudamos a definir a estratégia mais adequada ao seu caso e a alinhar o processo com mais clareza.</p>
+
+      <div class="cta-links">
+        <a href="contactos.html" class="cta-btn cta-btn-primary">Falar com a One Home</a>
+        <a href="avaliacao.html" class="cta-btn cta-btn-secondary">Avaliar o meu imóvel</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-conteudo">
+      <p>© 2026 ONE HOME Real Estate</p>
+      <p>Mediação imobiliária com um acompanhamento próximo, cuidado e estratégico.</p>
+    </div>
+  </footer>
+
+  <script>
+    window.addEventListener("scroll", function() {
+      const header = document.querySelector(".header");
+      if (window.scrollY > 20) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+    });
+
+    const slides = document.querySelectorAll(".hero-slide");
+    let slideIndex = 0;
+
+    function trocarHero(){
+      slides[slideIndex].classList.remove("active");
+      slideIndex++;
+      if(slideIndex >= slides.length){
+        slideIndex = 0;
+      }
+      slides[slideIndex].classList.add("active");
+    }
+
+    setInterval(trocarHero, 4000);
+  </script>
+
+</body>
+</html>
